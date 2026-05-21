@@ -70,7 +70,7 @@
             this.panelContenido.Controls.Add(this.label2);
             this.panelContenido.Controls.Add(this.label1);
             this.panelContenido.Controls.Add(this.dgvClientes);
-            this.panelContenido.Location = new System.Drawing.Point(326, 61);
+            this.panelContenido.Location = new System.Drawing.Point(388, 65);
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(1436, 1035);
             this.panelContenido.TabIndex = 2;
@@ -79,7 +79,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(1225, 86);
+            this.label6.Location = new System.Drawing.Point(1208, 66);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(125, 20);
             this.label6.TabIndex = 4;
@@ -138,7 +138,8 @@
             // btnNuevoCliente
             // 
             this.btnNuevoCliente.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnNuevoCliente.Location = new System.Drawing.Point(1144, 136);
+            this.btnNuevoCliente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnNuevoCliente.Location = new System.Drawing.Point(1148, 165);
             this.btnNuevoCliente.Name = "btnNuevoCliente";
             this.btnNuevoCliente.Size = new System.Drawing.Size(206, 65);
             this.btnNuevoCliente.TabIndex = 5;
@@ -200,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1821, 922);
+            this.ClientSize = new System.Drawing.Size(1924, 922);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelMenu);
             this.Name = "Clientes";
