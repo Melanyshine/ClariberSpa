@@ -30,7 +30,9 @@
         {
             this.panelMenu = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
@@ -40,8 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.panelContenido.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +75,16 @@
             this.panelContenido.Size = new System.Drawing.Size(1436, 1035);
             this.panelContenido.TabIndex = 2;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(1225, 86);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 20);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "BEAUTY Y SPA";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -84,6 +94,17 @@
             this.label4.Size = new System.Drawing.Size(20, 22);
             this.label4.TabIndex = 9;
             this.label4.Text = "1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.RosyBrown;
+            this.label5.Location = new System.Drawing.Point(1165, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(218, 46);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Claribel Spa";
             // 
             // label3
             // 
@@ -100,8 +121,9 @@
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(55, 39);
             this.btnAnterior.TabIndex = 7;
-            this.btnAnterior.Text = "button3";
+            this.btnAnterior.Text = "0";
             this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
             // 
             // btnSiguiente
             // 
@@ -109,8 +131,9 @@
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(60, 40);
             this.btnSiguiente.TabIndex = 6;
-            this.btnSiguiente.Text = "button2";
+            this.btnSiguiente.Text = "0";
             this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
             // 
             // btnNuevoCliente
             // 
@@ -172,27 +195,6 @@
             this.dgvClientes.RowTemplate.Height = 28;
             this.dgvClientes.Size = new System.Drawing.Size(1323, 447);
             this.dgvClientes.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.RosyBrown;
-            this.label5.Location = new System.Drawing.Point(1165, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(218, 46);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Claribel Spa";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(1225, 86);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 20);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "BEAUTY Y SPA";
             // 
             // Clientes
             // 

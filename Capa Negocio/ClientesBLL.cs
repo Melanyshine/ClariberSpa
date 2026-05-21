@@ -1,6 +1,5 @@
 ﻿using CapaDatos;
 using CapaEntidades;
-using System.Collections.Generic;
 using System.Data;
 
 namespace CapaNegocio
@@ -18,19 +17,22 @@ namespace CapaNegocio
         // GUARDAR CLIENTE
         public void Guardar(Clientes c)
         {
+            if (c == null)
+                return;
+
             if (c.id_cliente == 0)
             {
+                // INSERT (SQL maneja la fecha)
                 dal.InsertarCliente(
-                    c.id_cliente,
                     c.nombre,
                     c.apellido,
                     c.correo,
-                    c.telefono,
-                    c.fecha_registro
+                    c.telefono
                 );
             }
             else
             {
+                // UPDATE
                 dal.ActualizarCliente(
                     c.id_cliente,
                     c.nombre,
@@ -44,6 +46,9 @@ namespace CapaNegocio
         // ELIMINAR CLIENTE
         public void Eliminar(int id)
         {
+            if (id <= 0)
+                return;
+
             dal.EliminarCliente(id);
         }
     }

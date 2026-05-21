@@ -16,6 +16,8 @@ namespace Capa_Presentacion
         int filasPorPagina = 5;
         int totalPaginas = 0;
 
+        bool limpiando = false; // 🔥 control para evitar filtros duplicados
+
         public Clientes()
         {
             InitializeComponent();
@@ -36,7 +38,6 @@ namespace Capa_Presentacion
 
             panelContenido.BackColor = Color.White;
 
-            // COMBOBOX FILTRO
             cbFiltro.Items.Clear();
             cbFiltro.Items.Add("Todos");
             cbFiltro.Items.Add("Nombre");
@@ -44,7 +45,6 @@ namespace Capa_Presentacion
             cbFiltro.Items.Add("Correo");
             cbFiltro.SelectedIndex = 0;
 
-            // BOTONES
             btnNuevoCliente.BackColor = Color.FromArgb(190, 120, 140);
             btnNuevoCliente.ForeColor = Color.White;
             btnNuevoCliente.FlatStyle = FlatStyle.Flat;
@@ -56,7 +56,6 @@ namespace Capa_Presentacion
             btnSiguiente.BackColor = Color.FromArgb(190, 120, 140);
             btnSiguiente.ForeColor = Color.White;
 
-            // DATAGRIDVIEW
             dgvClientes.BackgroundColor = Color.White;
             dgvClientes.BorderStyle = BorderStyle.None;
             dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -66,16 +65,13 @@ namespace Capa_Presentacion
             dgvClientes.ReadOnly = true;
             dgvClientes.EnableHeadersVisualStyles = false;
 
-            dgvClientes.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(235, 210, 220);
-
+            dgvClientes.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(235, 210, 220);
             dgvClientes.ColumnHeadersHeight = 35;
             dgvClientes.RowTemplate.Height = 35;
 
             CargarClientes();
         }
 
-        // CARGAR CLIENTES
         private void CargarClientes()
         {
             tablaOriginal = objBLL.Listar();
@@ -89,7 +85,6 @@ namespace Capa_Presentacion
             MostrarPagina();
         }
 
-        // PAGINACIÓN
         private void MostrarPagina()
         {
             DataTable tablaPagina = tablaOriginal.Clone();
@@ -108,10 +103,9 @@ namespace Capa_Presentacion
             dgvClientes.DataSource = tablaPagina;
 
             ConfigurarGrid();
-            MostrarColumnas(); // 🔥 importante
+            MostrarColumnas();
         }
 
-        // GRID
         private void ConfigurarGrid()
         {
             if (dgvClientes.Columns.Count == 0)
@@ -156,7 +150,6 @@ namespace Capa_Presentacion
             }
         }
 
-        // CLICK GRID
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -190,20 +183,24 @@ namespace Capa_Presentacion
             }
         }
 
-        // BUSCAR
+        // 🔥 BUSCAR
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
+            if (limpiando) return;
             AplicarFiltro();
         }
 
-        // COMBOBOX
+        // 🔥 CAMBIO DE FILTRO (AQUÍ SE LIMPIA EL TEXTO)
         private void cbFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
+            limpiando = true;
+            txtBuscar.Clear(); // 👈 limpia automáticamente
+            limpiando = false;
+
             AplicarFiltro();
             MostrarColumnas();
         }
 
-        // FILTRO
         private void AplicarFiltro()
         {
             if (tablaOriginal == null) return;
@@ -215,15 +212,9 @@ namespace Capa_Presentacion
 
             switch (campoSeleccionado)
             {
-                case "Nombre":
-                    columna = "nombre";
-                    break;
-                case "Apellido":
-                    columna = "apellido";
-                    break;
-                case "Correo":
-                    columna = "correo";
-                    break;
+                case "Nombre": columna = "nombre"; break;
+                case "Apellido": columna = "apellido"; break;
+                case "Correo": columna = "correo"; break;
             }
 
             DataView dv = tablaOriginal.DefaultView;
@@ -239,10 +230,9 @@ namespace Capa_Presentacion
 
             dgvClientes.DataSource = dv.ToTable();
             ConfigurarGrid();
-            MostrarColumnas(); // 🔥 importante
+            MostrarColumnas();
         }
 
-        // MOSTRAR COLUMNAS
         private void MostrarColumnas()
         {
             if (dgvClientes.Columns.Count == 0) return;
@@ -276,7 +266,6 @@ namespace Capa_Presentacion
             }
         }
 
-        // PAGINACIÓN
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
             if (paginaActual < totalPaginas)
@@ -295,7 +284,6 @@ namespace Capa_Presentacion
             }
         }
 
-        // NUEVO CLIENTE
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
             FrmCliente frm = new FrmCliente();
