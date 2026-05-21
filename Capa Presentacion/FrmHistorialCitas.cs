@@ -36,20 +36,14 @@ namespace CapaPresentacion
             CargarHistorial();
         }
 
-        // 📜 CARGAR HISTORIAL
-        // 🔥 SOLO CITAS COMPLETADAS
-        // 📜 CARGAR HISTORIAL
-        // 🔥 SOLO CITAS COMPLETADAS
+        // 📦 CARGAR HISTORIAL
+        // 🔥 SOLO MOSTRAR COMPLETADAS
         private void CargarHistorial()
         {
             try
             {
                 DataTable tabla =
                     bll.Listar();
-
-                // 🔥 ORDENAR POR FECHA MÁS RECIENTE
-                tabla.DefaultView.Sort =
-                    "fecha DESC";
 
                 DataView vista =
                     tabla.DefaultView;
@@ -67,6 +61,12 @@ namespace CapaPresentacion
                 if (dgvHistorial.Columns.Contains("id_cita"))
                     dgvHistorial.Columns["id_cita"].Visible = false;
 
+                if (dgvHistorial.Columns.Contains("id_cliente"))
+                    dgvHistorial.Columns["id_cliente"].Visible = false;
+
+                if (dgvHistorial.Columns.Contains("id_servicio"))
+                    dgvHistorial.Columns["id_servicio"].Visible = false;
+
                 if (dgvHistorial.Columns.Contains("id_usuario"))
                     dgvHistorial.Columns["id_usuario"].Visible = false;
 
@@ -79,13 +79,17 @@ namespace CapaPresentacion
                     dgvHistorial.Columns["fecha"].HeaderText =
                         "Fecha";
 
-                if (dgvHistorial.Columns.Contains("accion"))
-                    dgvHistorial.Columns["accion"].HeaderText =
-                        "Acción";
+                if (dgvHistorial.Columns.Contains("hora_inicio"))
+                    dgvHistorial.Columns["hora_inicio"].HeaderText =
+                        "Hora";
 
                 if (dgvHistorial.Columns.Contains("descripcion"))
                     dgvHistorial.Columns["descripcion"].HeaderText =
                         "Descripción";
+
+                if (dgvHistorial.Columns.Contains("precio"))
+                    dgvHistorial.Columns["precio"].HeaderText =
+                        "Precio";
 
                 // 🔥 CENTRAR HEADERS
                 dgvHistorial.ColumnHeadersDefaultCellStyle.Alignment =
@@ -106,7 +110,7 @@ namespace CapaPresentacion
             }
         }
 
-        // 🔥 BOTÓN VOLVER
+        // 🔥 BOTON VOLVER
         private void btnVolver_Click(
             object sender,
             EventArgs e)
@@ -121,7 +125,7 @@ namespace CapaPresentacion
             this.BackColor =
                 fondo;
 
-            // TÍTULO
+            // TITULO
             lblTitulo.ForeColor =
                 colorRosado;
 
@@ -210,7 +214,7 @@ namespace CapaPresentacion
             dgvHistorial.AllowUserToResizeRows =
                 false;
 
-            // 🔥 BOTÓN VOLVER
+            // 🔥 BOTON VOLVER
             btnVolver.BackColor =
                 colorRosado;
 

@@ -110,7 +110,6 @@ namespace Capa_Presentacion
             if (dgvCitas.Columns.Contains("id_usuario"))
                 dgvCitas.Columns["id_usuario"].Visible = false;
         }
-
         // =========================
         // 👤 CLIENTES
         // =========================
