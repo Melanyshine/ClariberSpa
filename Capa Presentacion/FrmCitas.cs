@@ -782,5 +782,17 @@ namespace Capa_Presentacion
             dgvCitas.GridColor =
                 Color.FromArgb(235, 230, 228);
         }
+
+        private void BtnHistorial_Click(
+    object sender,
+    EventArgs e)
+        {
+            FrmHistorialCitas frm =
+                new FrmHistorialCitas();
+
+            frm.ShowDialog();
+        }
     }
+
+
 }
