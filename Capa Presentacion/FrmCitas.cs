@@ -85,8 +85,17 @@ namespace Capa_Presentacion
         // =========================
         void MostrarCitas()
         {
-            dgvCitas.DataSource =
+            DataTable dt =
                 citasBLL.Listar();
+
+            // 🔥 OCULTAR CITAS COMPLETADAS
+            DataView vista = dt.DefaultView;
+
+            vista.RowFilter =
+                "nombre_estado <> 'Completada'";
+
+            dgvCitas.DataSource =
+                vista;
 
             // 🔥 OCULTAR IDS
             if (dgvCitas.Columns.Contains("id_cita"))

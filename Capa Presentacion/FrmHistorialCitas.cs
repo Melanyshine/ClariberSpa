@@ -1,5 +1,6 @@
 ﻿using CapaNegocio;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,10 +12,10 @@ namespace CapaPresentacion
             new Historial_CitaBLL();
 
         // 🎨 COLORES
-        Color colorRosado =
+        private readonly Color colorRosado =
             Color.RosyBrown;
 
-        Color fondo =
+        private readonly Color fondo =
             Color.FromArgb(250, 248, 246);
 
         public FrmHistorialCitas()
@@ -22,20 +23,42 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
+        // 🔥 LOAD
         private void FrmHistorialCitas_Load(
             object sender,
             EventArgs e)
         {
-            // 🔥 ABRIR GRANDE
             this.WindowState =
                 FormWindowState.Maximized;
 
             AplicarDiseno();
 
+            CargarHistorial();
+        }
+
+        // 📜 CARGAR HISTORIAL
+        // 🔥 SOLO CITAS COMPLETADAS
+        // 📜 CARGAR HISTORIAL
+        // 🔥 SOLO CITAS COMPLETADAS
+        private void CargarHistorial()
+        {
             try
             {
-                dgvHistorial.DataSource =
+                DataTable tabla =
                     bll.Listar();
+
+                // 🔥 ORDENAR POR FECHA MÁS RECIENTE
+                tabla.DefaultView.Sort =
+                    "fecha DESC";
+
+                DataView vista =
+                    tabla.DefaultView;
+
+                vista.RowFilter =
+                    "nombre_estado = 'Completada'";
+
+                dgvHistorial.DataSource =
+                    vista;
 
                 // 🔥 OCULTAR IDS
                 if (dgvHistorial.Columns.Contains("id_historial"))
@@ -43,6 +66,9 @@ namespace CapaPresentacion
 
                 if (dgvHistorial.Columns.Contains("id_cita"))
                     dgvHistorial.Columns["id_cita"].Visible = false;
+
+                if (dgvHistorial.Columns.Contains("id_usuario"))
+                    dgvHistorial.Columns["id_usuario"].Visible = false;
 
                 // 🔥 CAMBIAR TITULOS
                 if (dgvHistorial.Columns.Contains("nombre_estado"))
@@ -56,6 +82,10 @@ namespace CapaPresentacion
                 if (dgvHistorial.Columns.Contains("accion"))
                     dgvHistorial.Columns["accion"].HeaderText =
                         "Acción";
+
+                if (dgvHistorial.Columns.Contains("descripcion"))
+                    dgvHistorial.Columns["descripcion"].HeaderText =
+                        "Descripción";
 
                 // 🔥 CENTRAR HEADERS
                 dgvHistorial.ColumnHeadersDefaultCellStyle.Alignment =
@@ -76,7 +106,7 @@ namespace CapaPresentacion
             }
         }
 
-        // 🔥 BOTON VOLVER
+        // 🔥 BOTÓN VOLVER
         private void btnVolver_Click(
             object sender,
             EventArgs e)
@@ -91,7 +121,7 @@ namespace CapaPresentacion
             this.BackColor =
                 fondo;
 
-            // TITULO
+            // TÍTULO
             lblTitulo.ForeColor =
                 colorRosado;
 
@@ -180,7 +210,7 @@ namespace CapaPresentacion
             dgvHistorial.AllowUserToResizeRows =
                 false;
 
-            // 🔥 BOTON VOLVER
+            // 🔥 BOTÓN VOLVER
             btnVolver.BackColor =
                 colorRosado;
 
@@ -204,16 +234,6 @@ namespace CapaPresentacion
 
             btnVolver.Text =
                 "← Volver";
-        }
-
-        private void BtnHistorial_Click(
-            object sender,
-            EventArgs e)
-        {
-            FrmHistorialCitas frm =
-                new FrmHistorialCitas();
-
-            frm.ShowDialog();
         }
     }
 }
