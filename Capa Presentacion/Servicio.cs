@@ -344,6 +344,18 @@ namespace Capa_Presentacion
                 dgvServicio.Columns["nombre_servicio"].HeaderText = "Servicio";
             }
 
+            // COLUMNA CATEGORIA
+            if (dgvServicio.Columns["categoria"] != null)
+            {
+                dgvServicio.Columns["categoria"].HeaderText = "Categoría";
+            }
+
+            // SI TU COLUMNA SE LLAMA nombre_categoria
+            if (dgvServicio.Columns["nombre_categoria"] != null)
+            {
+                dgvServicio.Columns["nombre_categoria"].HeaderText = "Categoría";
+            }
+
             if (dgvServicio.Columns["duracion_minutos"] != null)
             {
                 dgvServicio.Columns["duracion_minutos"].HeaderText = "Duración";
