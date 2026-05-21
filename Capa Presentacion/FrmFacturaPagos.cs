@@ -16,5 +16,10 @@ namespace Capa_Presentacion
         {
             InitializeComponent();
         }
+
+        private void FrmFacturaPagos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

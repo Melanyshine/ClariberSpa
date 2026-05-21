@@ -34,14 +34,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
-            this.cnFiltro = new System.Windows.Forms.ComboBox();
+            this.btnNuevoCliente = new System.Windows.Forms.Button();
+            this.cbFiltro = new System.Windows.Forms.ComboBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnNuevoCliente = new System.Windows.Forms.Button();
             this.panelContenido.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -58,19 +58,21 @@
             // panelContenido
             // 
             this.panelContenido.BackColor = System.Drawing.Color.White;
+            this.panelContenido.Controls.Add(this.label6);
             this.panelContenido.Controls.Add(this.label4);
+            this.panelContenido.Controls.Add(this.label5);
             this.panelContenido.Controls.Add(this.label3);
             this.panelContenido.Controls.Add(this.btnAnterior);
             this.panelContenido.Controls.Add(this.btnSiguiente);
             this.panelContenido.Controls.Add(this.btnNuevoCliente);
-            this.panelContenido.Controls.Add(this.cnFiltro);
+            this.panelContenido.Controls.Add(this.cbFiltro);
             this.panelContenido.Controls.Add(this.txtBuscar);
             this.panelContenido.Controls.Add(this.label2);
             this.panelContenido.Controls.Add(this.label1);
             this.panelContenido.Controls.Add(this.dgvClientes);
-            this.panelContenido.Location = new System.Drawing.Point(326, 143);
+            this.panelContenido.Location = new System.Drawing.Point(326, 61);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1436, 714);
+            this.panelContenido.Size = new System.Drawing.Size(1436, 1035);
             this.panelContenido.TabIndex = 2;
             // 
             // label4
@@ -110,15 +112,26 @@
             this.btnSiguiente.Text = "button2";
             this.btnSiguiente.UseVisualStyleBackColor = true;
             // 
-            // cnFiltro
+            // btnNuevoCliente
             // 
-            this.cnFiltro.ForeColor = System.Drawing.Color.Gray;
-            this.cnFiltro.FormattingEnabled = true;
-            this.cnFiltro.Location = new System.Drawing.Point(522, 184);
-            this.cnFiltro.Name = "cnFiltro";
-            this.cnFiltro.Size = new System.Drawing.Size(190, 28);
-            this.cnFiltro.TabIndex = 4;
-            this.cnFiltro.Text = "Todos los clientes";
+            this.btnNuevoCliente.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnNuevoCliente.Location = new System.Drawing.Point(1144, 136);
+            this.btnNuevoCliente.Name = "btnNuevoCliente";
+            this.btnNuevoCliente.Size = new System.Drawing.Size(206, 65);
+            this.btnNuevoCliente.TabIndex = 5;
+            this.btnNuevoCliente.Text = "Nuevo Cliente";
+            this.btnNuevoCliente.UseVisualStyleBackColor = false;
+            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
+            // 
+            // cbFiltro
+            // 
+            this.cbFiltro.ForeColor = System.Drawing.Color.Gray;
+            this.cbFiltro.FormattingEnabled = true;
+            this.cbFiltro.Location = new System.Drawing.Point(522, 184);
+            this.cbFiltro.Name = "cbFiltro";
+            this.cbFiltro.Size = new System.Drawing.Size(190, 28);
+            this.cbFiltro.TabIndex = 4;
+            this.cbFiltro.Text = "Todos los clientes";
             // 
             // txtBuscar
             // 
@@ -165,7 +178,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.RosyBrown;
-            this.label5.Location = new System.Drawing.Point(1514, 37);
+            this.label5.Location = new System.Drawing.Point(1165, 20);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(218, 46);
             this.label5.TabIndex = 3;
@@ -175,29 +188,17 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(1551, 83);
+            this.label6.Location = new System.Drawing.Point(1225, 86);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(125, 20);
             this.label6.TabIndex = 4;
             this.label6.Text = "BEAUTY Y SPA";
-            // 
-            // btnNuevoCliente
-            // 
-            this.btnNuevoCliente.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnNuevoCliente.Location = new System.Drawing.Point(1158, 41);
-            this.btnNuevoCliente.Name = "btnNuevoCliente";
-            this.btnNuevoCliente.Size = new System.Drawing.Size(206, 65);
-            this.btnNuevoCliente.TabIndex = 5;
-            this.btnNuevoCliente.Text = "Nuevo Cliente";
-            this.btnNuevoCliente.UseVisualStyleBackColor = false;
             // 
             // Clientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1821, 922);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.panelContenido);
             this.Controls.Add(this.panelMenu);
             this.Name = "Clientes";
@@ -207,7 +208,6 @@
             this.panelContenido.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -215,7 +215,7 @@
 
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelContenido;
-        private System.Windows.Forms.ComboBox cnFiltro;
+        private System.Windows.Forms.ComboBox cbFiltro;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

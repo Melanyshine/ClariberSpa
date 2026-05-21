@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(1075, 532);
             this.Name = "FrmFacturaPagos";
             this.Text = "FrmFacturaPagos";
+            this.Load += new System.EventHandler(this.FrmFacturaPagos_Load);
             this.ResumeLayout(false);
 
         }
