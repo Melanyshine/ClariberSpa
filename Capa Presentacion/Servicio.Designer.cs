@@ -31,19 +31,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cmbServicio = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.cmbServicio = new System.Windows.Forms.ComboBox();
             this.panelServiciosRegistrados = new System.Windows.Forms.Panel();
-            this.btnNuevoServicio = new System.Windows.Forms.Button();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dgvServicio = new System.Windows.Forms.DataGridView();
-            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.lblResultados = new System.Windows.Forms.Label();
+            this.lblPagina = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.dgvServicio = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.btnNuevoServicio = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panelServiciosRegistrados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicio)).BeginInit();
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(982, 48);
+            this.label1.Location = new System.Drawing.Point(1204, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 20);
             this.label1.TabIndex = 2;
@@ -69,91 +69,113 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 77);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.Location = new System.Drawing.Point(42, 89);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(227, 20);
+            this.label2.Size = new System.Drawing.Size(283, 25);
             this.label2.TabIndex = 3;
             this.label2.Text = "Administra los servicios del spa";
             // 
-            // label3
+            // lblTitulo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Servicio";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(39, 28);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(173, 45);
+            this.lblTitulo.TabIndex = 4;
+            this.lblTitulo.Text = "Servicios";
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.cmbServicio);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.lblTitulo);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(299, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1164, 129);
+            this.panel3.Size = new System.Drawing.Size(1419, 129);
             this.panel3.TabIndex = 5;
-            // 
-            // cmbServicio
-            // 
-            this.cmbServicio.FormattingEnabled = true;
-            this.cmbServicio.Location = new System.Drawing.Point(587, 50);
-            this.cmbServicio.Name = "cmbServicio";
-            this.cmbServicio.Size = new System.Drawing.Size(121, 28);
-            this.cmbServicio.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1052, 28);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.RosyBrown;
+            this.label4.Location = new System.Drawing.Point(1177, 18);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 20);
+            this.label4.Size = new System.Drawing.Size(239, 46);
             this.label4.TabIndex = 6;
             this.label4.Text = "Claribet Spa";
             // 
+            // cmbServicio
+            // 
+            this.cmbServicio.FormattingEnabled = true;
+            this.cmbServicio.Location = new System.Drawing.Point(954, 18);
+            this.cmbServicio.Name = "cmbServicio";
+            this.cmbServicio.Size = new System.Drawing.Size(121, 28);
+            this.cmbServicio.TabIndex = 5;
+            // 
             // panelServiciosRegistrados
             // 
-            this.panelServiciosRegistrados.Controls.Add(this.label7);
-            this.panelServiciosRegistrados.Controls.Add(this.label6);
+            this.panelServiciosRegistrados.Controls.Add(this.lblResultados);
+            this.panelServiciosRegistrados.Controls.Add(this.lblPagina);
             this.panelServiciosRegistrados.Controls.Add(this.btnAnterior);
             this.panelServiciosRegistrados.Controls.Add(this.btnSiguiente);
             this.panelServiciosRegistrados.Controls.Add(this.dgvServicio);
             this.panelServiciosRegistrados.Controls.Add(this.label5);
             this.panelServiciosRegistrados.Controls.Add(this.txtBuscar);
             this.panelServiciosRegistrados.Controls.Add(this.btnNuevoServicio);
-            this.panelServiciosRegistrados.Location = new System.Drawing.Point(299, 165);
+            this.panelServiciosRegistrados.Location = new System.Drawing.Point(478, 168);
             this.panelServiciosRegistrados.Name = "panelServiciosRegistrados";
             this.panelServiciosRegistrados.Size = new System.Drawing.Size(1164, 822);
             this.panelServiciosRegistrados.TabIndex = 6;
             // 
-            // btnNuevoServicio
+            // lblResultados
             // 
-            this.btnNuevoServicio.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnNuevoServicio.Location = new System.Drawing.Point(912, 32);
-            this.btnNuevoServicio.Name = "btnNuevoServicio";
-            this.btnNuevoServicio.Size = new System.Drawing.Size(199, 57);
-            this.btnNuevoServicio.TabIndex = 0;
-            this.btnNuevoServicio.Text = "NuevoServicio";
-            this.btnNuevoServicio.UseVisualStyleBackColor = false;
+            this.lblResultados.AutoSize = true;
+            this.lblResultados.BackColor = System.Drawing.Color.Transparent;
+            this.lblResultados.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultados.ForeColor = System.Drawing.Color.Gray;
+            this.lblResultados.Location = new System.Drawing.Point(54, 772);
+            this.lblResultados.Name = "lblResultados";
+            this.lblResultados.Size = new System.Drawing.Size(246, 20);
+            this.lblResultados.TabIndex = 7;
+            this.lblResultados.Text = "Mostrando 1 de 6 a 6  resultados";
             // 
-            // txtBuscar
+            // lblPagina
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(43, 87);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(374, 26);
-            this.txtBuscar.TabIndex = 1;
-            this.txtBuscar.Text = "Buscar Servicio";
+            this.lblPagina.AutoSize = true;
+            this.lblPagina.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPagina.Location = new System.Drawing.Point(538, 760);
+            this.lblPagina.Name = "lblPagina";
+            this.lblPagina.Size = new System.Drawing.Size(26, 29);
+            this.lblPagina.TabIndex = 6;
+            this.lblPagina.Text = "1";
             // 
-            // label5
+            // btnAnterior
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(43, 43);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 20);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Servicios";
+            this.btnAnterior.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnAnterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnterior.Location = new System.Drawing.Point(570, 746);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(58, 48);
+            this.btnAnterior.TabIndex = 5;
+            this.btnAnterior.Text = "▶";
+            this.btnAnterior.UseVisualStyleBackColor = false;
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnSiguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSiguiente.Location = new System.Drawing.Point(467, 746);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(65, 48);
+            this.btnSiguiente.TabIndex = 4;
+            this.btnSiguiente.Text = "◀";
+            this.btnSiguiente.UseVisualStyleBackColor = false;
             // 
             // dgvServicio
             // 
@@ -165,49 +187,42 @@
             this.dgvServicio.Size = new System.Drawing.Size(1098, 579);
             this.dgvServicio.TabIndex = 3;
             // 
-            // btnSiguiente
+            // label5
             // 
-            this.btnSiguiente.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnSiguiente.Location = new System.Drawing.Point(456, 758);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(75, 23);
-            this.btnSiguiente.TabIndex = 4;
-            this.btnSiguiente.Text = "button2";
-            this.btnSiguiente.UseVisualStyleBackColor = false;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(43, 43);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(260, 32);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Servicios registrados";
             // 
-            // btnAnterior
+            // txtBuscar
             // 
-            this.btnAnterior.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnAnterior.Location = new System.Drawing.Point(587, 758);
-            this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(75, 23);
-            this.btnAnterior.TabIndex = 5;
-            this.btnAnterior.Text = "button3";
-            this.btnAnterior.UseVisualStyleBackColor = false;
+            this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
+            this.txtBuscar.Location = new System.Drawing.Point(43, 87);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(374, 26);
+            this.txtBuscar.TabIndex = 1;
+            this.txtBuscar.Text = "Buscar Servicio";
             // 
-            // label6
+            // btnNuevoServicio
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(538, 760);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 20);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "1";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(68, 781);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(241, 20);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Mostrando 1 de 6 a 6  resultados";
+            this.btnNuevoServicio.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnNuevoServicio.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnNuevoServicio.Location = new System.Drawing.Point(912, 32);
+            this.btnNuevoServicio.Name = "btnNuevoServicio";
+            this.btnNuevoServicio.Size = new System.Drawing.Size(199, 57);
+            this.btnNuevoServicio.TabIndex = 0;
+            this.btnNuevoServicio.Text = "Nuevo Servicio";
+            this.btnNuevoServicio.UseVisualStyleBackColor = false;
             // 
             // Servicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1491, 1050);
+            this.ClientSize = new System.Drawing.Size(1750, 1050);
             this.Controls.Add(this.panelServiciosRegistrados);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -228,15 +243,15 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbServicio;
         private System.Windows.Forms.Panel panelServiciosRegistrados;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Button btnNuevoServicio;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblResultados;
+        private System.Windows.Forms.Label lblPagina;
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnSiguiente;
         private System.Windows.Forms.DataGridView dgvServicio;
