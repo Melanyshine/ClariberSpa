@@ -87,22 +87,22 @@
             this.panelCitas.Controls.Add(this.lblServicio);
             this.panelCitas.Controls.Add(this.cbCliente);
             this.panelCitas.Controls.Add(this.lblCliente);
-            this.panelCitas.Location = new System.Drawing.Point(1274, 118);
+            this.panelCitas.Location = new System.Drawing.Point(1249, 116);
             this.panelCitas.Name = "panelCitas";
-            this.panelCitas.Size = new System.Drawing.Size(416, 704);
+            this.panelCitas.Size = new System.Drawing.Size(441, 779);
             this.panelCitas.TabIndex = 3;
             // 
             // cbEstado
             // 
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(216, 46);
+            this.cbEstado.Location = new System.Drawing.Point(253, 43);
             this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(121, 28);
+            this.cbEstado.Size = new System.Drawing.Size(159, 28);
             this.cbEstado.TabIndex = 20;
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(198, 645);
+            this.btnActualizar.Location = new System.Drawing.Point(234, 681);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(124, 46);
             this.btnActualizar.TabIndex = 10;
@@ -113,14 +113,14 @@
             // clbServicios
             // 
             this.clbServicios.FormattingEnabled = true;
-            this.clbServicios.Location = new System.Drawing.Point(31, 125);
+            this.clbServicios.Location = new System.Drawing.Point(68, 122);
             this.clbServicios.Name = "clbServicios";
             this.clbServicios.Size = new System.Drawing.Size(239, 96);
             this.clbServicios.TabIndex = 10;
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(49, 645);
+            this.btnLimpiar.Location = new System.Drawing.Point(85, 681);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(128, 44);
             this.btnLimpiar.TabIndex = 19;
@@ -130,7 +130,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(197, 570);
+            this.btnEliminar.Location = new System.Drawing.Point(233, 606);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(124, 47);
             this.btnEliminar.TabIndex = 18;
@@ -140,7 +140,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(49, 570);
+            this.btnGuardar.Location = new System.Drawing.Point(85, 606);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(124, 47);
             this.btnGuardar.TabIndex = 17;
@@ -151,7 +151,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(193, 491);
+            this.lblPrecio.Location = new System.Drawing.Point(249, 488);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(49, 20);
             this.lblPrecio.TabIndex = 16;
@@ -160,15 +160,16 @@
             // lblPrecioTitulo
             // 
             this.lblPrecioTitulo.AutoSize = true;
-            this.lblPrecioTitulo.Location = new System.Drawing.Point(27, 503);
+            this.lblPrecioTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioTitulo.Location = new System.Drawing.Point(54, 514);
             this.lblPrecioTitulo.Name = "lblPrecioTitulo";
-            this.lblPrecioTitulo.Size = new System.Drawing.Size(113, 20);
+            this.lblPrecioTitulo.Size = new System.Drawing.Size(146, 25);
             this.lblPrecioTitulo.TabIndex = 15;
-            this.lblPrecioTitulo.Text = "Total estimado";
+            this.lblPrecioTitulo.Text = "Total estimado:";
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(34, 373);
+            this.txtDescripcion.Location = new System.Drawing.Point(85, 379);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(236, 81);
@@ -177,7 +178,7 @@
             // txtNotas
             // 
             this.txtNotas.AutoSize = true;
-            this.txtNotas.Location = new System.Drawing.Point(30, 329);
+            this.txtNotas.Location = new System.Drawing.Point(81, 335);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(134, 20);
             this.txtNotas.TabIndex = 13;
@@ -187,7 +188,7 @@
             // 
             this.dtHora.CustomFormat = "HH : mm";
             this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtHora.Location = new System.Drawing.Point(198, 274);
+            this.dtHora.Location = new System.Drawing.Point(249, 280);
             this.dtHora.Name = "dtHora";
             this.dtHora.ShowUpDown = true;
             this.dtHora.Size = new System.Drawing.Size(109, 26);
@@ -196,16 +197,16 @@
             // lblHora
             // 
             this.lblHora.AutoSize = true;
-            this.lblHora.Location = new System.Drawing.Point(226, 248);
+            this.lblHora.Location = new System.Drawing.Point(259, 254);
             this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(44, 20);
+            this.lblHora.Size = new System.Drawing.Size(48, 20);
             this.lblHora.TabIndex = 11;
-            this.lblHora.Text = "Hora";
+            this.lblHora.Text = "Hora:";
             // 
             // dtFecha
             // 
             this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFecha.Location = new System.Drawing.Point(24, 274);
+            this.dtFecha.Location = new System.Drawing.Point(75, 280);
             this.dtFecha.Name = "dtFecha";
             this.dtFecha.Size = new System.Drawing.Size(136, 26);
             this.dtFecha.TabIndex = 10;
@@ -213,25 +214,25 @@
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(27, 239);
+            this.lblFecha.Location = new System.Drawing.Point(81, 254);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(54, 20);
+            this.lblFecha.Size = new System.Drawing.Size(58, 20);
             this.lblFecha.TabIndex = 9;
-            this.lblFecha.Text = "Fecha";
+            this.lblFecha.Text = "Fecha:";
             // 
             // lblServicio
             // 
             this.lblServicio.AutoSize = true;
-            this.lblServicio.Location = new System.Drawing.Point(20, 91);
+            this.lblServicio.Location = new System.Drawing.Point(57, 88);
             this.lblServicio.Name = "lblServicio";
-            this.lblServicio.Size = new System.Drawing.Size(64, 20);
+            this.lblServicio.Size = new System.Drawing.Size(68, 20);
             this.lblServicio.TabIndex = 7;
-            this.lblServicio.Text = "Servicio";
+            this.lblServicio.Text = "Servicio:";
             // 
             // cbCliente
             // 
             this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(21, 46);
+            this.cbCliente.Location = new System.Drawing.Point(58, 43);
             this.cbCliente.Name = "cbCliente";
             this.cbCliente.Size = new System.Drawing.Size(175, 28);
             this.cbCliente.TabIndex = 6;
@@ -239,11 +240,11 @@
             // lblCliente
             // 
             this.lblCliente.AutoSize = true;
-            this.lblCliente.Location = new System.Drawing.Point(17, 23);
+            this.lblCliente.Location = new System.Drawing.Point(54, 20);
             this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(58, 20);
+            this.lblCliente.Size = new System.Drawing.Size(62, 20);
             this.lblCliente.TabIndex = 5;
-            this.lblCliente.Text = "Cliente";
+            this.lblCliente.Text = "Cliente:";
             // 
             // lblTitulo
             // 
@@ -267,7 +268,7 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(289, 849);
+            this.panelMenu.Size = new System.Drawing.Size(289, 907);
             this.panelMenu.TabIndex = 6;
             // 
             // panelTabla
@@ -281,7 +282,7 @@
             // 
             this.btnHistorial.Location = new System.Drawing.Point(357, 746);
             this.btnHistorial.Name = "btnHistorial";
-            this.btnHistorial.Size = new System.Drawing.Size(194, 49);
+            this.btnHistorial.Size = new System.Drawing.Size(305, 49);
             this.btnHistorial.TabIndex = 9;
             this.btnHistorial.Text = "Ver Historial de citas";
             this.btnHistorial.UseVisualStyleBackColor = true;
@@ -292,7 +293,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1725, 849);
+            this.ClientSize = new System.Drawing.Size(1725, 907);
             this.Controls.Add(this.btnHistorial);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panel1);
