@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿
+ using CapaNegocio;
 using System;
 using System.Data;
 using System.Drawing;
