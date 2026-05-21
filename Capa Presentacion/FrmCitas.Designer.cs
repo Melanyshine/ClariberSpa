@@ -30,6 +30,9 @@
         {
             this.dgvCitas = new System.Windows.Forms.DataGridView();
             this.panelCitas = new System.Windows.Forms.Panel();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.clbServicios = new System.Windows.Forms.CheckedListBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -49,9 +52,6 @@
             this.panelMenu = new System.Windows.Forms.Panel();
             this.panelTabla = new System.Windows.Forms.Panel();
             this.btnHistorial = new System.Windows.Forms.Button();
-            this.clbServicios = new System.Windows.Forms.CheckedListBox();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCitas)).BeginInit();
             this.panelCitas.SuspendLayout();
             this.SuspendLayout();
@@ -92,9 +92,35 @@
             this.panelCitas.Size = new System.Drawing.Size(416, 704);
             this.panelCitas.TabIndex = 3;
             // 
+            // cbEstado
+            // 
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Location = new System.Drawing.Point(216, 46);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(121, 28);
+            this.cbEstado.TabIndex = 20;
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(198, 645);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(124, 46);
+            this.btnActualizar.TabIndex = 10;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // clbServicios
+            // 
+            this.clbServicios.FormattingEnabled = true;
+            this.clbServicios.Location = new System.Drawing.Point(31, 125);
+            this.clbServicios.Name = "clbServicios";
+            this.clbServicios.Size = new System.Drawing.Size(239, 96);
+            this.clbServicios.TabIndex = 10;
+            // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(49, 622);
+            this.btnLimpiar.Location = new System.Drawing.Point(49, 645);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(128, 44);
             this.btnLimpiar.TabIndex = 19;
@@ -104,7 +130,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(197, 547);
+            this.btnEliminar.Location = new System.Drawing.Point(197, 570);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(124, 47);
             this.btnEliminar.TabIndex = 18;
@@ -114,7 +140,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(49, 547);
+            this.btnGuardar.Location = new System.Drawing.Point(49, 570);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(124, 47);
             this.btnGuardar.TabIndex = 17;
@@ -125,7 +151,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(248, 503);
+            this.lblPrecio.Location = new System.Drawing.Point(193, 491);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(49, 20);
             this.lblPrecio.TabIndex = 16;
@@ -260,32 +286,6 @@
             this.btnHistorial.Text = "Ver Historial de citas";
             this.btnHistorial.UseVisualStyleBackColor = true;
             this.btnHistorial.Click += new System.EventHandler(this.btnHistorial_Click);
-            // 
-            // clbServicios
-            // 
-            this.clbServicios.FormattingEnabled = true;
-            this.clbServicios.Location = new System.Drawing.Point(31, 125);
-            this.clbServicios.Name = "clbServicios";
-            this.clbServicios.Size = new System.Drawing.Size(239, 96);
-            this.clbServicios.TabIndex = 10;
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Location = new System.Drawing.Point(198, 622);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(124, 46);
-            this.btnActualizar.TabIndex = 10;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // cbEstado
-            // 
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(216, 46);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(121, 28);
-            this.cbEstado.TabIndex = 20;
             // 
             // FrmCitas
             // 

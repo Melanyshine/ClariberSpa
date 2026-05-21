@@ -694,6 +694,45 @@ namespace Capa_Presentacion
 
             btnEliminar.Height = 40;
 
+            // ACTUALIZAR
+            btnActualizar.BackColor =
+                colorVinoBotones;
+
+            btnActualizar.ForeColor =
+                Color.White;
+
+            btnActualizar.FlatStyle =
+                FlatStyle.Flat;
+
+            btnActualizar.FlatAppearance.BorderSize = 0;
+
+            btnActualizar.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    10F);
+
+            btnActualizar.Height = 40;
+
+
+            // VER HISTORIAL
+            btnHistorial.BackColor =
+                Color.FromArgb(242, 235, 231);
+
+            btnHistorial.ForeColor =
+                colorMenuLateral;
+
+            btnHistorial.FlatStyle =
+                FlatStyle.Flat;
+
+            btnHistorial.FlatAppearance.BorderSize = 0;
+
+            btnHistorial.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    10F);
+
+            btnHistorial.Height = 40;
+
             // TABLA
             dgvCitas.BackgroundColor =
                 Color.White;
