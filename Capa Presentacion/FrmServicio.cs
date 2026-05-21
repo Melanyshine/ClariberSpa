@@ -130,7 +130,6 @@ namespace Capa_Presentacion
             btnCancelar.FlatAppearance.BorderSize = 1;
             btnCancelar.Font = new Font("Segoe UI", 11, FontStyle.Bold);
 
-            // ❌ SIN BORDES REDONDOS EN BOTONES
             btnGuardarServicio.Region = null;
             btnCancelar.Region = null;
         }
@@ -299,8 +298,18 @@ namespace Capa_Presentacion
             txtPrecio.Text = fila[0]["precio"].ToString();
             txtPrecio.ForeColor = Color.Black;
 
-            txtDescripcion.Text = fila[0]["duracion_minutos"].ToString();
-            txtDescripcion.ForeColor = Color.Black;
+            // VALIDAR SI EXISTE LA COLUMNA
+            if (dt.Columns.Contains("duracion_minutos"))
+            {
+                txtDescripcion.Text = fila[0]["duracion_minutos"].ToString();
+                txtDescripcion.ForeColor = Color.Black;
+            }
+
+            // CARGAR CATEGORIA
+            if (dt.Columns.Contains("categoria"))
+            {
+                cmbCategoria.Text = fila[0]["categoria"].ToString();
+            }
         }
 
         // =========================
@@ -330,6 +339,7 @@ namespace Capa_Presentacion
             {
                 id_servicio = IdServicio,
                 nombre_servicio = txtNombreServicio.Text.Trim(),
+                categoria = cmbCategoria.Text,
                 precio = precio,
                 duracion_minutos = duracion
             };
