@@ -30,18 +30,18 @@
         {
             this.panelMenu = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.cnFiltro = new System.Windows.Forms.ComboBox();
-            this.btnNuevoCliente = new System.Windows.Forms.Button();
-            this.btnSiguiente = new System.Windows.Forms.Button();
-            this.btnAnterior = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.cnFiltro = new System.Windows.Forms.ComboBox();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnNuevoCliente = new System.Windows.Forms.Button();
             this.panelContenido.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -73,25 +73,61 @@
             this.panelContenido.Size = new System.Drawing.Size(1436, 714);
             this.panelContenido.TabIndex = 2;
             // 
-            // dgvClientes
+            // label4
             // 
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(51, 254);
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.RowHeadersWidth = 62;
-            this.dgvClientes.RowTemplate.Height = 28;
-            this.dgvClientes.Size = new System.Drawing.Size(1323, 447);
-            this.dgvClientes.TabIndex = 0;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(682, 738);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 22);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "1";
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 55);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Clientes";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(34, 749);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(200, 20);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Mostrando 5 de 25 clientes";
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Location = new System.Drawing.Point(708, 730);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(55, 39);
+            this.btnAnterior.TabIndex = 7;
+            this.btnAnterior.Text = "button3";
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Location = new System.Drawing.Point(616, 729);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(60, 40);
+            this.btnSiguiente.TabIndex = 6;
+            this.btnSiguiente.Text = "button2";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            // 
+            // cnFiltro
+            // 
+            this.cnFiltro.ForeColor = System.Drawing.Color.Gray;
+            this.cnFiltro.FormattingEnabled = true;
+            this.cnFiltro.Location = new System.Drawing.Point(522, 184);
+            this.cnFiltro.Name = "cnFiltro";
+            this.cnFiltro.Size = new System.Drawing.Size(190, 28);
+            this.cnFiltro.TabIndex = 4;
+            this.cnFiltro.Text = "Todos los clientes";
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
+            this.txtBuscar.Location = new System.Drawing.Point(51, 184);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(407, 26);
+            this.txtBuscar.TabIndex = 3;
+            this.txtBuscar.Text = "Buscar Clientes";
             // 
             // label2
             // 
@@ -104,71 +140,25 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Gestiona lainformacion de tus clientes";
             // 
-            // txtBuscar
+            // label1
             // 
-            this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
-            this.txtBuscar.Location = new System.Drawing.Point(51, 184);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(407, 26);
-            this.txtBuscar.TabIndex = 3;
-            this.txtBuscar.Text = "Buscar Clientes";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(46, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(188, 55);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Clientes";
             // 
-            // cnFiltro
+            // dgvClientes
             // 
-            this.cnFiltro.ForeColor = System.Drawing.Color.Gray;
-            this.cnFiltro.FormattingEnabled = true;
-            this.cnFiltro.Location = new System.Drawing.Point(522, 184);
-            this.cnFiltro.Name = "cnFiltro";
-            this.cnFiltro.Size = new System.Drawing.Size(190, 28);
-            this.cnFiltro.TabIndex = 4;
-            this.cnFiltro.Text = "Todos los clientes";
-            // 
-            // btnNuevoCliente
-            // 
-            this.btnNuevoCliente.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnNuevoCliente.Location = new System.Drawing.Point(1158, 41);
-            this.btnNuevoCliente.Name = "btnNuevoCliente";
-            this.btnNuevoCliente.Size = new System.Drawing.Size(206, 65);
-            this.btnNuevoCliente.TabIndex = 5;
-            this.btnNuevoCliente.Text = "Nuevo Cliente";
-            this.btnNuevoCliente.UseVisualStyleBackColor = false;
-            // 
-            // btnSiguiente
-            // 
-            this.btnSiguiente.Location = new System.Drawing.Point(616, 729);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(60, 40);
-            this.btnSiguiente.TabIndex = 6;
-            this.btnSiguiente.Text = "button2";
-            this.btnSiguiente.UseVisualStyleBackColor = true;
-            // 
-            // btnAnterior
-            // 
-            this.btnAnterior.Location = new System.Drawing.Point(708, 730);
-            this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(55, 39);
-            this.btnAnterior.TabIndex = 7;
-            this.btnAnterior.Text = "button3";
-            this.btnAnterior.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 749);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(200, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Mostrando 5 de 25 clientes";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(682, 738);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 22);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "1";
+            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientes.Location = new System.Drawing.Point(51, 254);
+            this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.RowHeadersWidth = 62;
+            this.dgvClientes.RowTemplate.Height = 28;
+            this.dgvClientes.Size = new System.Drawing.Size(1323, 447);
+            this.dgvClientes.TabIndex = 0;
             // 
             // label5
             // 
@@ -191,6 +181,16 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "BEAUTY Y SPA";
             // 
+            // btnNuevoCliente
+            // 
+            this.btnNuevoCliente.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnNuevoCliente.Location = new System.Drawing.Point(1158, 41);
+            this.btnNuevoCliente.Name = "btnNuevoCliente";
+            this.btnNuevoCliente.Size = new System.Drawing.Size(206, 65);
+            this.btnNuevoCliente.TabIndex = 5;
+            this.btnNuevoCliente.Text = "Nuevo Cliente";
+            this.btnNuevoCliente.UseVisualStyleBackColor = false;
+            // 
             // Clientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -202,6 +202,7 @@
             this.Controls.Add(this.panelMenu);
             this.Name = "Clientes";
             this.Text = "Clientes";
+            this.Load += new System.EventHandler(this.Clientes_Load);
             this.panelContenido.ResumeLayout(false);
             this.panelContenido.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
@@ -214,7 +215,6 @@
 
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelContenido;
-        private System.Windows.Forms.Button btnNuevoCliente;
         private System.Windows.Forms.ComboBox cnFiltro;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label2;
@@ -226,5 +226,6 @@
         private System.Windows.Forms.Button btnSiguiente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnNuevoCliente;
     }
 }
