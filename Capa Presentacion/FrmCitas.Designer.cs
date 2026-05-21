@@ -65,7 +65,7 @@
             this.dgvCitas.ReadOnly = true;
             this.dgvCitas.RowHeadersWidth = 62;
             this.dgvCitas.RowTemplate.Height = 28;
-            this.dgvCitas.Size = new System.Drawing.Size(801, 573);
+            this.dgvCitas.Size = new System.Drawing.Size(922, 573);
             this.dgvCitas.TabIndex = 2;
             // 
             // panelCitas
@@ -87,7 +87,7 @@
             this.panelCitas.Controls.Add(this.lblServicio);
             this.panelCitas.Controls.Add(this.cbCliente);
             this.panelCitas.Controls.Add(this.lblCliente);
-            this.panelCitas.Location = new System.Drawing.Point(1249, 116);
+            this.panelCitas.Location = new System.Drawing.Point(1355, 116);
             this.panelCitas.Name = "panelCitas";
             this.panelCitas.Size = new System.Drawing.Size(441, 779);
             this.panelCitas.TabIndex = 3;
@@ -249,7 +249,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(1280, 74);
+            this.lblTitulo.Location = new System.Drawing.Point(1386, 74);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(151, 20);
             this.lblTitulo.TabIndex = 4;
@@ -275,7 +275,7 @@
             // 
             this.panelTabla.Location = new System.Drawing.Point(345, 126);
             this.panelTabla.Name = "panelTabla";
-            this.panelTabla.Size = new System.Drawing.Size(831, 598);
+            this.panelTabla.Size = new System.Drawing.Size(945, 605);
             this.panelTabla.TabIndex = 7;
             // 
             // btnHistorial
@@ -293,7 +293,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1725, 907);
+            this.ClientSize = new System.Drawing.Size(1820, 907);
             this.Controls.Add(this.btnHistorial);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panel1);

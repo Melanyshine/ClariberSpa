@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
 
 namespace CapaEntidades
 {
@@ -12,8 +13,6 @@ namespace CapaEntidades
         public int id_cita { get; set; }
 
         public int id_cliente { get; set; }
-
-        public int id_servicio { get; set; }
 
         public int id_usuario { get; set; }
 

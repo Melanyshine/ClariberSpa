@@ -45,6 +45,7 @@
     <Compile Include="CitasDAL.cs" />
     <Compile Include="ClientesDAL.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="Detalle_CitasDAL.cs" />
     <Compile Include="Detalle_FacturaDAL.cs" />
     <Compile Include="DisponibilidadDAL.cs" />
     <Compile Include="FacturaDAL.cs" />

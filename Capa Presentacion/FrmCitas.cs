@@ -104,9 +104,6 @@ namespace Capa_Presentacion
             if (dgvCitas.Columns.Contains("id_cliente"))
                 dgvCitas.Columns["id_cliente"].Visible = false;
 
-            if (dgvCitas.Columns.Contains("id_servicio"))
-                dgvCitas.Columns["id_servicio"].Visible = false;
-
             if (dgvCitas.Columns.Contains("id_usuario"))
                 dgvCitas.Columns["id_usuario"].Visible = false;
         }
@@ -176,8 +173,8 @@ namespace Capa_Presentacion
         // 🖱 CLICK GRID
         // =========================
         private void dgvCitas_CellClick(
-            object sender,
-            DataGridViewCellEventArgs e)
+     object sender,
+     DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
@@ -186,14 +183,16 @@ namespace Capa_Presentacion
                 dgvCitas.Rows[e.RowIndex];
 
             // CLIENTE
-            if (dgvCitas.Columns.Contains("id_cliente"))
+            if (dgvCitas.Columns.Contains("id_cliente") &&
+                fila.Cells["id_cliente"].Value != DBNull.Value)
             {
                 cbCliente.SelectedValue =
                     fila.Cells["id_cliente"].Value;
             }
 
             // FECHA
-            if (dgvCitas.Columns.Contains("fecha"))
+            if (dgvCitas.Columns.Contains("fecha") &&
+                fila.Cells["fecha"].Value != DBNull.Value)
             {
                 dtFecha.Value =
                     Convert.ToDateTime(
@@ -201,7 +200,8 @@ namespace Capa_Presentacion
             }
 
             // HORA
-            if (dgvCitas.Columns.Contains("hora_inicio"))
+            if (dgvCitas.Columns.Contains("hora_inicio") &&
+                fila.Cells["hora_inicio"].Value != DBNull.Value)
             {
                 TimeSpan hora =
                     TimeSpan.Parse(
@@ -214,16 +214,22 @@ namespace Capa_Presentacion
             }
 
             // DESCRIPCIÓN
-            if (dgvCitas.Columns.Contains("descripcion"))
+            if (dgvCitas.Columns.Contains("descripcion") &&
+                fila.Cells["descripcion"].Value != DBNull.Value)
             {
                 txtDescripcion.Text =
                     fila.Cells["descripcion"]
                     .Value
                     .ToString();
             }
+            else
+            {
+                txtDescripcion.Text = "";
+            }
 
             // ESTADO
-            if (dgvCitas.Columns.Contains("nombre_estado"))
+            if (dgvCitas.Columns.Contains("nombre_estado") &&
+                fila.Cells["nombre_estado"].Value != DBNull.Value)
             {
                 cbEstado.Text =
                     fila.Cells["nombre_estado"]
@@ -232,13 +238,14 @@ namespace Capa_Presentacion
             }
 
             // PRECIO
-            if (dgvCitas.Columns.Contains("precio"))
+            if (dgvCitas.Columns.Contains("precio") &&
+                fila.Cells["precio"].Value != DBNull.Value)
             {
                 lblPrecio.Text =
                     "RD$ " +
-                    fila.Cells["precio"]
-                    .Value
-                    .ToString();
+                    Convert.ToDecimal(
+                    fila.Cells["precio"].Value)
+                    .ToString("N2");
             }
 
             // LIMPIAR CHECKS
@@ -247,48 +254,59 @@ namespace Capa_Presentacion
                 clbServicios.SetItemChecked(i, false);
             }
 
-            // MARCAR SERVICIO
-            if (dgvCitas.Columns.Contains("id_servicio"))
+            // MARCAR SERVICIOS
+            if (dgvCitas.Columns.Contains("id_cita") &&
+                fila.Cells["id_cita"].Value != DBNull.Value)
             {
-                int idServicio =
-                    Convert.ToInt32(
-                    fila.Cells["id_servicio"].Value);
+                int idCita = Convert.ToInt32(
+                    fila.Cells["id_cita"].Value);
 
-                for (int i = 0; i < clbServicios.Items.Count; i++)
+                DataTable detalles =
+                    new DetalleCitas_BLL()
+                    .ObtenerPorCita(idCita);
+
+                foreach (DataRow detalle in detalles.Rows)
                 {
-                    DataRowView item =
-                        (DataRowView)clbServicios.Items[i];
+                    int idServicio =
+                        Convert.ToInt32(
+                        detalle["id_servicio"]);
 
-                    if (Convert.ToInt32(item["id_servicio"]) == idServicio)
+                    for (int i = 0; i < clbServicios.Items.Count; i++)
                     {
-                        clbServicios.SetItemChecked(i, true);
-                        break;
+                        DataRowView item =
+                            (DataRowView)clbServicios.Items[i];
+
+                        if (Convert.ToInt32(
+                            item["id_servicio"]) == idServicio)
+                        {
+                            clbServicios.SetItemChecked(i, true);
+                            break;
+                        }
                     }
                 }
             }
         }
-
         // =========================
         // 💾 GUARDAR
         // =========================
         // 💾 GUARDAR
         private void btnGuardar_Click(
-            object sender,
-            EventArgs e)
+      object sender,
+      EventArgs e)
         {
             try
             {
-                if (clbServicios.CheckedItems.Count == 0)
+                if (cbCliente.SelectedValue == null)
                 {
-                    MessageBox.Show(
-                        "Seleccione al menos un servicio");
-
+                    MessageBox.Show("Seleccione un cliente");
                     return;
                 }
 
-                DataRowView servicio =
-                    (DataRowView)
-                    clbServicios.CheckedItems[0];
+                if (clbServicios.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("Seleccione al menos un servicio");
+                    return;
+                }
 
                 Citas c = new Citas();
 
@@ -296,16 +314,7 @@ namespace Capa_Presentacion
                     Convert.ToInt32(
                     cbCliente.SelectedValue);
 
-                c.id_servicio =
-                    Convert.ToInt32(
-                    servicio["id_servicio"]);
-
-                // 🔥 SOLO ESTE CAMBIO
-                c.id_usuario =
-                    Convert.ToInt32(
-                    dgvCitas.CurrentRow != null
-                    ? dgvCitas.CurrentRow.Cells["id_usuario"].Value
-                    : 1);
+                c.id_usuario = 1;
 
                 c.fecha =
                     dtFecha.Value;
@@ -322,10 +331,11 @@ namespace Capa_Presentacion
                 c.nombre_estado =
                     cbEstado.Text;
 
-                citasBLL.Guardar(c);
+                citasBLL.Guardar(
+                    c,
+                    clbServicios.CheckedItems);
 
-                MessageBox.Show(
-                    "Cita guardada correctamente");
+                MessageBox.Show("Cita guardada correctamente");
 
                 MostrarCitas();
 
@@ -333,8 +343,7 @@ namespace Capa_Presentacion
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
         // =========================
@@ -374,8 +383,8 @@ namespace Capa_Presentacion
 
 
         private void btnActualizar_Click(
-   object sender,
-   EventArgs e)
+      object sender,
+      EventArgs e)
         {
             try
             {
@@ -395,10 +404,6 @@ namespace Capa_Presentacion
                     return;
                 }
 
-                DataRowView servicio =
-                    (DataRowView)
-                    clbServicios.CheckedItems[0];
-
                 Citas c =
                     new Citas();
 
@@ -412,28 +417,9 @@ namespace Capa_Presentacion
                     Convert.ToInt32(
                     cbCliente.SelectedValue);
 
-                c.id_servicio =
-                    Convert.ToInt32(
-                    servicio["id_servicio"]);
-                c.id_cita =
-    Convert.ToInt32(
-    dgvCitas.CurrentRow.Cells["id_cita"].Value);
-
-                c.id_cliente =
-                    Convert.ToInt32(
-                    cbCliente.SelectedValue);
-
-                c.id_servicio =
-                    Convert.ToInt32(
-                    servicio["id_servicio"]);
-
-                // ✅ AGREGAR ESTO
                 c.id_usuario =
                     Convert.ToInt32(
                     dgvCitas.CurrentRow.Cells["id_usuario"].Value);
-
-                c.fecha =
-                    dtFecha.Value;
 
                 c.fecha =
                     dtFecha.Value;
@@ -450,7 +436,9 @@ namespace Capa_Presentacion
                 c.nombre_estado =
                     cbEstado.Text;
 
-                citasBLL.Actualizar(c);
+                citasBLL.Actualizar(
+                    c,
+                    clbServicios.CheckedItems);
 
                 MessageBox.Show(
                     "Cita actualizada");

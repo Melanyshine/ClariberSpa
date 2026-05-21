@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Citas.cs" />
     <Compile Include="Clientes.cs" />
+    <Compile Include="Detalle_Citas.cs" />
     <Compile Include="Detalle_Factura.cs" />
     <Compile Include="Disponibilidad.cs" />
     <Compile Include="Factura.cs" />

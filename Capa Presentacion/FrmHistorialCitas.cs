@@ -49,7 +49,8 @@ namespace CapaPresentacion
                     tabla.DefaultView;
 
                 vista.RowFilter =
-                    "nombre_estado = 'Completada'";
+                  vista.RowFilter =
+               "nombre_estado = 'Completada' OR nombre_estado = 'Cancelada'";
 
                 dgvHistorial.DataSource =
                     vista;

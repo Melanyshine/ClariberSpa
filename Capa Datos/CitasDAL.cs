@@ -35,9 +35,12 @@ namespace CapaDatos
         // =========================
         // INSERTAR
         // =========================
-        public void InsertarCita(
+        // =========================
+        // CITAS DAL
+        // =========================
+
+        public int InsertarCita(
             int id_cliente,
-            int id_servicio,
             int id_usuario,
             DateTime fecha,
             TimeSpan hora_inicio,
@@ -63,10 +66,6 @@ namespace CapaDatos
                 id_cliente);
 
             cmd.Parameters.AddWithValue(
-                "@id_servicio",
-                id_servicio);
-
-            cmd.Parameters.AddWithValue(
                 "@id_usuario",
                 id_usuario);
 
@@ -90,9 +89,13 @@ namespace CapaDatos
                 "@nombre_estado",
                 nombre_estado);
 
-            cmd.ExecuteNonQuery();
+            int idCita =
+                Convert.ToInt32(
+                cmd.ExecuteScalar());
 
             con.Close();
+
+            return idCita;
         }
 
         // =========================
@@ -102,15 +105,14 @@ namespace CapaDatos
         // ACTUALIZAR
         // =========================
         public void ActualizarCita(
-            int id_cita,
-            int id_cliente,
-            int id_servicio,
-            int id_usuario,
-            DateTime fecha,
-            TimeSpan hora_inicio,
-            decimal precio,
-            string descripcion,
-            string nombre_estado)
+       int id_cita,
+       int id_cliente,
+       int id_usuario,
+       DateTime fecha,
+       TimeSpan hora_inicio,
+       decimal precio,
+       string descripcion,
+       string nombre_estado)
         {
             SqlConnection con =
                 Conexion.ObtenerConexion();
@@ -132,10 +134,6 @@ namespace CapaDatos
             cmd.Parameters.AddWithValue(
                 "@id_cliente",
                 id_cliente);
-
-            cmd.Parameters.AddWithValue(
-                "@id_servicio",
-                id_servicio);
 
             cmd.Parameters.AddWithValue(
                 "@id_usuario",
