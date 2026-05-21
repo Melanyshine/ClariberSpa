@@ -26,6 +26,10 @@ namespace CapaPresentacion
             object sender,
             EventArgs e)
         {
+            // 🔥 ABRIR GRANDE
+            this.WindowState =
+                FormWindowState.Maximized;
+
             AplicarDiseno();
 
             try
@@ -39,6 +43,27 @@ namespace CapaPresentacion
 
                 if (dgvHistorial.Columns.Contains("id_cita"))
                     dgvHistorial.Columns["id_cita"].Visible = false;
+
+                // 🔥 CAMBIAR TITULOS
+                if (dgvHistorial.Columns.Contains("nombre_estado"))
+                    dgvHistorial.Columns["nombre_estado"].HeaderText =
+                        "Estado";
+
+                if (dgvHistorial.Columns.Contains("fecha"))
+                    dgvHistorial.Columns["fecha"].HeaderText =
+                        "Fecha";
+
+                if (dgvHistorial.Columns.Contains("accion"))
+                    dgvHistorial.Columns["accion"].HeaderText =
+                        "Acción";
+
+                // 🔥 CENTRAR HEADERS
+                dgvHistorial.ColumnHeadersDefaultCellStyle.Alignment =
+                    DataGridViewContentAlignment.MiddleCenter;
+
+                // 🔥 ALTURA FILAS
+                dgvHistorial.RowTemplate.Height =
+                    38;
             }
             catch (Exception ex)
             {
@@ -51,14 +76,12 @@ namespace CapaPresentacion
             }
         }
 
-        private void BtnHistorial_Click(
+        // 🔥 BOTON VOLVER
+        private void btnVolver_Click(
             object sender,
             EventArgs e)
         {
-            FrmHistorialCitas frm =
-                new FrmHistorialCitas();
-
-            frm.Show();
+            this.Close();
         }
 
         // 🎨 DISEÑO
@@ -75,7 +98,7 @@ namespace CapaPresentacion
             lblTitulo.Font =
                 new Font(
                     "Segoe UI Semibold",
-                    22F,
+                    28F,
                     FontStyle.Bold);
 
             // PANEL TABLA
@@ -110,10 +133,11 @@ namespace CapaPresentacion
             dgvHistorial.ColumnHeadersDefaultCellStyle.Font =
                 new Font(
                     "Segoe UI Semibold",
-                    10F);
+                    11F,
+                    FontStyle.Bold);
 
             dgvHistorial.ColumnHeadersHeight =
-                38;
+                45;
 
             dgvHistorial.DefaultCellStyle.Font =
                 new Font(
@@ -126,11 +150,70 @@ namespace CapaPresentacion
             dgvHistorial.DefaultCellStyle.SelectionForeColor =
                 Color.Black;
 
+            dgvHistorial.DefaultCellStyle.Padding =
+                new Padding(5);
+
             dgvHistorial.AlternatingRowsDefaultCellStyle.BackColor =
                 Color.FromArgb(248, 244, 242);
 
             dgvHistorial.GridColor =
                 Color.FromArgb(235, 230, 228);
+
+            dgvHistorial.CellBorderStyle =
+                DataGridViewCellBorderStyle.SingleHorizontal;
+
+            dgvHistorial.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            dgvHistorial.MultiSelect =
+                false;
+
+            dgvHistorial.ReadOnly =
+                true;
+
+            dgvHistorial.AllowUserToAddRows =
+                false;
+
+            dgvHistorial.AllowUserToDeleteRows =
+                false;
+
+            dgvHistorial.AllowUserToResizeRows =
+                false;
+
+            // 🔥 BOTON VOLVER
+            btnVolver.BackColor =
+                colorRosado;
+
+            btnVolver.ForeColor =
+                Color.White;
+
+            btnVolver.FlatStyle =
+                FlatStyle.Flat;
+
+            btnVolver.FlatAppearance.BorderSize =
+                0;
+
+            btnVolver.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    11F,
+                    FontStyle.Bold);
+
+            btnVolver.Cursor =
+                Cursors.Hand;
+
+            btnVolver.Text =
+                "← Volver";
+        }
+
+        private void BtnHistorial_Click(
+            object sender,
+            EventArgs e)
+        {
+            FrmHistorialCitas frm =
+                new FrmHistorialCitas();
+
+            frm.ShowDialog();
         }
     }
 }

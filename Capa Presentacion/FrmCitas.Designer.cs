@@ -151,7 +151,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(249, 488);
+            this.lblPrecio.Location = new System.Drawing.Point(220, 488);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(49, 20);
             this.lblPrecio.TabIndex = 16;
@@ -161,7 +161,7 @@
             // 
             this.lblPrecioTitulo.AutoSize = true;
             this.lblPrecioTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecioTitulo.Location = new System.Drawing.Point(54, 514);
+            this.lblPrecioTitulo.Location = new System.Drawing.Point(36, 515);
             this.lblPrecioTitulo.Name = "lblPrecioTitulo";
             this.lblPrecioTitulo.Size = new System.Drawing.Size(146, 25);
             this.lblPrecioTitulo.TabIndex = 15;
