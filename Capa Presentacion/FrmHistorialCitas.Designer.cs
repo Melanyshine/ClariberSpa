@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.dgvHistorial = new System.Windows.Forms.DataGridView();
+            this.lblTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,22 +43,34 @@
             this.dgvHistorial.Size = new System.Drawing.Size(643, 314);
             this.dgvHistorial.TabIndex = 0;
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(297, 23);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(128, 20);
+            this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.Text = "Historial de Citas";
+            // 
             // FrmHistorialCitas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.dgvHistorial);
             this.Name = "FrmHistorialCitas";
             this.Text = "FrmHistorialCitas";
             this.Load += new System.EventHandler(this.FrmHistorialCitas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dgvHistorial;
+        private System.Windows.Forms.Label lblTitulo;
     }
 }
