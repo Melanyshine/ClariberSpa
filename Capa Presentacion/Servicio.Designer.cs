@@ -128,9 +128,9 @@
             this.panelServiciosRegistrados.Controls.Add(this.label5);
             this.panelServiciosRegistrados.Controls.Add(this.txtBuscar);
             this.panelServiciosRegistrados.Controls.Add(this.btnNuevoServicio);
-            this.panelServiciosRegistrados.Location = new System.Drawing.Point(478, 168);
+            this.panelServiciosRegistrados.Location = new System.Drawing.Point(346, 168);
             this.panelServiciosRegistrados.Name = "panelServiciosRegistrados";
-            this.panelServiciosRegistrados.Size = new System.Drawing.Size(1164, 822);
+            this.panelServiciosRegistrados.Size = new System.Drawing.Size(1392, 822);
             this.panelServiciosRegistrados.TabIndex = 6;
             // 
             // lblResultados
@@ -143,7 +143,7 @@
             this.lblResultados.Name = "lblResultados";
             this.lblResultados.Size = new System.Drawing.Size(246, 20);
             this.lblResultados.TabIndex = 7;
-            this.lblResultados.Text = "Mostrando 1 de 6 a 6  resultados";
+            this.lblResultados.Text = "Mostrando 1 de 2 a 2  resultados";
             // 
             // lblPagina
             // 
@@ -184,7 +184,7 @@
             this.dgvServicio.Name = "dgvServicio";
             this.dgvServicio.RowHeadersWidth = 62;
             this.dgvServicio.RowTemplate.Height = 28;
-            this.dgvServicio.Size = new System.Drawing.Size(1098, 579);
+            this.dgvServicio.Size = new System.Drawing.Size(1203, 579);
             this.dgvServicio.TabIndex = 3;
             // 
             // label5
@@ -211,7 +211,7 @@
             // 
             this.btnNuevoServicio.BackColor = System.Drawing.Color.RosyBrown;
             this.btnNuevoServicio.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNuevoServicio.Location = new System.Drawing.Point(912, 32);
+            this.btnNuevoServicio.Location = new System.Drawing.Point(959, 35);
             this.btnNuevoServicio.Name = "btnNuevoServicio";
             this.btnNuevoServicio.Size = new System.Drawing.Size(199, 57);
             this.btnNuevoServicio.TabIndex = 0;
