@@ -12,7 +12,7 @@ namespace Capa_Presentacion
         // ======================================================================================
         // CADENA DE CONEXIÓN PERFECTA Y CORREGIDA PARA TU COMPUTADORA
         // ======================================================================================
-        private readonly string cadenaConexion = "Data Source=DESKTOP-AN7T80I\\LISNANYERY;Initial Catalog=ClaribetSpa;Integrated Security=True";
+        private readonly string cadenaConexion = "Data Source=localhost;Initial Catalog=ClaribetSpa;Integrated Security=True";
 
         // Paleta de colores personalizada de Claribet Beauty Center & Spa
         private readonly Color colorFondoFormulario = Color.FromArgb(245, 240, 238);
@@ -294,6 +294,11 @@ namespace Capa_Presentacion
             path.CloseFigure();
 
             return path;
+        }
+
+        private void Inicio_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
