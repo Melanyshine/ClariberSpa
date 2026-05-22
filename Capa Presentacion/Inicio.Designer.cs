@@ -212,6 +212,7 @@
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Inicio_Load_1);
             this.panelFormulario.ResumeLayout(false);
             this.panelFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicFondo)).EndInit();
