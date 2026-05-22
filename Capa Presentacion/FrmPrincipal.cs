@@ -86,7 +86,7 @@ namespace Capa_Presentacion
 
             DiseñoBoton(btnClientes);
             DiseñoBoton(btnServicios);
-            DiseñoBoton(btnUsuarios);
+            DiseñoBoton(btnUsuario);
             DiseñoBoton(btnCitas);
             DiseñoBoton(btnDisponibilidad);
             DiseñoBoton(btnHistorial);
@@ -102,7 +102,7 @@ namespace Capa_Presentacion
             btnServicios.Text =
                 "🌸 Servicios";
 
-            btnUsuarios.Text =
+            btnUsuario.Text =
                 "👥 Usuarios";
 
             btnCitas.Text =
@@ -257,7 +257,7 @@ namespace Capa_Presentacion
         // USUARIOS / EMPLEADOS
         // =========================================
 
-        private void btnUsuarios_Click(
+        private void btnUsuario_Click(
             object sender,
             EventArgs e)
         {

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.panelMenu = new System.Windows.Forms.Panel();
             this.gbDatosUsuario = new System.Windows.Forms.GroupBox();
             this.dtFechaRegistro = new System.Windows.Forms.DateTimePicker();
             this.txtIdUsuario = new System.Windows.Forms.TextBox();
@@ -76,13 +75,6 @@
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
             // 
-            // panelMenu
-            // 
-            this.panelMenu.Location = new System.Drawing.Point(0, -1);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(262, 1142);
-            this.panelMenu.TabIndex = 1;
-            // 
             // gbDatosUsuario
             // 
             this.gbDatosUsuario.Controls.Add(this.dtFechaRegistro);
@@ -102,7 +94,7 @@
             this.gbDatosUsuario.Controls.Add(this.lblCorreo);
             this.gbDatosUsuario.Controls.Add(this.lblApellido);
             this.gbDatosUsuario.Controls.Add(this.lblNombre);
-            this.gbDatosUsuario.Location = new System.Drawing.Point(300, 138);
+            this.gbDatosUsuario.Location = new System.Drawing.Point(490, 147);
             this.gbDatosUsuario.Name = "gbDatosUsuario";
             this.gbDatosUsuario.Size = new System.Drawing.Size(827, 328);
             this.gbDatosUsuario.TabIndex = 3;
@@ -247,7 +239,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(1168, 183);
+            this.btnGuardar.Location = new System.Drawing.Point(1358, 192);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(117, 43);
             this.btnGuardar.TabIndex = 4;
@@ -257,7 +249,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(1168, 233);
+            this.btnNuevo.Location = new System.Drawing.Point(1358, 242);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(117, 42);
             this.btnNuevo.TabIndex = 5;
@@ -267,7 +259,7 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(1168, 281);
+            this.btnEditar.Location = new System.Drawing.Point(1358, 290);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(117, 46);
             this.btnEditar.TabIndex = 6;
@@ -277,7 +269,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(1168, 340);
+            this.btnEliminar.Location = new System.Drawing.Point(1358, 349);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(117, 43);
             this.btnEliminar.TabIndex = 7;
@@ -287,7 +279,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(1168, 394);
+            this.btnCancelar.Location = new System.Drawing.Point(1358, 403);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(117, 43);
             this.btnCancelar.TabIndex = 8;
@@ -301,7 +293,7 @@
             this.gbListadoUsuarios.Controls.Add(this.lblBuscar);
             this.gbListadoUsuarios.Controls.Add(this.txtBuscar);
             this.gbListadoUsuarios.Controls.Add(this.dgvUsuarios);
-            this.gbListadoUsuarios.Location = new System.Drawing.Point(300, 505);
+            this.gbListadoUsuarios.Location = new System.Drawing.Point(490, 514);
             this.gbListadoUsuarios.Name = "gbListadoUsuarios";
             this.gbListadoUsuarios.Size = new System.Drawing.Size(1075, 437);
             this.gbListadoUsuarios.TabIndex = 9;
@@ -337,7 +329,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(308, -1);
+            this.lblTitulo.Location = new System.Drawing.Point(498, 8);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(72, 20);
             this.lblTitulo.TabIndex = 10;
@@ -346,7 +338,7 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(308, 64);
+            this.lblDescripcion.Location = new System.Drawing.Point(498, 73);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(262, 40);
             this.lblDescripcion.TabIndex = 11;
@@ -356,7 +348,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1767, 1023);
+            this.ClientSize = new System.Drawing.Size(1902, 1023);
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnCancelar);
@@ -365,7 +357,6 @@
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.gbDatosUsuario);
-            this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.gbListadoUsuarios);
             this.Name = "FrmEmpleado";
             this.Text = "FrmEmpleado";
@@ -383,7 +374,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvUsuarios;
-        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.GroupBox gbDatosUsuario;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblRol;

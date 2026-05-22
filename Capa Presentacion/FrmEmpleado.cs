@@ -354,8 +354,7 @@ namespace Presentacion
             this.BackColor =
                 Color.FromArgb(248, 244, 240);
 
-            panelMenu.BackColor =
-                Color.FromArgb(135, 105, 105);
+     
 
             lblTitulo.ForeColor =
                 Color.FromArgb(90, 70, 70);

@@ -29,32 +29,41 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnHistorial = new System.Windows.Forms.Button();
             this.btnDisponibilidad = new System.Windows.Forms.Button();
             this.btnCitas = new System.Windows.Forms.Button();
-            this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnServicios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.panelContenido = new System.Windows.Forms.Panel();
-            this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnUsuario = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.btnUsuario);
             this.panelMenu.Controls.Add(this.lblTitulo);
             this.panelMenu.Controls.Add(this.btnCerrarSesion);
             this.panelMenu.Controls.Add(this.btnHistorial);
             this.panelMenu.Controls.Add(this.btnDisponibilidad);
             this.panelMenu.Controls.Add(this.btnCitas);
-            this.panelMenu.Controls.Add(this.btnUsuarios);
             this.panelMenu.Controls.Add(this.btnServicios);
             this.panelMenu.Controls.Add(this.btnClientes);
             this.panelMenu.Location = new System.Drawing.Point(-50, -15);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(430, 1126);
             this.panelMenu.TabIndex = 0;
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(62, 47);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(51, 20);
+            this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.Text = "label1";
             // 
             // btnCerrarSesion
             // 
@@ -96,15 +105,6 @@
             this.btnCitas.UseVisualStyleBackColor = true;
             this.btnCitas.Click += new System.EventHandler(this.btnCitas_Click);
             // 
-            // btnUsuarios
-            // 
-            this.btnUsuarios.Location = new System.Drawing.Point(91, 368);
-            this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(149, 44);
-            this.btnUsuarios.TabIndex = 2;
-            this.btnUsuarios.Text = "Usuarios";
-            this.btnUsuarios.UseVisualStyleBackColor = true;
-            // 
             // btnServicios
             // 
             this.btnServicios.Location = new System.Drawing.Point(91, 284);
@@ -132,14 +132,15 @@
             this.panelContenido.Size = new System.Drawing.Size(1027, 976);
             this.panelContenido.TabIndex = 1;
             // 
-            // lblTitulo
+            // btnUsuario
             // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(62, 47);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(51, 20);
-            this.lblTitulo.TabIndex = 1;
-            this.lblTitulo.Text = "label1";
+            this.btnUsuario.Location = new System.Drawing.Point(91, 369);
+            this.btnUsuario.Name = "btnUsuario";
+            this.btnUsuario.Size = new System.Drawing.Size(149, 44);
+            this.btnUsuario.TabIndex = 0;
+            this.btnUsuario.Text = "Usuarios";
+            this.btnUsuario.UseVisualStyleBackColor = true;
+            this.btnUsuario.Click += new System.EventHandler(this.btnUsuario_Click);
             // 
             // FrmPrincipal
             // 
@@ -161,7 +162,6 @@
 
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button btnCitas;
-        private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnServicios;
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Button btnDisponibilidad;
@@ -169,5 +169,6 @@
         private System.Windows.Forms.Button btnHistorial;
         private System.Windows.Forms.Panel panelContenido;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnUsuario;
     }
 }
