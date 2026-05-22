@@ -21,7 +21,7 @@ namespace CapaPresentacion
 
            
 
-            Application.Run(new FrmCitas());
+            Application.Run(new Inicio());
 
         }
     }
