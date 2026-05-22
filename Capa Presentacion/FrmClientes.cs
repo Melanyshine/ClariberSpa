@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Capa_Presentacion
 {
-    public partial class Clientes : Form
+    public partial class FrmClientes : Form
     {
         ClientesBLL objBLL = new ClientesBLL();
         DataTable tablaOriginal = new DataTable();
@@ -32,7 +32,7 @@ namespace Capa_Presentacion
         private readonly Color COLOR_BTN_ELIMINAR = Color.FromArgb(254, 242, 242);   // Fondo eliminar (tonalidad rojiza/rosa)
         private readonly Color COLOR_BORDER_ELIMINAR = Color.FromArgb(243, 214, 214);// Borde eliminar
 
-        public Clientes()
+        public FrmClientes()
         {
             InitializeComponent();
 
@@ -51,8 +51,7 @@ namespace Capa_Presentacion
             this.BackColor = COLOR_FONDO_EXTERIOR;
 
             // Lateral del Menú
-            panelMenu.BackColor = COLOR_PANEL_MENU;
-            panelMenu.Width = 240;
+         
 
             // Panel contenedor blanco central (tarjeta redondeada simulada)
             panelContenido.BackColor = Color.White;

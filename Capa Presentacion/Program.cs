@@ -1,4 +1,5 @@
 ﻿using Capa_Presentacion;
+using CapaEntidades;
 using Presentacion;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace CapaPresentacion
 
            
 
-            Application.Run(new FrmPrincipal());
+            Application.Run(new Inicio());
 
         }
     }

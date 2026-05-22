@@ -49,18 +49,18 @@
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panelMenu = new System.Windows.Forms.Panel();
             this.panelTabla = new System.Windows.Forms.Panel();
             this.btnHistorial = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCitas)).BeginInit();
             this.panelCitas.SuspendLayout();
+            this.panelTabla.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCitas
             // 
             this.dgvCitas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCitas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCitas.Location = new System.Drawing.Point(357, 138);
+            this.dgvCitas.Location = new System.Drawing.Point(12, 14);
             this.dgvCitas.Name = "dgvCitas";
             this.dgvCitas.ReadOnly = true;
             this.dgvCitas.RowHeadersWidth = 62;
@@ -87,9 +87,9 @@
             this.panelCitas.Controls.Add(this.lblServicio);
             this.panelCitas.Controls.Add(this.cbCliente);
             this.panelCitas.Controls.Add(this.lblCliente);
-            this.panelCitas.Location = new System.Drawing.Point(1355, 116);
+            this.panelCitas.Location = new System.Drawing.Point(1435, 111);
             this.panelCitas.Name = "panelCitas";
-            this.panelCitas.Size = new System.Drawing.Size(441, 779);
+            this.panelCitas.Size = new System.Drawing.Size(441, 784);
             this.panelCitas.TabIndex = 3;
             // 
             // cbEstado
@@ -249,7 +249,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(1386, 74);
+            this.lblTitulo.Location = new System.Drawing.Point(1431, 74);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(151, 20);
             this.lblTitulo.TabIndex = 4;
@@ -262,25 +262,17 @@
             this.panel1.Size = new System.Drawing.Size(200, 100);
             this.panel1.TabIndex = 5;
             // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.Color.RosyBrown;
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(289, 907);
-            this.panelMenu.TabIndex = 6;
-            // 
             // panelTabla
             // 
-            this.panelTabla.Location = new System.Drawing.Point(345, 126);
+            this.panelTabla.Controls.Add(this.dgvCitas);
+            this.panelTabla.Location = new System.Drawing.Point(435, 97);
             this.panelTabla.Name = "panelTabla";
             this.panelTabla.Size = new System.Drawing.Size(945, 605);
             this.panelTabla.TabIndex = 7;
             // 
             // btnHistorial
             // 
-            this.btnHistorial.Location = new System.Drawing.Point(357, 746);
+            this.btnHistorial.Location = new System.Drawing.Point(435, 738);
             this.btnHistorial.Name = "btnHistorial";
             this.btnHistorial.Size = new System.Drawing.Size(305, 49);
             this.btnHistorial.TabIndex = 9;
@@ -293,13 +285,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1820, 907);
+            this.ClientSize = new System.Drawing.Size(1924, 907);
             this.Controls.Add(this.btnHistorial);
-            this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panelCitas);
-            this.Controls.Add(this.dgvCitas);
             this.Controls.Add(this.panelTabla);
             this.Name = "FrmCitas";
             this.Text = "FrmCitas";
@@ -307,6 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCitas)).EndInit();
             this.panelCitas.ResumeLayout(false);
             this.panelCitas.PerformLayout();
+            this.panelTabla.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,7 +322,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelTabla;
         private System.Windows.Forms.Button btnHistorial;
         private System.Windows.Forms.CheckedListBox clbServicios;

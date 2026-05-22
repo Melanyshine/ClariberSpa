@@ -39,17 +39,17 @@
             // dgvHistorial
             // 
             this.dgvHistorial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHistorial.Location = new System.Drawing.Point(453, 202);
+            this.dgvHistorial.Location = new System.Drawing.Point(646, 254);
             this.dgvHistorial.Name = "dgvHistorial";
             this.dgvHistorial.RowHeadersWidth = 62;
             this.dgvHistorial.RowTemplate.Height = 28;
-            this.dgvHistorial.Size = new System.Drawing.Size(969, 526);
+            this.dgvHistorial.Size = new System.Drawing.Size(1031, 526);
             this.dgvHistorial.TabIndex = 0;
             // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(680, 108);
+            this.lblTitulo.Location = new System.Drawing.Point(949, 133);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(128, 20);
             this.lblTitulo.TabIndex = 1;
@@ -64,12 +64,12 @@
             this.panelTabla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTabla.Location = new System.Drawing.Point(0, 0);
             this.panelTabla.Name = "panelTabla";
-            this.panelTabla.Size = new System.Drawing.Size(1449, 819);
+            this.panelTabla.Size = new System.Drawing.Size(1712, 959);
             this.panelTabla.TabIndex = 2;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(552, 744);
+            this.btnVolver.Location = new System.Drawing.Point(664, 824);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(103, 44);
             this.btnVolver.TabIndex = 2;
@@ -81,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1449, 819);
+            this.ClientSize = new System.Drawing.Size(1712, 959);
             this.Controls.Add(this.panelTabla);
             this.Name = "FrmHistorialCitas";
             this.Text = "FrmHistorialCitas";

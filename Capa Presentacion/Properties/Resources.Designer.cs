@@ -73,6 +73,16 @@ namespace Capa_Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_5r6yqz5r6yqz5r6y {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_5r6yqz5r6yqz5r6y", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap WhatsApp_Image_2026_05_19_at_8_08_19_PM {
             get {
                 object obj = ResourceManager.GetObject("WhatsApp Image 2026-05-19 at 8.08.19 PM", resourceCulture);

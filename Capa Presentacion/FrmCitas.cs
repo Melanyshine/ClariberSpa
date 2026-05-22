@@ -512,8 +512,7 @@ namespace Capa_Presentacion
                 colorFondoGeneral;
 
             // PANEL MENU
-            panelMenu.BackColor =
-                colorMenuLateral;
+        
 
             // PANEL CITA
             panelCitas.BackColor =

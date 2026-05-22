@@ -1,6 +1,6 @@
 ﻿namespace Capa_Presentacion
 {
-    partial class Clientes
+    partial class FrmClientes
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelMenu = new System.Windows.Forms.Panel();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,15 +45,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.Color.RosyBrown;
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(305, 922);
-            this.panelMenu.TabIndex = 0;
-            // 
             // panelContenido
             // 
             this.panelContenido.BackColor = System.Drawing.Color.White;
@@ -70,9 +60,9 @@
             this.panelContenido.Controls.Add(this.label2);
             this.panelContenido.Controls.Add(this.label1);
             this.panelContenido.Controls.Add(this.dgvClientes);
-            this.panelContenido.Location = new System.Drawing.Point(388, 65);
+            this.panelContenido.Location = new System.Drawing.Point(389, 65);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1436, 1035);
+            this.panelContenido.Size = new System.Drawing.Size(1452, 809);
             this.panelContenido.TabIndex = 2;
             // 
             // label6
@@ -198,14 +188,13 @@
             this.dgvClientes.TabIndex = 0;
             this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             // 
-            // Clientes
+            // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 922);
+            this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.panelContenido);
-            this.Controls.Add(this.panelMenu);
-            this.Name = "Clientes";
+            this.Name = "FrmClientes";
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.Clientes_Load);
             this.panelContenido.ResumeLayout(false);
@@ -216,8 +205,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelContenido;
         private System.Windows.Forms.ComboBox cbFiltro;
         private System.Windows.Forms.TextBox txtBuscar;

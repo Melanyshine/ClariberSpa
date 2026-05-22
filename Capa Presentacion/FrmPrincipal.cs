@@ -234,7 +234,7 @@ namespace Capa_Presentacion
             EventArgs e)
         {
             AbrirFormulario(
-                new Clientes());
+                new FrmClientes());
         }
 
         // =========================================

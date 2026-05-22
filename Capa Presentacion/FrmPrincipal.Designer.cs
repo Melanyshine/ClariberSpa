@@ -36,8 +36,8 @@
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnServicios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,21 +125,21 @@
             this.btnClientes.UseVisualStyleBackColor = true;
             this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(139, 50);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(51, 20);
-            this.lblTitulo.TabIndex = 1;
-            this.lblTitulo.Text = "label1";
-            // 
             // panelContenido
             // 
             this.panelContenido.Location = new System.Drawing.Point(393, -12);
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(1027, 976);
             this.panelContenido.TabIndex = 1;
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(62, 47);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(51, 20);
+            this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.Text = "label1";
             // 
             // FrmPrincipal
             // 
@@ -167,7 +167,7 @@
         private System.Windows.Forms.Button btnDisponibilidad;
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Button btnHistorial;
-        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panelContenido;
+        private System.Windows.Forms.Label lblTitulo;
     }
 }

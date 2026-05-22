@@ -196,9 +196,9 @@
             // PicFondo
             // 
             this.PicFondo.Image = global::Capa_Presentacion.Properties.Resources.WhatsApp_Image_2026_05_19_at_8_08_19_PM;
-            this.PicFondo.Location = new System.Drawing.Point(12, 12);
+            this.PicFondo.Location = new System.Drawing.Point(12, -11);
             this.PicFondo.Name = "PicFondo";
-            this.PicFondo.Size = new System.Drawing.Size(921, 1065);
+            this.PicFondo.Size = new System.Drawing.Size(921, 1088);
             this.PicFondo.TabIndex = 0;
             this.PicFondo.TabStop = false;
             // 

@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1204, 64);
+            this.label1.Location = new System.Drawing.Point(1286, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 20);
             this.label1.TabIndex = 2;
@@ -94,9 +94,9 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lblTitulo);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(299, 12);
+            this.panel3.Location = new System.Drawing.Point(395, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1439, 129);
+            this.panel3.Size = new System.Drawing.Size(1507, 129);
             this.panel3.TabIndex = 5;
             // 
             // label4
@@ -104,7 +104,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.RosyBrown;
-            this.label4.Location = new System.Drawing.Point(1177, 18);
+            this.label4.Location = new System.Drawing.Point(1226, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(239, 46);
             this.label4.TabIndex = 6;
@@ -113,7 +113,7 @@
             // cmbServicio
             // 
             this.cmbServicio.FormattingEnabled = true;
-            this.cmbServicio.Location = new System.Drawing.Point(954, 18);
+            this.cmbServicio.Location = new System.Drawing.Point(1015, 36);
             this.cmbServicio.Name = "cmbServicio";
             this.cmbServicio.Size = new System.Drawing.Size(121, 28);
             this.cmbServicio.TabIndex = 5;
@@ -128,9 +128,9 @@
             this.panelServiciosRegistrados.Controls.Add(this.label5);
             this.panelServiciosRegistrados.Controls.Add(this.txtBuscar);
             this.panelServiciosRegistrados.Controls.Add(this.btnNuevoServicio);
-            this.panelServiciosRegistrados.Location = new System.Drawing.Point(346, 168);
+            this.panelServiciosRegistrados.Location = new System.Drawing.Point(395, 168);
             this.panelServiciosRegistrados.Name = "panelServiciosRegistrados";
-            this.panelServiciosRegistrados.Size = new System.Drawing.Size(1392, 822);
+            this.panelServiciosRegistrados.Size = new System.Drawing.Size(1443, 817);
             this.panelServiciosRegistrados.TabIndex = 6;
             // 
             // lblResultados
@@ -139,7 +139,7 @@
             this.lblResultados.BackColor = System.Drawing.Color.Transparent;
             this.lblResultados.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResultados.ForeColor = System.Drawing.Color.Gray;
-            this.lblResultados.Location = new System.Drawing.Point(54, 772);
+            this.lblResultados.Location = new System.Drawing.Point(57, 746);
             this.lblResultados.Name = "lblResultados";
             this.lblResultados.Size = new System.Drawing.Size(246, 20);
             this.lblResultados.TabIndex = 7;
@@ -149,7 +149,7 @@
             // 
             this.lblPagina.AutoSize = true;
             this.lblPagina.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPagina.Location = new System.Drawing.Point(538, 760);
+            this.lblPagina.Location = new System.Drawing.Point(622, 760);
             this.lblPagina.Name = "lblPagina";
             this.lblPagina.Size = new System.Drawing.Size(26, 29);
             this.lblPagina.TabIndex = 6;
@@ -159,7 +159,7 @@
             // 
             this.btnAnterior.BackColor = System.Drawing.Color.RosyBrown;
             this.btnAnterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnterior.Location = new System.Drawing.Point(570, 746);
+            this.btnAnterior.Location = new System.Drawing.Point(665, 749);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(58, 48);
             this.btnAnterior.TabIndex = 5;
@@ -170,7 +170,7 @@
             // 
             this.btnSiguiente.BackColor = System.Drawing.Color.RosyBrown;
             this.btnSiguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSiguiente.Location = new System.Drawing.Point(467, 746);
+            this.btnSiguiente.Location = new System.Drawing.Point(551, 749);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(65, 48);
             this.btnSiguiente.TabIndex = 4;
@@ -222,7 +222,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1750, 1050);
+            this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.panelServiciosRegistrados);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
