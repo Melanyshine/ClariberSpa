@@ -15,26 +15,53 @@ namespace Capa_Presentacion
             InitializeComponent();
         }
 
-        // =====================================
+        // =========================================
         // LOAD
-        // =====================================
-        private void FrmMenu_Load(
+        // =========================================
+        private void FrmPrincipal_Load(
             object sender,
             EventArgs e)
         {
+            // =========================================
+            // FORM
+            // =========================================
+
             this.WindowState =
                 FormWindowState.Maximized;
 
-            // =================================
-            // PANEL
-            // =================================
+            this.BackColor =
+                Color.FromArgb(
+                    230,
+                    223,
+                    220);
+
+            // =========================================
+            // PANEL MENU
+            // =========================================
+
             panelMenu.BackColor =
                 Color.FromArgb(
-                    120, 84, 72);
+                    126,
+                    90,
+                    78);
 
-            // =================================
+            panelMenu.Width =
+                280;
+
+            // =========================================
+            // PANEL CONTENIDO
+            // =========================================
+
+            panelContenido.BackColor =
+                Color.White;
+
+            panelContenido.Dock =
+                DockStyle.Fill;
+
+            // =========================================
             // TITULO
-            // =================================
+            // =========================================
+
             lblTitulo.Text =
                 "CLARIBER SPA";
 
@@ -44,31 +71,30 @@ namespace Capa_Presentacion
             lblTitulo.Font =
                 new Font(
                     "Georgia",
-                    18,
+                    24,
                     FontStyle.Bold);
 
-            // =================================
+            lblTitulo.AutoSize =
+                true;
+
+            lblTitulo.BackColor =
+                Color.Transparent;
+
+            // =========================================
             // BOTONES
-            // =================================
+            // =========================================
 
             DiseñoBoton(btnClientes);
-
             DiseñoBoton(btnServicios);
-
             DiseñoBoton(btnUsuarios);
-
             DiseñoBoton(btnCitas);
-
             DiseñoBoton(btnDisponibilidad);
-
             DiseñoBoton(btnHistorial);
-
             DiseñoBoton(btnCerrarSesion);
 
-            // =================================
-            // TEXTO BOTONES
-            // =================================
-  
+            // =========================================
+            // TEXTOS
+            // =========================================
 
             btnClientes.Text =
                 "👤 Clientes";
@@ -77,7 +103,7 @@ namespace Capa_Presentacion
                 "🌸 Servicios";
 
             btnUsuarios.Text =
-                "👥 Empleados";
+                "👥 Usuarios";
 
             btnCitas.Text =
                 "📅 Citas";
@@ -88,14 +114,14 @@ namespace Capa_Presentacion
             btnHistorial.Text =
                 "📋 Historial";
 
-
             btnCerrarSesion.Text =
                 "↩ Cerrar Sesión";
         }
 
-        // =====================================
+        // =========================================
         // DISEÑO BOTONES
-        // =====================================
+        // =========================================
+
         private void DiseñoBoton(
             Button btn)
         {
@@ -114,11 +140,23 @@ namespace Capa_Presentacion
             btn.Font =
                 new Font(
                     "Segoe UI",
-                    11,
+                    12,
                     FontStyle.Regular);
 
             btn.TextAlign =
                 ContentAlignment.MiddleLeft;
+
+            btn.ImageAlign =
+                ContentAlignment.MiddleLeft;
+
+            btn.Padding =
+                new Padding(15, 0, 0, 0);
+
+            btn.Height =
+                55;
+
+            btn.Width =
+                260;
 
             btn.Cursor =
                 Cursors.Hand;
@@ -130,9 +168,10 @@ namespace Capa_Presentacion
                 Btn_MouseLeave;
         }
 
-        // =====================================
-        // HOVER
-        // =====================================
+        // =========================================
+        // EFECTO HOVER
+        // =========================================
+
         private void Btn_MouseEnter(
             object sender,
             EventArgs e)
@@ -142,7 +181,9 @@ namespace Capa_Presentacion
 
             btn.BackColor =
                 Color.FromArgb(
-                    166, 117, 102);
+                    166,
+                    117,
+                    102);
         }
 
         private void Btn_MouseLeave(
@@ -156,111 +197,115 @@ namespace Capa_Presentacion
                 Color.Transparent;
         }
 
-        // =====================================
+        // =========================================
+        // ABRIR FORMS EN PANEL
+        // =========================================
+
+        private void AbrirFormulario(
+            Form frm)
+        {
+            panelContenido.Controls.Clear();
+
+            frm.TopLevel =
+                false;
+
+            frm.FormBorderStyle =
+                FormBorderStyle.None;
+
+            frm.Dock =
+                DockStyle.Fill;
+
+            panelContenido.Controls.Add(frm);
+
+            panelContenido.Tag =
+                frm;
+
+            frm.Show();
+
+            frm.BringToFront();
+        }
+
+        // =========================================
         // CLIENTES
-        // =====================================
+        // =========================================
+
         private void btnClientes_Click(
             object sender,
             EventArgs e)
         {
-            Clientes frm =
-                new Clientes();
-
-            frm.Show();
+            AbrirFormulario(
+                new Clientes());
         }
 
-        // =====================================
+        // =========================================
         // SERVICIOS
-        // =====================================
+        // =========================================
+
         private void btnServicios_Click(
             object sender,
             EventArgs e)
         {
-            FrmServicio frm =
-                new FrmServicio();
-
-            frm.Show();
+            AbrirFormulario(
+                new FrmServicio());
         }
 
-        // =====================================
-        // EMPLEADOS
-        // =====================================
-        private void btnEmpleados_Click(
+        // =========================================
+        // USUARIOS
+        // =========================================
+
+        private void btnUsuarios_Click(
             object sender,
             EventArgs e)
         {
-            FrmEmpleado frm =
-                new FrmEmpleado();
-
-            frm.Show();
+            AbrirFormulario(
+                new FrmEmpleado());
         }
 
-        // =====================================
+        // =========================================
         // CITAS
-        // =====================================
+        // =========================================
+
         private void btnCitas_Click(
             object sender,
             EventArgs e)
         {
-            FrmCitas frm =
-                new FrmCitas();
-
-            frm.Show();
+            AbrirFormulario(
+                new FrmCitas());
         }
 
-        // =====================================
+        // =========================================
         // DISPONIBILIDAD
-        // =====================================
+        // =========================================
+
         private void btnDisponibilidad_Click(
             object sender,
             EventArgs e)
         {
-            FrmDisponibilidad frm =
-                new FrmDisponibilidad();
-
-            frm.Show();
+            AbrirFormulario(
+                new FrmDisponibilidad());
         }
 
-        // =====================================
-        // PAGOS
-        // =====================================
-
-
-        // =====================================
+        // =========================================
         // HISTORIAL
-        // =====================================
+        // =========================================
+
         private void btnHistorial_Click(
             object sender,
             EventArgs e)
         {
-            FrmHistorialCitas frm =
-                new FrmHistorialCitas();
-
-            frm.Show();
+            AbrirFormulario(
+                new FrmHistorialCitas());
         }
 
-        // =====================================
-        // REPORTES
-        // =====================================
-   
-
-        // =====================================
-        // CONFIGURACION
-        // =====================================
-
-        // =====================================
+        // =========================================
         // CERRAR SESION
-        // =====================================
+        // =========================================
+
         private void btnCerrarSesion_Click(
             object sender,
             EventArgs e)
         {
             this.Close();
-        }
-
-        private void FrmPrincipal_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

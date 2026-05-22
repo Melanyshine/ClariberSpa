@@ -37,11 +37,13 @@
             this.btnServicios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.panelContenido = new System.Windows.Forms.Panel();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.lblTitulo);
             this.panelMenu.Controls.Add(this.btnCerrarSesion);
             this.panelMenu.Controls.Add(this.btnHistorial);
             this.panelMenu.Controls.Add(this.btnDisponibilidad);
@@ -51,7 +53,7 @@
             this.panelMenu.Controls.Add(this.btnClientes);
             this.panelMenu.Location = new System.Drawing.Point(-50, -15);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(277, 865);
+            this.panelMenu.Size = new System.Drawing.Size(430, 1126);
             this.panelMenu.TabIndex = 0;
             // 
             // btnCerrarSesion
@@ -62,6 +64,7 @@
             this.btnCerrarSesion.TabIndex = 1;
             this.btnCerrarSesion.Text = "Cerrar Sesión";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
             // btnHistorial
             // 
@@ -101,7 +104,6 @@
             this.btnUsuarios.TabIndex = 2;
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.UseVisualStyleBackColor = true;
-            this.btnUsuarios.Click += new System.EventHandler(this.btnEmpleados_Click);
             // 
             // btnServicios
             // 
@@ -126,25 +128,32 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(550, 57);
+            this.lblTitulo.Location = new System.Drawing.Point(139, 50);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(51, 20);
             this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "label1";
             // 
+            // panelContenido
+            // 
+            this.panelContenido.Location = new System.Drawing.Point(393, -12);
+            this.panelContenido.Name = "panelContenido";
+            this.panelContenido.Size = new System.Drawing.Size(1027, 976);
+            this.panelContenido.TabIndex = 1;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 816);
-            this.Controls.Add(this.lblTitulo);
+            this.ClientSize = new System.Drawing.Size(1524, 935);
             this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelContenido);
             this.Name = "FrmPrincipal";
             this.Text = "FrmPrincipal";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -159,5 +168,6 @@
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Button btnHistorial;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Panel panelContenido;
     }
 }
