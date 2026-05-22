@@ -11,7 +11,7 @@ namespace CapaDatos
     {
         // Cadena de conexión
         private static string cadena =
-            "Server=DESKTOP-8GIEJA0\\SQLEXPRESS;Database=ClaribetSpa;Integrated Security=true;";
+            "Server=DESKTOP-AN7T80I\\LISNANYERY;Database=ClaribetSpa;Integrated Security=true;";
 
         // Método para obtener la conexión
         public static SqlConnection ObtenerConexion()
