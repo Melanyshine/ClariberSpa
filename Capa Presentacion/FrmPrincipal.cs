@@ -246,11 +246,15 @@ namespace Capa_Presentacion
             EventArgs e)
         {
             AbrirFormulario(
-                new FrmServicio());
+                new Servicio());
         }
 
         // =========================================
         // USUARIOS
+        // =========================================
+
+        // =========================================
+        // USUARIOS / EMPLEADOS
         // =========================================
 
         private void btnUsuarios_Click(
