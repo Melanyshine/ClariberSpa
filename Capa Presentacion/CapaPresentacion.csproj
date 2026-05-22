@@ -143,6 +143,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Servicio.resx">
       <DependentUpon>Servicio.cs</DependentUpon>
@@ -169,6 +170,12 @@
       <Project>{0bac8b3b-521f-492d-9ccc-3d5002fa53e2}</Project>
       <Name>CapaNegocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2026-05-14 194923.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Image 2026-05-19 at 8.08.19 PM.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
