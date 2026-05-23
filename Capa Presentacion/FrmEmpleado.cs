@@ -24,6 +24,7 @@ namespace Presentacion
 
         private void FrmEmpleado_Load(object sender, EventArgs e)
         {
+            
             txtIdUsuario.Visible = false;
 
             CargarRoles();

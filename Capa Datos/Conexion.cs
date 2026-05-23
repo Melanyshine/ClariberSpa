@@ -9,11 +9,11 @@ namespace CapaDatos
 
     public class Conexion
     {
-        // Cadena de conexión
+        
         private static string cadena =
-            "Server=DESKTOP-AN7T80I\\LISNANYERY;Database=ClaribetSpa;Integrated Security=true;";
+            "Server=DESKTOP-8GIEJA0\\SQLEXPRESS;Database=ClaribetSpa;Integrated Security=true;";
 
-        // Método para obtener la conexión
+      
         public static SqlConnection ObtenerConexion()
         {
             SqlConnection conexion = new SqlConnection(cadena);

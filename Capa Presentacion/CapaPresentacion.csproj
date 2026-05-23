@@ -129,6 +129,9 @@
     <EmbeddedResource Include="FrmCliente.resx">
       <DependentUpon>FrmCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmDetalleFactura.resx">
+      <DependentUpon>FrmDetalleFactura.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDisponibilidad.resx">
       <DependentUpon>FrmDisponibilidad.cs</DependentUpon>
     </EmbeddedResource>

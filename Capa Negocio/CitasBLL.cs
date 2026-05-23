@@ -95,5 +95,12 @@ namespace CapaNegocio
         {
             dal.EliminarCita(id);
         }
+
+       
+        public DataTable ObtenerPorId(int id_cita)
+        {
+            CitasDAL dal = new CitasDAL();
+            return dal.ObtenerCitaPorId(id_cita);
+        }
     }
 }

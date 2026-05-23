@@ -186,5 +186,49 @@ namespace CapaDatos
 
             con.Close();
         }
+
+        // =========================
+        // OBTENER CITA POR ID
+        // =========================
+        public DataTable ObtenerCitaPorId(int id_cita)
+        {
+            SqlConnection con =
+                Conexion.ObtenerConexion();
+
+            con.Open();
+
+            SqlCommand cmd =
+                new SqlCommand(
+                    "SP_ListarCitas",
+                    con);
+
+            cmd.CommandType =
+                CommandType.StoredProcedure;
+
+            SqlDataAdapter da =
+                new SqlDataAdapter(cmd);
+
+            DataTable dt =
+                new DataTable();
+
+            da.Fill(dt);
+
+            con.Close();
+
+            // Filtra solo la cita que necesitamos
+            DataTable resultado = dt.Clone();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (Convert.ToInt32(
+                    row["id_cita"]) == id_cita)
+                {
+                    resultado.ImportRow(row);
+                    break;
+                }
+            }
+
+            return resultado;
+        }
     }
 }

@@ -9,52 +9,100 @@ namespace Capa_Presentacion
 {
     public partial class FrmFactura : Form
     {
+        // =========================
+        // COLORES
+        // =========================
         private readonly Color colorRosado = Color.RosyBrown;
         private readonly Color colorFondo = Color.FromArgb(250, 248, 246);
         private readonly Color colorVino = Color.RosyBrown;
+        private readonly Color colorBeige = Color.FromArgb(242, 235, 231);
 
+        // =========================
+        // BLL
+        // =========================
         Detalle_FacturaBLL detalleBLL = new Detalle_FacturaBLL();
         FacturaBLL facturaBLL = new FacturaBLL();
         ServiciosBLL servicioBLL = new ServiciosBLL();
+        CitasBLL citasBLL = new CitasBLL();
 
         public FrmFactura() { InitializeComponent(); }
 
+        // =========================
+        // LOAD
+        // =========================
         private void FrmFacturaPagos_Load(object sender, EventArgs e)
         {
+
+            nudCantidad.ValueChanged += nudCantidad_ValueChanged;
             this.WindowState = FormWindowState.Maximized;
             AplicarDiseno();
 
+            // Eventos buscador
             txtBuscar.TextChanged += txtBuscar_TextChanged;
             btnBuscar.Click += btnBuscar_Click;
             cbFiltroFactura.SelectedIndexChanged += cbFiltroFactura_SelectedIndexChanged;
-            cbServicio.SelectedIndexChanged += cbServicio_SelectedIndexChanged;
-            nudCantidad.ValueChanged += nudCantidad_ValueChanged;
+
+           
+
+            // Evento grid
             dgvDetalle.CellClick += dgvDetalle_CellClick;
+
+            // Evento botón ver detalle
             btnVerDetalle.Click += btnVerDetalle_Click;
 
-            CargarFacturas();
-            CargarServicios();
+            CargarCitas();
+            CargarMetodosPago();
+            CargarEstados();
             CargarFiltro();
-            MostrarDetalles();
+            MostrarFacturas();
         }
 
         // =========================
-        // 📌 CARGAR COMBOS
+        // CARGAR COMBOS
         // =========================
-        void CargarFacturas()
+        void CargarCitas()
         {
-            cbFactura.DataSource = facturaBLL.Listar();
-            cbFactura.DisplayMember = "id_factura";
-            cbFactura.ValueMember = "id_factura";
-            cbFactura.SelectedIndex = -1;
+            
+            cbCita.SelectedIndexChanged -= cbCita_SelectedIndexChanged;
+
+            DataTable dt = citasBLL.Listar();
+
+            DataView vista = dt.DefaultView;
+            vista.RowFilter =
+                "nombre_estado = 'Completada' " +
+                "OR nombre_estado = 'Confirmada'";
+
+            cbCita.DataSource = vista.ToTable();
+            cbCita.DisplayMember = "id_cita";
+            cbCita.ValueMember = "id_cita";
+            cbCita.SelectedIndex = -1;
+
+           
+            cbCita.SelectedIndexChanged += cbCita_SelectedIndexChanged;
         }
 
-        void CargarServicios()
+        void CargarMetodosPago()
         {
-            cbServicio.DataSource = servicioBLL.Listar();
-            cbServicio.DisplayMember = "nombre_servicio";
-            cbServicio.ValueMember = "id_servicio";
-            cbServicio.SelectedIndex = -1;
+            cbMetodoPago.Items.Clear();
+            cbMetodoPago.Items.AddRange(new object[]
+            {
+                "Efectivo",
+                "Tarjeta",
+                "Transferencia"
+            });
+            cbMetodoPago.SelectedIndex = -1;
+        }
+
+        void CargarEstados()
+        {
+            cbEstado.Items.Clear();
+            cbEstado.Items.AddRange(new object[]
+            {
+                "Pagado",
+                "Pendiente",
+                "Cancelado"
+            });
+            cbEstado.SelectedIndex = 0;
         }
 
         void CargarFiltro()
@@ -63,49 +111,81 @@ namespace Capa_Presentacion
             cbFiltroFactura.Items.Add("Todas");
             DataTable dt = facturaBLL.Listar();
             foreach (DataRow fila in dt.Rows)
-                cbFiltroFactura.Items.Add(fila["id_factura"].ToString());
+                cbFiltroFactura.Items.Add(
+                    fila["id_factura"].ToString());
             cbFiltroFactura.SelectedIndex = 0;
         }
 
         // =========================
-        // 💰 CALCULAR SUBTOTAL
+        // KEY: SELECCIONAR CITA
+        // → RELLENA CAMPOS AUTOMÁTICAMENTE
         // =========================
-        void Calcular()
+        private void cbCita_SelectedIndexChanged(
+            object sender, EventArgs e)
         {
-            if (cbServicio.SelectedValue == null) return;
-            DataRowView fila = (DataRowView)cbServicio.SelectedItem;
-            decimal precio = Convert.ToDecimal(fila["precio"]);
-            lblSubtotal.Text = "RD$ " + (precio * nudCantidad.Value).ToString("N2");
+            if (cbCita.SelectedValue == null) return;
+
+            int idCita =
+                Convert.ToInt32(cbCita.SelectedValue);
+
+            DataTable dt =
+                citasBLL.ObtenerPorId(idCita);
+
+            if (dt.Rows.Count == 0) return;
+
+            DataRow fila = dt.Rows[0];
+
+            // Auto-rellenar campos de solo lectura
+            txtCliente.Text =
+                fila["cliente"].ToString();
+
+            txtEmpleado.Text =
+                fila["empleado"].ToString();
+
+            txtServicios.Text =
+                fila["servicios"].ToString();
+
+            txtMonto.Text =
+                Convert.ToDecimal(
+                    fila["precio"]).ToString("N2");
         }
 
-        private void cbServicio_SelectedIndexChanged(object sender, EventArgs e) => Calcular();
-        private void nudCantidad_ValueChanged(object sender, EventArgs e) => Calcular();
-
         // =========================
-        // 📦 MOSTRAR DETALLES
+        // MOSTRAR FACTURAS EN GRID
         // =========================
-        void MostrarDetalles()
+        void MostrarFacturas()
         {
-            dgvDetalle.DataSource = detalleBLL.Listar();
+            DataTable dt = facturaBLL.Listar();
+            dgvDetalle.DataSource = dt;
+            dgvDetalle.Visible = true;
+            dgvDetalle.BringToFront();
             OcultarColumnas();
         }
 
         // =========================
-        // 🔍 BUSCAR
+        // BUSCAR / FILTRAR
         // =========================
-        void BuscarDetalles()
+        void BuscarFacturas()
         {
-            DataView vista = detalleBLL.Listar().DefaultView;
+            DataView vista =
+                facturaBLL.Listar().DefaultView;
+
             string filtro = "";
 
             if (cbFiltroFactura.SelectedIndex > 0)
-                filtro = $"id_factura = {cbFiltroFactura.SelectedItem}";
+                filtro =
+                    $"id_factura = {cbFiltroFactura.SelectedItem}";
 
             string texto = txtBuscar.Text.Trim();
+
             if (!string.IsNullOrEmpty(texto))
             {
-                string tf = $"descripcion LIKE '%{texto}%'";
-                filtro = string.IsNullOrEmpty(filtro) ? tf : filtro + " AND " + tf;
+                string tf =
+                    $"estado_pago LIKE '%{texto}%'";
+
+                filtro = string.IsNullOrEmpty(filtro)
+                    ? tf
+                    : filtro + " AND " + tf;
             }
 
             vista.RowFilter = filtro;
@@ -115,198 +195,328 @@ namespace Capa_Presentacion
 
         void OcultarColumnas()
         {
-            if (dgvDetalle.Columns.Contains("id_detalle_factura"))
-                dgvDetalle.Columns["id_detalle_factura"].Visible = false;
-            if (dgvDetalle.Columns.Contains("id_servicio"))
-                dgvDetalle.Columns["id_servicio"].Visible = false;
+            if (dgvDetalle.Columns.Contains("id_cliente"))
+                dgvDetalle.Columns["id_cliente"].Visible = false;
 
-            dgvDetalle.DataBindingComplete += (s, ev) =>
-            {
-                dgvDetalle.EnableHeadersVisualStyles = false;
-                dgvDetalle.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-                dgvDetalle.ColumnHeadersDefaultCellStyle.BackColor = colorVino;
-                dgvDetalle.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dgvDetalle.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F);
-                dgvDetalle.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            };
+            if (dgvDetalle.Columns.Contains("referencia"))
+                dgvDetalle.Columns["referencia"].Visible = false;
+
+            if (dgvDetalle.Columns.Contains("notas"))
+                dgvDetalle.Columns["notas"].Visible = false;
+
+            dgvDetalle.EnableHeadersVisualStyles = false;
+            dgvDetalle.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.None;
+            dgvDetalle.ColumnHeadersDefaultCellStyle.BackColor = colorVino;
+            dgvDetalle.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvDetalle.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI Semibold", 9F);
+            dgvDetalle.ColumnHeadersDefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
         }
 
         // =========================
-        // 🔍 EVENTOS BUSCADOR
+        // EVENTOS BUSCADOR
         // =========================
-        private void btnBuscar_Click(object sender, EventArgs e) => BuscarDetalles();
-        private void txtBuscar_TextChanged(object sender, EventArgs e) => BuscarDetalles();
-        private void cbFiltroFactura_SelectedIndexChanged(object sender, EventArgs e) => BuscarDetalles();
+        private void btnBuscar_Click(
+            object sender, EventArgs e) =>
+            BuscarFacturas();
+
+        private void txtBuscar_TextChanged(
+            object sender, EventArgs e) =>
+            BuscarFacturas();
+
+        private void cbFiltroFactura_SelectedIndexChanged(
+            object sender, EventArgs e) =>
+            BuscarFacturas();
 
         // =========================
-        // 🖱 CLICK GRID
+        // CLICK EN GRID
+        // → CARGA DATOS PARA EDITAR
         // =========================
-        private void dgvDetalle_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDetalle_CellClick(
+            object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            DataGridViewRow fila = dgvDetalle.Rows[e.RowIndex];
 
-            if (dgvDetalle.Columns.Contains("id_factura") &&
-                fila.Cells["id_factura"].Value != DBNull.Value)
-                cbFactura.SelectedValue = fila.Cells["id_factura"].Value;
+            DataGridViewRow fila =
+                dgvDetalle.Rows[e.RowIndex];
 
-            if (dgvDetalle.Columns.Contains("id_servicio") &&
-                fila.Cells["id_servicio"].Value != DBNull.Value)
-                cbServicio.SelectedValue = fila.Cells["id_servicio"].Value;
+            if (dgvDetalle.Columns.Contains("metodo_pago") &&
+                fila.Cells["metodo_pago"].Value != DBNull.Value)
+                cbMetodoPago.SelectedItem =
+                    fila.Cells["metodo_pago"].Value.ToString();
 
-            txtDescripcion.Text = (dgvDetalle.Columns.Contains("descripcion") &&
-                fila.Cells["descripcion"].Value != DBNull.Value)
-                ? fila.Cells["descripcion"].Value.ToString() : "";
+            if (dgvDetalle.Columns.Contains("estado_pago") &&
+                fila.Cells["estado_pago"].Value != DBNull.Value)
+                cbEstado.SelectedItem =
+                    fila.Cells["estado_pago"].Value.ToString();
 
-            if (dgvDetalle.Columns.Contains("cantidad") &&
-                fila.Cells["cantidad"].Value != DBNull.Value)
-                nudCantidad.Value = Convert.ToDecimal(fila.Cells["cantidad"].Value);
+            if (dgvDetalle.Columns.Contains("total") &&
+                fila.Cells["total"].Value != DBNull.Value)
+                txtMonto.Text =
+                    Convert.ToDecimal(
+                        fila.Cells["total"].Value
+                    ).ToString("N2");
 
-            if (dgvDetalle.Columns.Contains("subtotal") &&
-                fila.Cells["subtotal"].Value != DBNull.Value)
-                lblSubtotal.Text = "RD$ " + Convert.ToDecimal(
-                    fila.Cells["subtotal"].Value).ToString("N2");
+            if (dgvDetalle.Columns.Contains("fecha_factura") &&
+                fila.Cells["fecha_factura"].Value != DBNull.Value)
+                dtpFecha.Value =
+                    Convert.ToDateTime(
+                        fila.Cells["fecha_factura"].Value);
         }
 
         // =========================
-        // 🔗 ABRIR DETALLE FACTURA
+        // ABRIR DETALLE FACTURA
         // =========================
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
-            FrmDetalleFactura frm = new FrmDetalleFactura();
-            frm.Show();
+            if (dgvDetalle.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecciona una factura primero.");
+                return;
+            }
+
+            // Toma el ID de la fila seleccionada (ajusta el nombre de la columna)
+            int idFactura = Convert.ToInt32(dgvDetalle.SelectedRows[0].Cells["id_factura"].Value);
+
+            FrmDetalleFactura frmDetalle = new FrmDetalleFactura(idFactura); 
+            frmDetalle.ShowDialog();
         }
 
         // =========================
-        // ✅ VALIDACIONES
+        // VALIDAR CAMPOS
         // =========================
         bool ValidarCampos()
         {
-            if (cbFactura.SelectedValue == null)
+            if (cbCita.SelectedValue == null)
             {
-                MessageBox.Show("⚠️ Selecciona una factura.", "Campo requerido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cbFactura.Focus(); return false;
-            }
-            if (cbServicio.SelectedValue == null)
-            {
-                MessageBox.Show("⚠️ Selecciona un servicio.", "Campo requerido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "⚠️ Selecciona una cita.",
+                    "Campo requerido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                cbCita.Focus();
                 return false;
             }
-            if (nudCantidad.Value <= 0)
+
+            if (cbMetodoPago.SelectedIndex < 0)
             {
-                MessageBox.Show("⚠️ La cantidad debe ser mayor a 0.", "Campo inválido",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "⚠️ Selecciona el método de pago.",
+                    "Campo requerido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                cbMetodoPago.Focus();
                 return false;
             }
+
+            if (cbEstado.SelectedIndex < 0)
+            {
+                MessageBox.Show(
+                    "⚠️ Selecciona el estado.",
+                    "Campo requerido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                cbEstado.Focus();
+                return false;
+            }
+
             return true;
         }
 
         // =========================
-        // 💾 GUARDAR
+        // CONSTRUIR OBJETO FACTURA
         // =========================
-        private void btnGuardar_Click(object sender, EventArgs e)
+        Factura ObtenerFacturaDesdeCampos()
         {
-            if (!ValidarCampos()) return;
-            try
+            // El id_cliente viene de la cita seleccionada
+            int idCita =
+                Convert.ToInt32(cbCita.SelectedValue);
+
+            DataTable dt =
+                citasBLL.ObtenerPorId(idCita);
+
+            int idCliente =
+                Convert.ToInt32(dt.Rows[0]["id_cliente"]);
+
+            decimal total = decimal.TryParse(
+                txtMonto.Text,
+                out decimal t) ? t : 0;
+
+            return new Factura
             {
-                Detalle_Factura d = new Detalle_Factura
-                {
-                    id_factura = Convert.ToInt32(cbFactura.SelectedValue),
-                    id_servicio = Convert.ToInt32(cbServicio.SelectedValue),
-                    descripcion = txtDescripcion.Text,
-                    cantidad = Convert.ToInt32(nudCantidad.Value),
-                    subtotal = ObtenerSubtotal()
-                };
-                detalleBLL.Guardar(d);
-                MessageBox.Show("Detalle guardado correctamente");
-                MostrarDetalles();
-                LimpiarCampos();
-            }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+                id_cliente = idCliente,
+                fecha_factura = dtpFecha.Value,
+                total = total,
+                metodo_pago =
+                    cbMetodoPago.SelectedItem.ToString(),
+                estado_pago =
+                    cbEstado.SelectedItem.ToString()
+            };
         }
 
         // =========================
-        // ✏️ ACTUALIZAR
+        // GUARDAR
         // =========================
-        private void btnActualizar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(
+            object sender, EventArgs e)
+        {
+            if (!ValidarCampos()) return;
+
+            try
+            {
+                Factura f = ObtenerFacturaDesdeCampos();
+                facturaBLL.Guardar(f);
+
+                MessageBox.Show(
+                    "✅ Pago registrado correctamente.",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                CargarFiltro();
+                MostrarFacturas();
+                LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        // =========================
+        // ACTUALIZAR
+        // =========================
+        private void btnActualizar_Click(
+            object sender, EventArgs e)
         {
             if (dgvDetalle.CurrentRow == null)
             {
-                MessageBox.Show("⚠️ Selecciona un detalle de la tabla.", "Sin selección",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "⚠️ Selecciona una factura de la tabla.",
+                    "Sin selección",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
+
             if (!ValidarCampos()) return;
+
             try
             {
-                Detalle_Factura d = new Detalle_Factura
-                {
-                    id_detalle_factura = Convert.ToInt32(
-                        dgvDetalle.CurrentRow.Cells["id_detalle_factura"].Value),
-                    id_factura = Convert.ToInt32(cbFactura.SelectedValue),
-                    id_servicio = Convert.ToInt32(cbServicio.SelectedValue),
-                    descripcion = txtDescripcion.Text,
-                    cantidad = Convert.ToInt32(nudCantidad.Value),
-                    subtotal = ObtenerSubtotal()
-                };
-                detalleBLL.Actualizar(d);
-                MessageBox.Show("Detalle actualizado");
-                MostrarDetalles();
+                Factura f = ObtenerFacturaDesdeCampos();
+
+                f.id_factura = Convert.ToInt32(
+                    dgvDetalle.CurrentRow
+                               .Cells["id_factura"].Value);
+
+                facturaBLL.Actualizar(f);
+
+                MessageBox.Show(
+                    "✅ Factura actualizada.",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                MostrarFacturas();
                 LimpiarCampos();
             }
-            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         // =========================
-        // 🗑 ELIMINAR
+        // ELIMINAR
         // =========================
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminar_Click(
+            object sender, EventArgs e)
         {
             if (dgvDetalle.CurrentRow == null) return;
-            if (MessageBox.Show("¿Eliminar este detalle?", "Confirmar",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+            if (MessageBox.Show(
+                "¿Eliminar esta factura?",
+                "Confirmar",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            try
             {
-                detalleBLL.Eliminar(Convert.ToInt32(
-                    dgvDetalle.CurrentRow.Cells["id_detalle_factura"].Value));
-                MessageBox.Show("Detalle eliminado");
-                MostrarDetalles();
+                int id = Convert.ToInt32(
+                    dgvDetalle.CurrentRow
+                               .Cells["id_factura"].Value);
+
+                facturaBLL.Eliminar(id);
+
+                MessageBox.Show(
+                    "🗑 Factura eliminada.",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                CargarFiltro();
+                MostrarFacturas();
                 LimpiarCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
         // =========================
-        // 🧹 LIMPIAR
+        // LIMPIAR
         // =========================
-        private void btnLimpiar_Click(object sender, EventArgs e) => LimpiarCampos();
+        private void btnLimpiar_Click(
+            object sender, EventArgs e) =>
+            LimpiarCampos();
 
         void LimpiarCampos()
         {
-            cbFactura.SelectedIndex = -1;
-            cbServicio.SelectedIndex = -1;
-            txtDescripcion.Clear();
-            nudCantidad.Value = 1;
-            lblSubtotal.Text = "RD$ 0.00";
+            cbCita.SelectedIndex = -1;
+            txtCliente.Text = "";
+            txtEmpleado.Text = "";
+            txtServicios.Text = "";
+            txtMonto.Text = "0.00";
+            cbMetodoPago.SelectedIndex = -1;
+            cbEstado.SelectedIndex = 0;
+            dtpFecha.Value = DateTime.Today;
+            txtReferencia.Clear();
+            txtNotas.Clear();
             dgvDetalle.ClearSelection();
         }
 
-        decimal ObtenerSubtotal()
-        {
-            string texto = lblSubtotal.Text.Replace("RD$", "").Trim();
-            return decimal.TryParse(texto, out decimal val) ? val : 0;
-        }
-
         // =========================
-        // 🎨 DISEÑO
+        // DISEÑO
         // =========================
-        void EstilarBoton(Button btn, Color fondo, Color texto, bool negrita = false)
+        void EstilarBoton(
+            Button btn,
+            Color fondo,
+            Color texto,
+            bool negrita = false)
         {
             btn.BackColor = fondo;
             btn.ForeColor = texto;
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
-            btn.Font = new Font("Segoe UI" + (negrita ? " Semibold" : ""), 10F);
+            btn.Font = new Font(
+                "Segoe UI" + (negrita ? " Semibold" : ""),
+                10F);
             btn.Height = 40;
             btn.Cursor = Cursors.Hand;
         }
@@ -317,61 +527,97 @@ namespace Capa_Presentacion
             panelDetalle.BackColor = Color.White;
             panelTabla.BackColor = Color.White;
 
+            // Título tabla
             lblTabla.ForeColor = colorRosado;
-            lblTabla.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
+            lblTabla.Font =
+                new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
 
-            foreach (Label lbl in new[] { lblFactura, lblServicio, lblCantidad, lblDescripcion, lblSubtotalTexto })
-            { lbl.ForeColor = Color.Black; lbl.Font = new Font("Segoe UI", 9F); }
+            // Labels del formulario
+            foreach (Label lbl in new[]
+            {
+                lblCita, lblCliente, lblServicios,
+                lblEmpleado, lblMonto, lblMetodoPago,
+                lblFecha, lblEstado, lblReferencia, lblNotas
+            })
+            {
+                lbl.ForeColor = Color.Black;
+                lbl.Font = new Font("Segoe UI", 9F);
+            }
 
-            foreach (ComboBox cb in new[] { cbFactura, cbServicio })
-            { cb.BackColor = Color.White; cb.ForeColor = Color.Black; cb.FlatStyle = FlatStyle.Flat; cb.Font = new Font("Segoe UI", 9F); }
+            // Combos editables
+            foreach (ComboBox cb in new[]
+            { cbCita, cbMetodoPago, cbEstado })
+            {
+                cb.BackColor = Color.White;
+                cb.ForeColor = Color.Black;
+                cb.FlatStyle = FlatStyle.Flat;
+                cb.Font = new Font("Segoe UI", 9F);
+            }
 
-            txtDescripcion.BackColor = Color.White;
-            txtDescripcion.ForeColor = colorRosado;
-            txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Font = new Font("Segoe UI", 9F);
+            // Campos readonly (fondo gris claro)
+            foreach (TextBox txt in new[]
+            { txtCliente, txtEmpleado, txtServicios, txtMonto })
+            {
+                txt.BackColor =
+                    Color.FromArgb(245, 245, 245);
+                txt.ForeColor = Color.DimGray;
+                txt.BorderStyle = BorderStyle.FixedSingle;
+                txt.Font = new Font("Segoe UI", 9F);
+            }
 
-            nudCantidad.Font = new Font("Segoe UI", 9F);
-            nudCantidad.Minimum = 1;
-            nudCantidad.Maximum = 100;
+            // Campos editables
+            foreach (TextBox txt in new[]
+            { txtReferencia, txtNotas })
+            {
+                txt.BackColor = Color.White;
+                txt.ForeColor = Color.Black;
+                txt.BorderStyle = BorderStyle.FixedSingle;
+                txt.Font = new Font("Segoe UI", 9F);
+            }
 
-            lblSubtotal.ForeColor = colorRosado;
-            lblSubtotal.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            lblSubtotal.Text = "RD$ 0.00";
+            // DateTimePicker
+            dtpFecha.Font = new Font("Segoe UI", 9F);
 
+            // Buscador
             txtBuscar.BackColor = Color.White;
             txtBuscar.ForeColor = Color.Gray;
             txtBuscar.BorderStyle = BorderStyle.FixedSingle;
             txtBuscar.Font = new Font("Segoe UI", 9F);
-            txtBuscar.Height = 28;
 
             cbFiltroFactura.BackColor = Color.White;
             cbFiltroFactura.ForeColor = Color.Black;
             cbFiltroFactura.FlatStyle = FlatStyle.Flat;
             cbFiltroFactura.Font = new Font("Segoe UI", 9F);
-            cbFiltroFactura.Height = 28;
 
-            Color beige = Color.FromArgb(242, 235, 231);
+            // Botones
             EstilarBoton(btnGuardar, colorVino, Color.White, negrita: true);
             EstilarBoton(btnActualizar, colorVino, Color.White, negrita: true);
-            EstilarBoton(btnEliminar, beige, colorRosado);
-            EstilarBoton(btnLimpiar, beige, colorRosado);
+            EstilarBoton(btnEliminar, colorBeige, colorRosado);
+            EstilarBoton(btnLimpiar, colorBeige, colorRosado);
             EstilarBoton(btnBuscar, colorVino, Color.White, negrita: true);
+            EstilarBoton(btnVerDetalle, colorBeige, colorRosado, negrita: true);
             btnBuscar.Height = 28;
-            EstilarBoton(btnVerDetalle, beige, colorRosado, negrita: true);
             btnVerDetalle.Height = 28;
 
+            // Grid
             dgvDetalle.BackgroundColor = Color.White;
             dgvDetalle.BorderStyle = BorderStyle.None;
             dgvDetalle.RowHeadersVisible = false;
-            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDetalle.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
             dgvDetalle.ColumnHeadersHeight = 38;
-            dgvDetalle.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
-            dgvDetalle.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 210, 215);
-            dgvDetalle.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 244, 242);
-            dgvDetalle.GridColor = Color.FromArgb(235, 230, 228);
-            dgvDetalle.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDetalle.DefaultCellStyle.Font =
+                new Font("Segoe UI", 9F);
+            dgvDetalle.DefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(230, 210, 215);
+            dgvDetalle.DefaultCellStyle.SelectionForeColor =
+                Color.Black;
+            dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.FromArgb(248, 244, 242);
+            dgvDetalle.GridColor =
+                Color.FromArgb(235, 230, 228);
+            dgvDetalle.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
             dgvDetalle.MultiSelect = false;
             dgvDetalle.AllowUserToAddRows = false;
             dgvDetalle.AllowUserToDeleteRows = false;
@@ -379,12 +625,26 @@ namespace Capa_Presentacion
             dgvDetalle.DataBindingComplete += (s, ev) =>
             {
                 dgvDetalle.EnableHeadersVisualStyles = false;
-                dgvDetalle.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-                dgvDetalle.ColumnHeadersDefaultCellStyle.BackColor = colorVino;
-                dgvDetalle.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dgvDetalle.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F);
-                dgvDetalle.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvDetalle.ColumnHeadersBorderStyle =
+                    DataGridViewHeaderBorderStyle.None;
+                dgvDetalle.ColumnHeadersDefaultCellStyle
+                    .BackColor = colorVino;
+                dgvDetalle.ColumnHeadersDefaultCellStyle
+                    .ForeColor = Color.White;
+                dgvDetalle.ColumnHeadersDefaultCellStyle
+                    .Font =
+                    new Font("Segoe UI Semibold", 9F);
+                dgvDetalle.ColumnHeadersDefaultCellStyle
+                    .Alignment =
+                    DataGridViewContentAlignment.MiddleCenter;
             };
+        }
+
+        private void nudCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            decimal monto = 0;
+            decimal.TryParse(txtMonto.Text, out monto);
+            lblSubtotal.Text = "RD$ " + (nudCantidad.Value * monto).ToString("N2");
         }
     }
 }

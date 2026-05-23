@@ -9,17 +9,12 @@ namespace CapaNegocio
     {
         FacturaDAL dal = new FacturaDAL();
 
-        // =========================
-        // LISTAR
-        // =========================
+      
         public DataTable Listar()
         {
             return dal.MostrarFacturas();
         }
 
-        // =========================
-        // GUARDAR
-        // =========================
         public void Guardar(Factura f)
         {
             if (f.id_cliente <= 0)
@@ -42,9 +37,7 @@ namespace CapaNegocio
                 f.estado_pago);
         }
 
-        // =========================
-        // ACTUALIZAR
-        // =========================
+     
         public void Actualizar(Factura f)
         {
             if (f.id_factura <= 0)
@@ -60,9 +53,7 @@ namespace CapaNegocio
                 f.estado_pago);
         }
 
-        // =========================
-        // ELIMINAR
-        // =========================
+       
         public void Eliminar(int id_factura)
         {
             if (id_factura <= 0)
