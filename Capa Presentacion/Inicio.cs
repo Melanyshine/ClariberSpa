@@ -12,7 +12,7 @@ namespace Capa_Presentacion
         // ======================================================================================
         // CADENA DE CONEXIÓN PERFECTA Y CORREGIDA PARA TU COMPUTADORA
         // ======================================================================================
-        private readonly string cadenaConexion = "Data Source=DESKTOP-8GIEJA0\\SQLEXPRESS;Initial Catalog=ClaribetSpa;Integrated Security=True";
+        private readonly string cadenaConexion = "Data Source=localhost;Initial Catalog=ClaribetSpa;Integrated Security=True";
 
         // Paleta de colores personalizada de Claribet Beauty Center & Spa
         private readonly Color colorFondoFormulario = Color.FromArgb(245, 240, 238);
@@ -55,61 +55,110 @@ namespace Capa_Presentacion
 
         // =================================================
         // CONEXIÓN A LA BASE DE DATOS Y LÓGICA DEL LOGIN
-        // =================================================
+        // ================================================
+
         private void btnInicioSesion_Click(object sender, EventArgs e)
         {
-            // Validaciones para que no dejen casillas vacías
-            if (!ValidarCampos()) return;
+            // VALIDAR CAMPOS
+            if (!ValidarCampos())
+                return;
 
-            string correoIngresado = txtCorreo.Text.Trim();
-            string contraseñaIngresada = txtContraseña.Text.Trim();
-            string rolSeleccionado = cmbRol.SelectedItem.ToString();
+            string correoIngresado =
+                txtCorreo.Text.Trim();
 
-            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            string contraseñaIngresada =
+                txtContraseña.Text.Trim();
+
+            string rolSeleccionado =
+                cmbRol.SelectedItem.ToString();
+
+            using (SqlConnection conexion =
+                new SqlConnection(cadenaConexion))
             {
                 try
                 {
                     conexion.Open();
 
-                    // Ejecuta tu procedimiento almacenado SP_Login
-                    using (SqlCommand comando = new SqlCommand("SP_Login", conexion))
+                    using (SqlCommand comando =
+                        new SqlCommand(
+                            "SP_Login",
+                            conexion))
                     {
-                        comando.CommandType = CommandType.StoredProcedure;
-                        comando.Parameters.AddWithValue("@correo", correoIngresado);
-                        comando.Parameters.AddWithValue("@contraseña", contraseñaIngresada);
+                        comando.CommandType =
+                            CommandType.StoredProcedure;
 
-                        using (SqlDataReader lector = comando.ExecuteReader())
+                        comando.Parameters.AddWithValue(
+                            "@correo",
+                            correoIngresado);
+
+                        comando.Parameters.AddWithValue(
+                            "@contraseña",
+                            contraseñaIngresada);
+
+                        using (SqlDataReader lector =
+                            comando.ExecuteReader())
                         {
                             if (lector.Read())
                             {
-                                string rolBD = lector["nombre_rol"].ToString();
-                                string nombreUsuario = lector["nombre"].ToString() + " " + lector["apellido"].ToString();
+                                string rolBD =
+                                    lector["nombre_rol"].ToString();
 
-                                // Verificación estricta de Roles
-                                if (rolBD.Equals(rolSeleccionado, StringComparison.OrdinalIgnoreCase))
+                                string nombreUsuario =
+                                    lector["nombre"].ToString()
+                                    + " "
+                                    + lector["apellido"].ToString();
+
+                                // VALIDAR ROL
+                                if (rolBD.Equals(
+                                    rolSeleccionado,
+                                    StringComparison.OrdinalIgnoreCase))
                                 {
-                                    MostrarAlerta($"¡Bienvenido(a) {nombreUsuario}!\nInicio de sesión exitoso como {rolBD}.", "Acceso Autorizado", MessageBoxIcon.Information);
+                                    MessageBox.Show(
+                                        "Bienvenido(a) "
+                                        + nombreUsuario,
+                                        "Inicio Correcto",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
 
-                                    // AQUÍ ABRES TU MENÚ PRINCIPAL DESPUÉS:
-                                    // MenuPrincipal menu = new MenuPrincipal();
-                                    // menu.Show();
-                                    // this.Hide();
+                                    // =====================================
+                                    // ABRIR FORM PRINCIPAL
+                                    // =====================================
+
+                                    FrmPrincipal frm =
+                                        new FrmPrincipal();
+
+                                    frm.Show();
+
+                                    // OCULTAR LOGIN
+                                    this.Hide();
                                 }
                                 else
                                 {
-                                    MostrarAlerta($"El usuario existe, pero no pertenece al rol '{rolSeleccionado}'.", "Error de Rol", MessageBoxIcon.Warning);
+                                    MessageBox.Show(
+                                        "El rol no coincide.",
+                                        "Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
                                 }
                             }
                             else
                             {
-                                MostrarAlerta("Correo electrónico o contraseña incorrectos. Verifique sus datos.", "Error de Autenticación", MessageBoxIcon.Error);
+                                MessageBox.Show(
+                                    "Correo o contraseña incorrectos.",
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MostrarAlerta("Error crítico de conexión: " + ex.Message, "Error del Sistema", MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
         }
