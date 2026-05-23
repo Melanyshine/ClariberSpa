@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace Capa_Presentacion
 {
-    public partial class FrmFacturaPagos : Form
+    public partial class FrmDetalleFactura : Form
     {
-        public FrmFacturaPagos()
+        public FrmDetalleFactura()
         {
             InitializeComponent();
-        }
-
-        private void FrmFacturaPagos_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Capa_Presentacion
 {
-    partial class FrmFacturaPagos
+    partial class FrmDetalleFactura
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // FrmFacturaPagos
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 532);
-            this.Name = "FrmFacturaPagos";
-            this.Text = "FrmFacturaPagos";
-            this.Load += new System.EventHandler(this.FrmFacturaPagos_Load);
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "FrmDetalleFactura";
         }
 
         #endregion

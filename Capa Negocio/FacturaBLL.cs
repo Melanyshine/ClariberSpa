@@ -1,46 +1,75 @@
-﻿using CapaDatos;
-using CapaEntidades;
+﻿using System;
 using System.Data;
+using CapaDatos;
+using CapaEntidades;
 
 namespace CapaNegocio
 {
     public class FacturaBLL
     {
-        private FacturaDAL dal = new FacturaDAL();
+        FacturaDAL dal = new FacturaDAL();
 
-
+        // =========================
+        // LISTAR
+        // =========================
         public DataTable Listar()
         {
             return dal.MostrarFacturas();
         }
 
-
+        // =========================
+        // GUARDAR
+        // =========================
         public void Guardar(Factura f)
         {
-            if (f.id_factura == 0)
-            {
-                dal.InsertarFactura(
-                    f.id_factura,
-                    f.id_cliente,
-                    f.fecha_factura,
-                    f.total,
-                    f.metodo_pago,
-                    f.estado_pago
-                );
-            }
-            else
-            {
-                dal.ActualizarFactura(
-                    f.id_factura,
-                    f.estado_pago
-                );
-            }
+            if (f.id_cliente <= 0)
+                throw new Exception(
+                    "Debe seleccionar un cliente.");
+
+            if (string.IsNullOrWhiteSpace(f.metodo_pago))
+                throw new Exception(
+                    "El método de pago es obligatorio.");
+
+            if (string.IsNullOrWhiteSpace(f.estado_pago))
+                throw new Exception(
+                    "El estado de pago es obligatorio.");
+
+            dal.InsertarFactura(
+                f.id_cliente,
+                f.fecha_factura,
+                f.total,
+                f.metodo_pago,
+                f.estado_pago);
         }
 
-
-        public void Eliminar(int id)
+        // =========================
+        // ACTUALIZAR
+        // =========================
+        public void Actualizar(Factura f)
         {
-            dal.EliminarFactura(id);
+            if (f.id_factura <= 0)
+                throw new Exception(
+                    "Selecciona una factura válida.");
+
+            if (string.IsNullOrWhiteSpace(f.estado_pago))
+                throw new Exception(
+                    "El estado de pago es obligatorio.");
+
+            dal.ActualizarFactura(
+                f.id_factura,
+                f.estado_pago);
+        }
+
+        // =========================
+        // ELIMINAR
+        // =========================
+        public void Eliminar(int id_factura)
+        {
+            if (id_factura <= 0)
+                throw new Exception(
+                    "ID de factura no válido.");
+
+            dal.EliminarFactura(id_factura);
         }
     }
 }
