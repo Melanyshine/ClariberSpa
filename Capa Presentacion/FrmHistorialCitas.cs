@@ -8,153 +8,175 @@ namespace CapaPresentacion
 {
     public partial class FrmHistorialCitas : Form
     {
-        Historial_CitaBLL bll =
-            new Historial_CitaBLL();
+        Historial_CitaBLL bll = new Historial_CitaBLL();
 
-        // 🎨 COLORES
-        private readonly Color colorRosado =
-            Color.RosyBrown;
-
-        private readonly Color fondo =
-            Color.FromArgb(250, 248, 246);
+        private readonly Color colorRosado = Color.RosyBrown;
+        private readonly Color fondo = Color.FromArgb(250, 248, 246);
 
         public FrmHistorialCitas()
         {
             InitializeComponent();
         }
 
-        // 🔥 LOAD
-        private void FrmHistorialCitas_Load(
-            object sender,
-            EventArgs e)
+        private void FrmHistorialCitas_Load(object sender, EventArgs e)
         {
-            this.WindowState =
-                FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;
 
             AplicarDiseno();
 
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            btnBuscar.Click += btnBuscar_Click;
+            btnVerTodos.Click += btnVerTodos_Click;
+            cbFiltroEstado.SelectedIndexChanged += cbFiltroEstado_SelectedIndexChanged;
+
+            CargarFiltroEstado();
             CargarHistorial();
         }
 
-        // 📦 CARGAR HISTORIAL
-        // 🔥 SOLO MOSTRAR COMPLETADAS
+    
+        void CargarFiltroEstado()
+        {
+            cbFiltroEstado.Items.Clear();
+
+            cbFiltroEstado.Items.AddRange(new object[]
+            {
+                "Todos",
+                "Completada",
+                "Cancelada"
+            });
+
+            cbFiltroEstado.SelectedIndex = 0;
+        }
+
+     
         private void CargarHistorial()
         {
             try
             {
-                DataTable tabla =
-                    bll.Listar();
-
-                DataView vista =
-                    tabla.DefaultView;
+                DataView vista = bll.Listar().DefaultView;
 
                 vista.RowFilter =
-                  vista.RowFilter =
-               "nombre_estado = 'Completada' OR nombre_estado = 'Cancelada'";
+                    "nombre_estado = 'Completada' OR nombre_estado = 'Cancelada'";
 
-                dgvHistorial.DataSource =
-                    vista;
+                dgvHistorial.DataSource = vista;
 
-                // 🔥 OCULTAR IDS
-                if (dgvHistorial.Columns.Contains("id_historial"))
-                    dgvHistorial.Columns["id_historial"].Visible = false;
-
-                if (dgvHistorial.Columns.Contains("id_cita"))
-                    dgvHistorial.Columns["id_cita"].Visible = false;
-
-                if (dgvHistorial.Columns.Contains("id_cliente"))
-                    dgvHistorial.Columns["id_cliente"].Visible = false;
-
-                if (dgvHistorial.Columns.Contains("id_servicio"))
-                    dgvHistorial.Columns["id_servicio"].Visible = false;
-
-                if (dgvHistorial.Columns.Contains("id_usuario"))
-                    dgvHistorial.Columns["id_usuario"].Visible = false;
-
-                // 🔥 CAMBIAR TITULOS
-                if (dgvHistorial.Columns.Contains("nombre_estado"))
-                    dgvHistorial.Columns["nombre_estado"].HeaderText =
-                        "Estado";
-
-                if (dgvHistorial.Columns.Contains("fecha"))
-                    dgvHistorial.Columns["fecha"].HeaderText =
-                        "Fecha";
-
-                if (dgvHistorial.Columns.Contains("hora_inicio"))
-                    dgvHistorial.Columns["hora_inicio"].HeaderText =
-                        "Hora";
-
-                if (dgvHistorial.Columns.Contains("descripcion"))
-                    dgvHistorial.Columns["descripcion"].HeaderText =
-                        "Descripción";
-
-                if (dgvHistorial.Columns.Contains("precio"))
-                    dgvHistorial.Columns["precio"].HeaderText =
-                        "Precio";
-
-                // 🔥 CENTRAR HEADERS
-                dgvHistorial.ColumnHeadersDefaultCellStyle.Alignment =
-                    DataGridViewContentAlignment.MiddleCenter;
-
-                // 🔥 ALTURA FILAS
-                dgvHistorial.RowTemplate.Height =
-                    38;
+                OcultarColumnas();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Error al cargar historial:\n" +
-                    ex.Message,
+                    "Error al cargar historial:\n" + ex.Message,
                     "Error",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    MessageBoxIcon.Error
+                );
             }
         }
 
-        // 🔥 BOTON VOLVER
-        private void btnVolver_Click(
-            object sender,
-            EventArgs e)
+     
+        void BuscarHistorial()
         {
-            this.Close();
+            try
+            {
+                DataView vista = bll.Listar().DefaultView;
+
+                string filtro =
+                    "(nombre_estado = 'Completada' OR nombre_estado = 'Cancelada')";
+
+                // FILTRO ESTADO
+                if (cbFiltroEstado.SelectedIndex > 0)
+                {
+                    filtro =
+                        $"nombre_estado = '{cbFiltroEstado.SelectedItem}'";
+                }
+
+                // TEXTO BUSQUEDA
+                string texto = txtBuscar.Text.Trim().Replace("'", "''");
+
+                if (!string.IsNullOrEmpty(texto))
+                {
+                    // ✅ VALIDAR SI EXISTE COLUMNA CLIENTE
+                    bool tieneCliente =
+                        vista.Table.Columns.Contains("cliente");
+
+                    bool tieneAccion =
+                        vista.Table.Columns.Contains("accion");
+
+                    if (tieneCliente && tieneAccion)
+                    {
+                        filtro +=
+                            $" AND (cliente LIKE '%{texto}%' OR accion LIKE '%{texto}%')";
+                    }
+                    else if (tieneAccion)
+                    {
+                        filtro +=
+                            $" AND accion LIKE '%{texto}%'";
+                    }
+                }
+
+                vista.RowFilter = filtro;
+
+                dgvHistorial.DataSource = vista;
+
+                OcultarColumnas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error al buscar:\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
-        // 🎨 DISEÑO
-        private void AplicarDiseno()
+        void OcultarColumnas()
         {
-            // FORM
-            this.BackColor =
-                fondo;
+            foreach (string col in new[]
+            {
+                "id_historial",
+                "id_cita",
+                "id_cliente",
+                "id_servicio",
+                "id_usuario"
+            })
+            {
+                if (dgvHistorial.Columns.Contains(col))
+                    dgvHistorial.Columns[col].Visible = false;
+            }
 
-            // TITULO
-            lblTitulo.ForeColor =
-                colorRosado;
+            // HEADERS
+            if (dgvHistorial.Columns.Contains("cliente"))
+                dgvHistorial.Columns["cliente"].HeaderText = "Cliente";
 
-            lblTitulo.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    28F,
-                    FontStyle.Bold);
+            if (dgvHistorial.Columns.Contains("nombre_estado"))
+                dgvHistorial.Columns["nombre_estado"].HeaderText = "Estado";
 
-            // PANEL TABLA
-            panelTabla.BackColor =
-                Color.White;
+            if (dgvHistorial.Columns.Contains("fecha"))
+                dgvHistorial.Columns["fecha"].HeaderText = "Fecha";
 
-            // TABLA
-            dgvHistorial.BackgroundColor =
-                Color.White;
+            if (dgvHistorial.Columns.Contains("hora_inicio"))
+            {
+                dgvHistorial.Columns["hora_inicio"].HeaderText = "Hora";
 
-            dgvHistorial.BorderStyle =
-                BorderStyle.None;
+                dgvHistorial.Columns["hora_inicio"]
+                    .DefaultCellStyle.Format = "hh\\:mm";
+            }
 
-            dgvHistorial.RowHeadersVisible =
-                false;
+            if (dgvHistorial.Columns.Contains("descripcion"))
+                dgvHistorial.Columns["descripcion"].HeaderText = "Descripción";
 
-            dgvHistorial.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
+            if (dgvHistorial.Columns.Contains("precio"))
+                dgvHistorial.Columns["precio"].HeaderText = "Precio";
 
-            dgvHistorial.EnableHeadersVisualStyles =
-                false;
+            if (dgvHistorial.Columns.Contains("accion"))
+                dgvHistorial.Columns["accion"].HeaderText = "Acción";
+
+            dgvHistorial.RowTemplate.Height = 38;
+
+            // ✅ QUITAR AZUL
+            dgvHistorial.EnableHeadersVisualStyles = false;
 
             dgvHistorial.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.None;
@@ -169,15 +191,163 @@ namespace CapaPresentacion
                 new Font(
                     "Segoe UI Semibold",
                     11F,
-                    FontStyle.Bold);
+                    FontStyle.Bold
+                );
 
-            dgvHistorial.ColumnHeadersHeight =
-                45;
+            dgvHistorial.ColumnHeadersDefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        // =========================
+        // 🔍 EVENTOS
+        // =========================
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            BuscarHistorial();
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            BuscarHistorial();
+        }
+
+        private void cbFiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuscarHistorial();
+        }
+
+        private void btnVerTodos_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Clear();
+
+            cbFiltroEstado.SelectedIndex = 0;
+
+            CargarHistorial();
+        }
+
+      
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+       
+        void EstilarBoton(
+            Button btn,
+            Color fondoBtn,
+            Color texto,
+            bool negrita = false
+        )
+        {
+            btn.BackColor = fondoBtn;
+            btn.ForeColor = texto;
+
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+
+            btn.Font = new Font(
+                "Segoe UI" + (negrita ? " Semibold" : ""),
+                10F
+            );
+
+            btn.Height = 28;
+
+            btn.Cursor = Cursors.Hand;
+        }
+
+        private void AplicarDiseno()
+        {
+            this.BackColor = fondo;
+
+            panelTabla.BackColor = Color.White;
+
+            lblTitulo.ForeColor = colorRosado;
+
+            lblTitulo.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    28F,
+                    FontStyle.Bold
+                );
+
+            // =========================
+            // BUSCADOR
+            // =========================
+            txtBuscar.BackColor = Color.White;
+            txtBuscar.ForeColor = Color.Gray;
+            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
+
+            txtBuscar.Font =
+                new Font("Segoe UI", 9F);
+
+            txtBuscar.Height = 28;
+
+            // =========================
+            // FILTRO
+            // =========================
+            cbFiltroEstado.BackColor = Color.White;
+            cbFiltroEstado.ForeColor = Color.Black;
+            cbFiltroEstado.FlatStyle = FlatStyle.Flat;
+
+            cbFiltroEstado.Font =
+                new Font("Segoe UI", 9F);
+
+            cbFiltroEstado.Height = 28;
+
+            // =========================
+            // BOTONES
+            // =========================
+            Color beige =
+                Color.FromArgb(242, 235, 231);
+
+            EstilarBoton(
+                btnBuscar,
+                colorRosado,
+                Color.White,
+                true
+            );
+
+            EstilarBoton(
+                btnVerTodos,
+                beige,
+                colorRosado
+            );
+
+            EstilarBoton(
+                btnVolver,
+                colorRosado,
+                Color.White,
+                true
+            );
+
+            btnVolver.Height = 40;
+
+            btnVolver.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    11F,
+                    FontStyle.Bold
+                );
+
+            btnVolver.Text = "← Volver";
+
+            // =========================
+            // TABLA
+            // =========================
+            dgvHistorial.BackgroundColor = Color.White;
+
+            dgvHistorial.BorderStyle =
+                BorderStyle.None;
+
+            dgvHistorial.RowHeadersVisible = false;
+
+            dgvHistorial.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvHistorial.ColumnHeadersHeight = 45;
 
             dgvHistorial.DefaultCellStyle.Font =
-                new Font(
-                    "Segoe UI",
-                    10F);
+                new Font("Segoe UI", 10F);
 
             dgvHistorial.DefaultCellStyle.SelectionBackColor =
                 Color.FromArgb(230, 210, 215);
@@ -200,45 +370,33 @@ namespace CapaPresentacion
             dgvHistorial.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
 
-            dgvHistorial.MultiSelect =
-                false;
+            dgvHistorial.MultiSelect = false;
 
-            dgvHistorial.ReadOnly =
-                true;
+            dgvHistorial.ReadOnly = true;
 
-            dgvHistorial.AllowUserToAddRows =
-                false;
+            dgvHistorial.AllowUserToAddRows = false;
+            dgvHistorial.AllowUserToDeleteRows = false;
+            dgvHistorial.AllowUserToResizeRows = false;
+            dgvHistorial.EnableHeadersVisualStyles = false;
 
-            dgvHistorial.AllowUserToDeleteRows =
-                false;
+            dgvHistorial.ColumnHeadersDefaultCellStyle.BackColor =
+                Color.RosyBrown;
 
-            dgvHistorial.AllowUserToResizeRows =
-                false;
-
-            // 🔥 BOTON VOLVER
-            btnVolver.BackColor =
-                colorRosado;
-
-            btnVolver.ForeColor =
+            dgvHistorial.ColumnHeadersDefaultCellStyle.ForeColor =
                 Color.White;
 
-            btnVolver.FlatStyle =
-                FlatStyle.Flat;
+            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionBackColor =
+                Color.RosyBrown;
 
-            btnVolver.FlatAppearance.BorderSize =
-                0;
+            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionForeColor =
+                Color.White;
 
-            btnVolver.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    11F,
-                    FontStyle.Bold);
+            dgvHistorial.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.None;
 
-            btnVolver.Cursor =
-                Cursors.Hand;
+            dgvHistorial.ColumnHeadersHeight = 45;
 
-            btnVolver.Text =
-                "← Volver";
+            dgvHistorial.Refresh();
         }
     }
 }

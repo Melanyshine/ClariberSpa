@@ -51,6 +51,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelTabla = new System.Windows.Forms.Panel();
             this.btnHistorial = new System.Windows.Forms.Button();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.cbFiltroEstado = new System.Windows.Forms.ComboBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnVerTodos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCitas)).BeginInit();
             this.panelCitas.SuspendLayout();
             this.panelTabla.SuspendLayout();
@@ -265,14 +269,14 @@
             // panelTabla
             // 
             this.panelTabla.Controls.Add(this.dgvCitas);
-            this.panelTabla.Location = new System.Drawing.Point(435, 97);
+            this.panelTabla.Location = new System.Drawing.Point(432, 131);
             this.panelTabla.Name = "panelTabla";
             this.panelTabla.Size = new System.Drawing.Size(945, 605);
             this.panelTabla.TabIndex = 7;
             // 
             // btnHistorial
             // 
-            this.btnHistorial.Location = new System.Drawing.Point(435, 738);
+            this.btnHistorial.Location = new System.Drawing.Point(432, 772);
             this.btnHistorial.Name = "btnHistorial";
             this.btnHistorial.Size = new System.Drawing.Size(305, 49);
             this.btnHistorial.TabIndex = 9;
@@ -280,12 +284,51 @@
             this.btnHistorial.UseVisualStyleBackColor = true;
             this.btnHistorial.Click += new System.EventHandler(this.btnHistorial_Click);
             // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(542, 46);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(277, 26);
+            this.txtBuscar.TabIndex = 10;
+            // 
+            // cbFiltroEstado
+            // 
+            this.cbFiltroEstado.FormattingEnabled = true;
+            this.cbFiltroEstado.Location = new System.Drawing.Point(1063, 46);
+            this.cbFiltroEstado.Name = "cbFiltroEstado";
+            this.cbFiltroEstado.Size = new System.Drawing.Size(121, 28);
+            this.cbFiltroEstado.TabIndex = 11;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(842, 32);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(56, 10);
+            this.btnBuscar.TabIndex = 12;
+            this.btnBuscar.Text = "🔍 ";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnVerTodos
+            // 
+            this.btnVerTodos.Location = new System.Drawing.Point(1205, 32);
+            this.btnVerTodos.Name = "btnVerTodos";
+            this.btnVerTodos.Size = new System.Drawing.Size(96, 13);
+            this.btnVerTodos.TabIndex = 13;
+            this.btnVerTodos.Text = "Ver todos";
+            this.btnVerTodos.UseVisualStyleBackColor = true;
+            this.btnVerTodos.Click += new System.EventHandler(this.btnVerTodos_Click);
+            // 
             // FrmCitas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1924, 907);
+            this.Controls.Add(this.btnVerTodos);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.cbFiltroEstado);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.btnHistorial);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitulo);
@@ -327,5 +370,9 @@
         private System.Windows.Forms.CheckedListBox clbServicios;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.ComboBox cbEstado;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.ComboBox cbFiltroEstado;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnVerTodos;
     }
 }

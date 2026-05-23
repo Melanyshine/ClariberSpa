@@ -32,12 +32,7 @@ namespace CapaDatos
             return dt;
         }
 
-        // =========================
-        // INSERTAR
-        // =========================
-        // =========================
-        // CITAS DAL
-        // =========================
+ 
 
         public int InsertarCita(
             int id_cliente,

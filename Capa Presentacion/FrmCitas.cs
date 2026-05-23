@@ -11,783 +11,399 @@ namespace Capa_Presentacion
     public partial class FrmCitas : Form
     {
         // 🎨 COLORES
-        private readonly Color colorMenuLateral =
-            Color.RosyBrown;
+        private readonly Color colorMenuLateral = Color.RosyBrown;
+        private readonly Color colorFondoGeneral = Color.FromArgb(250, 248, 246);
+        private readonly Color colorVinoBotones = Color.RosyBrown;
 
-        private readonly Color colorFondoGeneral =
-            Color.FromArgb(250, 248, 246);
-
-        private readonly Color colorVinoBotones =
-            Color.RosyBrown;
-
-        CitasBLL citasBLL =
-            new CitasBLL();
-
-        ClientesBLL clientesBLL =
-            new ClientesBLL();
-
-        ServiciosBLL serviciosBLL =
-            new ServiciosBLL();
-
-        UsuarioBLL usuarioBLL =
-            new UsuarioBLL();
+        CitasBLL citasBLL = new CitasBLL();
+        ClientesBLL clientesBLL = new ClientesBLL();
+        ServiciosBLL serviciosBLL = new ServiciosBLL();
+        UsuarioBLL usuarioBLL = new UsuarioBLL();
 
         decimal totalActual = 0;
 
-        public FrmCitas()
-        {
-            InitializeComponent();
-        }
+        public FrmCitas() { InitializeComponent(); }
 
-        private void FrmCitas_Load(
-            object sender,
-            EventArgs e)
+        private void FrmCitas_Load(object sender, EventArgs e)
         {
-          
-            this.WindowState =
-                FormWindowState.Maximized;
-
+            this.WindowState = FormWindowState.Maximized;
             AplicarDiseno();
 
+            // eventos que sí estaban
             dgvCitas.CellClick += dgvCitas_CellClick;
+            clbServicios.ItemCheck += clbServicios_ItemCheck;
 
-            clbServicios.ItemCheck +=
-                clbServicios_ItemCheck;
+            // ✅ AGREGAR ESTOS — conectan el buscador y filtro
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            btnBuscar.Click += btnBuscar_Click;
+            btnVerTodos.Click += btnVerTodos_Click;
+            cbFiltroEstado.SelectedIndexChanged += cbFiltroEstado_SelectedIndexChanged;
 
             MostrarCitas();
-
             CargarClientes();
-
             CargarServicios();
-
             CargarEstados();
-
             MostrarPrecio();
         }
 
-        // =========================
-        // 📌 ESTADOS
-        // =========================
+
         void CargarEstados()
         {
             cbEstado.Items.Clear();
-
-            cbEstado.Items.Add("Pendiente");
-            cbEstado.Items.Add("Confirmada");
-            cbEstado.Items.Add("Completada");
-            cbEstado.Items.Add("Cancelada");
-
+            cbEstado.Items.AddRange(new object[] { "Pendiente", "Confirmada", "Completada", "Cancelada" });
             cbEstado.SelectedIndex = 0;
+
+            cbFiltroEstado.Items.Clear();
+            cbFiltroEstado.Items.AddRange(new object[] { "Todos", "Pendiente", "Confirmada" });
+            cbFiltroEstado.SelectedIndex = 0;
         }
 
-        // =========================
-        // 📦 MOSTRAR CITAS
-        // =========================
         void MostrarCitas()
         {
-            DataTable dt =
-                citasBLL.Listar();
-
-            // 🔥 OCULTAR CITAS COMPLETADAS
+            DataTable dt = citasBLL.Listar();
             DataView vista = dt.DefaultView;
-
-            vista.RowFilter =
-                "nombre_estado <> 'Completada'";
-
-            dgvCitas.DataSource =
-                vista;
-
-            // 🔥 OCULTAR IDS
-            if (dgvCitas.Columns.Contains("id_cita"))
-                dgvCitas.Columns["id_cita"].Visible = false;
-
-            if (dgvCitas.Columns.Contains("id_cliente"))
-                dgvCitas.Columns["id_cliente"].Visible = false;
-
-            if (dgvCitas.Columns.Contains("id_usuario"))
-                dgvCitas.Columns["id_usuario"].Visible = false;
+            vista.RowFilter = "nombre_estado <> 'Completada' AND nombre_estado <> 'Cancelada'";
+            dgvCitas.DataSource = vista;
+            OcultarColumnas();
         }
-        // =========================
-        // 👤 CLIENTES
-        // =========================
+
+
+        void BuscarCitas()
+        {
+            DataView vista = citasBLL.Listar().DefaultView;
+            string filtro = "nombre_estado <> 'Completada' AND nombre_estado <> 'Cancelada'";
+
+            if (cbFiltroEstado.SelectedIndex > 0)
+                filtro += $" AND nombre_estado = '{cbFiltroEstado.SelectedItem}'";
+
+            string texto = txtBuscar.Text.Trim();
+            if (!string.IsNullOrEmpty(texto))
+                filtro += $" AND (cliente LIKE '%{texto}%' OR descripcion LIKE '%{texto}%')";
+            // ↑ este es el único cambio
+
+            vista.RowFilter = filtro;
+            dgvCitas.DataSource = vista;
+            OcultarColumnas();
+        }
+       
+
+
+        void OcultarColumnas()
+        {
+            foreach (string col in new[] { "id_cita", "id_cliente", "id_usuario" })
+                if (dgvCitas.Columns.Contains(col))
+                    dgvCitas.Columns[col].Visible = false;
+
+            // ✅ FORMATO DE HORA
+            if (dgvCitas.Columns.Contains("hora_inicio"))
+                dgvCitas.Columns["hora_inicio"].DefaultCellStyle.Format = "hh\\:mm";
+        }
+
+
+        private void btnBuscar_Click(object sender, EventArgs e) => BuscarCitas();
+        private void txtBuscar_TextChanged(object sender, EventArgs e) => BuscarCitas();
+        private void cbFiltroEstado_SelectedIndexChanged(object sender, EventArgs e) => BuscarCitas();
+        private void btnVerTodos_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Clear();
+            cbFiltroEstado.SelectedIndex = 0;
+            MostrarCitas();
+        }
+
+      
         void CargarClientes()
         {
-            cbCliente.DataSource =
-                clientesBLL.Listar();
-
-            cbCliente.DisplayMember =
-                "nombre";
-
-            cbCliente.ValueMember =
-                "id_cliente";
-
+            cbCliente.DataSource = clientesBLL.Listar();
+            cbCliente.DisplayMember = "nombre";
+            cbCliente.ValueMember = "id_cliente";
             cbCliente.SelectedIndex = -1;
         }
 
-        // =========================
-        // 💆 SERVICIOS
-        // =========================
         void CargarServicios()
         {
-            clbServicios.DataSource =
-                serviciosBLL.Listar();
-
-            clbServicios.DisplayMember =
-                "nombre_servicio";
-
-            clbServicios.ValueMember =
-                "id_servicio";
+            clbServicios.DataSource = serviciosBLL.Listar();
+            clbServicios.DisplayMember = "nombre_servicio";
+            clbServicios.ValueMember = "id_servicio";
         }
 
-        // =========================
-        // 💰 PRECIO
-        // =========================
+      
         void MostrarPrecio()
         {
             totalActual = 0;
-
-            foreach (DataRowView fila
-                in clbServicios.CheckedItems)
-            {
-                totalActual +=
-                    Convert.ToDecimal(
-                    fila["precio"]);
-            }
-
-            lblPrecio.Text =
-                "RD$ " +
-                totalActual.ToString("N2");
+            foreach (DataRowView fila in clbServicios.CheckedItems)
+                totalActual += Convert.ToDecimal(fila["precio"]);
+            lblPrecio.Text = "RD$ " + totalActual.ToString("N2");
         }
 
-        private void clbServicios_ItemCheck(
-            object sender,
-            ItemCheckEventArgs e)
+        private void clbServicios_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            this.BeginInvoke((MethodInvoker)delegate
+            this.BeginInvoke((MethodInvoker)delegate { MostrarPrecio(); });
+        }
+
+        // =========================
+        // ✅ VALIDACIONES (reutilizable)
+        // =========================
+        bool ValidarCampos()
+        {
+            if (cbCliente.SelectedValue == null)
             {
-                MostrarPrecio();
-            });
+                MessageBox.Show("⚠️ Debes seleccionar un cliente.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbCliente.Focus(); return false;
+            }
+            if (clbServicios.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("⚠️ Selecciona al menos un servicio.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (dtFecha.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show("⚠️ La fecha no puede ser en el pasado.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (dtFecha.Value.Date == DateTime.Today && dtHora.Value.TimeOfDay < DateTime.Now.TimeOfDay)
+            {
+                MessageBox.Show("⚠️ La hora ya pasó para hoy.", "Hora inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            if (cbEstado.SelectedIndex == -1)
+            {
+                MessageBox.Show("⚠️ Selecciona un estado.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
         }
 
         // =========================
         // 🖱 CLICK GRID
         // =========================
-        private void dgvCitas_CellClick(
-     object sender,
-     DataGridViewCellEventArgs e)
+        private void dgvCitas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
-                return;
+            if (e.RowIndex < 0) return;
+            DataGridViewRow fila = dgvCitas.Rows[e.RowIndex];
 
-            DataGridViewRow fila =
-                dgvCitas.Rows[e.RowIndex];
+            if (dgvCitas.Columns.Contains("id_cliente") && fila.Cells["id_cliente"].Value != DBNull.Value)
+                cbCliente.SelectedValue = fila.Cells["id_cliente"].Value;
 
-            // CLIENTE
-            if (dgvCitas.Columns.Contains("id_cliente") &&
-                fila.Cells["id_cliente"].Value != DBNull.Value)
-            {
-                cbCliente.SelectedValue =
-                    fila.Cells["id_cliente"].Value;
-            }
+            if (dgvCitas.Columns.Contains("fecha") && fila.Cells["fecha"].Value != DBNull.Value)
+                dtFecha.Value = Convert.ToDateTime(fila.Cells["fecha"].Value);
 
-            // FECHA
-            if (dgvCitas.Columns.Contains("fecha") &&
-                fila.Cells["fecha"].Value != DBNull.Value)
-            {
-                dtFecha.Value =
-                    Convert.ToDateTime(
-                    fila.Cells["fecha"].Value);
-            }
+            if (dgvCitas.Columns.Contains("hora_inicio") && fila.Cells["hora_inicio"].Value != DBNull.Value)
+                dtHora.Value = DateTime.Today.Add(TimeSpan.Parse(fila.Cells["hora_inicio"].Value.ToString()));
 
-            // HORA
-            if (dgvCitas.Columns.Contains("hora_inicio") &&
-                fila.Cells["hora_inicio"].Value != DBNull.Value)
-            {
-                TimeSpan hora =
-                    TimeSpan.Parse(
-                    fila.Cells["hora_inicio"]
-                    .Value
-                    .ToString());
+            txtDescripcion.Text = (dgvCitas.Columns.Contains("descripcion") && fila.Cells["descripcion"].Value != DBNull.Value)
+                ? fila.Cells["descripcion"].Value.ToString() : "";
 
-                dtHora.Value =
-                    DateTime.Today.Add(hora);
-            }
+            if (dgvCitas.Columns.Contains("nombre_estado") && fila.Cells["nombre_estado"].Value != DBNull.Value)
+                cbEstado.Text = fila.Cells["nombre_estado"].Value.ToString();
 
-            // DESCRIPCIÓN
-            if (dgvCitas.Columns.Contains("descripcion") &&
-                fila.Cells["descripcion"].Value != DBNull.Value)
-            {
-                txtDescripcion.Text =
-                    fila.Cells["descripcion"]
-                    .Value
-                    .ToString();
-            }
-            else
-            {
-                txtDescripcion.Text = "";
-            }
+            if (dgvCitas.Columns.Contains("precio") && fila.Cells["precio"].Value != DBNull.Value)
+                lblPrecio.Text = "RD$ " + Convert.ToDecimal(fila.Cells["precio"].Value).ToString("N2");
 
-            // ESTADO
-            if (dgvCitas.Columns.Contains("nombre_estado") &&
-                fila.Cells["nombre_estado"].Value != DBNull.Value)
-            {
-                cbEstado.Text =
-                    fila.Cells["nombre_estado"]
-                    .Value
-                    .ToString();
-            }
-
-            // PRECIO
-            if (dgvCitas.Columns.Contains("precio") &&
-                fila.Cells["precio"].Value != DBNull.Value)
-            {
-                lblPrecio.Text =
-                    "RD$ " +
-                    Convert.ToDecimal(
-                    fila.Cells["precio"].Value)
-                    .ToString("N2");
-            }
-
-            // LIMPIAR CHECKS
+            // LIMPIAR Y MARCAR SERVICIOS
             for (int i = 0; i < clbServicios.Items.Count; i++)
-            {
                 clbServicios.SetItemChecked(i, false);
-            }
 
-            // MARCAR SERVICIOS
-            if (dgvCitas.Columns.Contains("id_cita") &&
-                fila.Cells["id_cita"].Value != DBNull.Value)
+            if (dgvCitas.Columns.Contains("id_cita") && fila.Cells["id_cita"].Value != DBNull.Value)
             {
-                int idCita = Convert.ToInt32(
-                    fila.Cells["id_cita"].Value);
-
-                DataTable detalles =
-                    new DetalleCitas_BLL()
-                    .ObtenerPorCita(idCita);
+                int idCita = Convert.ToInt32(fila.Cells["id_cita"].Value);
+                DataTable detalles = new DetalleCitas_BLL().ObtenerPorCita(idCita);
 
                 foreach (DataRow detalle in detalles.Rows)
                 {
-                    int idServicio =
-                        Convert.ToInt32(
-                        detalle["id_servicio"]);
-
+                    int idServicio = Convert.ToInt32(detalle["id_servicio"]);
                     for (int i = 0; i < clbServicios.Items.Count; i++)
                     {
-                        DataRowView item =
-                            (DataRowView)clbServicios.Items[i];
-
-                        if (Convert.ToInt32(
-                            item["id_servicio"]) == idServicio)
-                        {
-                            clbServicios.SetItemChecked(i, true);
-                            break;
-                        }
+                        DataRowView item = (DataRowView)clbServicios.Items[i];
+                        if (Convert.ToInt32(item["id_servicio"]) == idServicio)
+                        { clbServicios.SetItemChecked(i, true); break; }
                     }
                 }
             }
         }
-        // =========================
-        // 💾 GUARDAR
-        // =========================
-        // 💾 GUARDAR
-        private void btnGuardar_Click(
-      object sender,
-      EventArgs e)
+
+      
+
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos()) return;
             try
             {
-                if (cbCliente.SelectedValue == null)
+                Citas c = new Citas
                 {
-                    MessageBox.Show("Seleccione un cliente");
-                    return;
-                }
-
-                if (clbServicios.CheckedItems.Count == 0)
-                {
-                    MessageBox.Show("Seleccione al menos un servicio");
-                    return;
-                }
-
-                Citas c = new Citas();
-
-                c.id_cliente =
-                    Convert.ToInt32(
-                    cbCliente.SelectedValue);
-
-                c.id_usuario = 1;
-
-                c.fecha =
-                    dtFecha.Value;
-
-                c.hora_inicio =
-                    dtHora.Value.TimeOfDay;
-
-                c.precio =
-                    totalActual;
-
-                c.descripcion =
-                    txtDescripcion.Text;
-
-                c.nombre_estado =
-                    cbEstado.Text;
-
-                citasBLL.Guardar(
-                    c,
-                    clbServicios.CheckedItems);
-
+                    id_cliente = Convert.ToInt32(cbCliente.SelectedValue),
+                    id_usuario = 1,
+                    fecha = dtFecha.Value,
+                    hora_inicio = dtHora.Value.TimeOfDay,
+                    precio = totalActual,
+                    descripcion = txtDescripcion.Text,
+                    nombre_estado = cbEstado.Text
+                };
+                citasBLL.Guardar(c, clbServicios.CheckedItems);
                 MessageBox.Show("Cita guardada correctamente");
-
-                MostrarCitas();
-
-                LimpiarCampos();
+                MostrarCitas(); LimpiarCampos();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
-        // =========================
-        // 🗑 ELIMINAR
-        // =========================
-        private void btnEliminar_Click(
-            object sender,
-            EventArgs e)
+
+      
+
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvCitas.CurrentRow != null)
+            if (dgvCitas.CurrentRow == null) return;
+            if (MessageBox.Show("¿Eliminar cita?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                DialogResult r =
-                    MessageBox.Show(
-                    "¿Eliminar cita?",
-                    "Confirmar",
-                    MessageBoxButtons.YesNo);
-
-                if (r == DialogResult.Yes)
-                {
-                    int id =
-                        Convert.ToInt32(
-                        dgvCitas.CurrentRow
-                        .Cells["id_cita"]
-                        .Value);
-
-                    citasBLL.Eliminar(id);
-
-                    MessageBox.Show(
-                        "Cita eliminada");
-
-                    MostrarCitas();
-
-                    LimpiarCampos();
-                }
+                citasBLL.Eliminar(Convert.ToInt32(dgvCitas.CurrentRow.Cells["id_cita"].Value));
+                MessageBox.Show("Cita eliminada");
+                MostrarCitas(); LimpiarCampos();
             }
         }
 
+      
 
-        private void btnActualizar_Click(
-      object sender,
-      EventArgs e)
+        private void btnActualizar_Click(object sender, EventArgs e)
         {
+            if (dgvCitas.CurrentRow == null)
+            {
+                MessageBox.Show("⚠️ Selecciona una cita de la tabla para actualizar.", "Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!ValidarCampos()) return;
             try
             {
-                if (dgvCitas.CurrentRow == null)
+                Citas c = new Citas
                 {
-                    MessageBox.Show(
-                        "Seleccione una cita");
-
-                    return;
-                }
-
-                if (clbServicios.CheckedItems.Count == 0)
-                {
-                    MessageBox.Show(
-                        "Seleccione al menos un servicio");
-
-                    return;
-                }
-
-                Citas c =
-                    new Citas();
-
-                c.id_cita =
-                    Convert.ToInt32(
-                    dgvCitas.CurrentRow
-                    .Cells["id_cita"]
-                    .Value);
-
-                c.id_cliente =
-                    Convert.ToInt32(
-                    cbCliente.SelectedValue);
-
-                c.id_usuario =
-                    Convert.ToInt32(
-                    dgvCitas.CurrentRow.Cells["id_usuario"].Value);
-
-                c.fecha =
-                    dtFecha.Value;
-
-                c.hora_inicio =
-                    dtHora.Value.TimeOfDay;
-
-                c.precio =
-                    totalActual;
-
-                c.descripcion =
-                    txtDescripcion.Text;
-
-                c.nombre_estado =
-                    cbEstado.Text;
-
-                citasBLL.Actualizar(
-                    c,
-                    clbServicios.CheckedItems);
-
-                MessageBox.Show(
-                    "Cita actualizada");
-
-                MostrarCitas();
-
-                LimpiarCampos();
+                    id_cita = Convert.ToInt32(dgvCitas.CurrentRow.Cells["id_cita"].Value),
+                    id_cliente = Convert.ToInt32(cbCliente.SelectedValue),
+                    id_usuario = Convert.ToInt32(dgvCitas.CurrentRow.Cells["id_usuario"].Value),
+                    fecha = dtFecha.Value,
+                    hora_inicio = dtHora.Value.TimeOfDay,
+                    precio = totalActual,
+                    descripcion = txtDescripcion.Text,
+                    nombre_estado = cbEstado.Text
+                };
+                citasBLL.Actualizar(c, clbServicios.CheckedItems);
+                MessageBox.Show("Cita actualizada");
+                MostrarCitas(); LimpiarCampos();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Error: " + ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
+      
 
-        // =========================
-        // 🧹 LIMPIAR
-        // =========================
-        private void btnLimpiar_Click(
-            object sender,
-            EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e) => LimpiarCampos();
+
+        private void btnHistorial_Click(object sender, EventArgs e)
         {
-            LimpiarCampos();
+            new FrmHistorialCitas().Show();
         }
 
-        private void btnHistorial_Click(
-            object sender,
-            EventArgs e)
+        private void BtnHistorial_Click(object sender, EventArgs e)
         {
-            FrmHistorialCitas frm =
-                new FrmHistorialCitas();
-
-            frm.Show();
+            new FrmHistorialCitas().ShowDialog();
         }
 
         private void LimpiarCampos()
         {
             cbCliente.SelectedIndex = -1;
-
-            for (int i = 0;
-                i < clbServicios.Items.Count;
-                i++)
-            {
+            for (int i = 0; i < clbServicios.Items.Count; i++)
                 clbServicios.SetItemChecked(i, false);
-            }
-
-            dtFecha.Value =
-                DateTime.Now;
-
-            dtHora.Value =
-                DateTime.Now;
-
+            dtFecha.Value = DateTime.Now;
+            dtHora.Value = DateTime.Now;
             txtDescripcion.Clear();
-
-            lblPrecio.Text =
-                "RD$ 0.00";
-
+            lblPrecio.Text = "RD$ 0.00";
             cbEstado.SelectedIndex = 0;
-
             dgvCitas.ClearSelection();
         }
 
-        // =========================
-        // 🎨 DISEÑO
-        // =========================
+     
+        void EstilarBoton(Button btn, Color fondo, Color texto, bool negrita = false)
+        {
+            btn.BackColor = fondo;
+            btn.ForeColor = texto;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI" + (negrita ? " Semibold" : ""), 10F);
+            btn.Height = 40;
+        }
+
         private void AplicarDiseno()
         {
-            // FORM
-            this.BackColor =
-                colorFondoGeneral;
+            this.BackColor = colorFondoGeneral;
+            panelCitas.BackColor = Color.White;
+            panelTabla.BackColor = Color.White;
 
-            // PANEL MENU
-        
+            lblTitulo.ForeColor = colorMenuLateral;
+            lblTitulo.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold);
 
-            // PANEL CITA
-            panelCitas.BackColor =
-                Color.White;
+            foreach (Label lbl in new[] { lblCliente, lblServicio, lblFecha, lblHora })
+            { lbl.ForeColor = Color.Black; lbl.Font = new Font("Segoe UI", 9F); }
 
-            // PANEL TABLA
-            panelTabla.BackColor =
-                Color.White;
 
-            // TITULO
-            lblTitulo.ForeColor =
-                colorMenuLateral;
-
-            lblTitulo.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    20F,
-                    FontStyle.Bold);
-
-            // LABELS
-            Label[] labels =
-            {
-                lblCliente,
-                lblServicio,
-                lblFecha,
-                lblHora
-            };
-
-            foreach (Label lbl in labels)
-            {
-                lbl.ForeColor =
-                    Color.Black;
-
-                lbl.Font =
-                    new Font(
-                        "Segoe UI",
-                        9F);
-            }
-
-            // COMBO CLIENTE
-            cbCliente.BackColor =
-                Color.White;
-
-            cbCliente.ForeColor =
-                Color.Black;
-
-            cbCliente.FlatStyle =
-                FlatStyle.Flat;
-
-            cbCliente.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
-            // COMBO ESTADO
-            cbEstado.BackColor =
-                Color.White;
-
-            cbEstado.ForeColor =
-                Color.Black;
-
-            cbEstado.FlatStyle =
-                FlatStyle.Flat;
-
-            cbEstado.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
+            // COMBOS
+            foreach (ComboBox cb in new[] { cbCliente, cbEstado })
+            { cb.BackColor = Color.White; cb.ForeColor = Color.Black; cb.FlatStyle = FlatStyle.Flat; cb.Font = new Font("Segoe UI", 9F); }
             cbEstado.Height = 35;
 
-            // CHECKLIST SERVICIOS
-            clbServicios.BackColor =
-                Color.White;
+            // 🔍 BUSCADOR
+            txtBuscar.BackColor = Color.White;
+            txtBuscar.ForeColor = Color.Gray;
+            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscar.Font = new Font("Segoe UI", 9F);
 
-            clbServicios.ForeColor =
-                Color.Black;
+            // 🔽 FILTRO ESTADO
+            cbFiltroEstado.BackColor = Color.White;
+            cbFiltroEstado.ForeColor = Color.Black;
+            cbFiltroEstado.FlatStyle = FlatStyle.Flat;
+            cbFiltroEstado.Font = new Font("Segoe UI", 9F);
 
-            clbServicios.BorderStyle =
-                BorderStyle.FixedSingle;
+            // BOTONES NUEVOS
+            EstilarBoton(btnBuscar, colorVinoBotones, Color.White, negrita: true);
+            EstilarBoton(btnVerTodos, Color.FromArgb(242, 235, 231), colorMenuLateral);
 
-            clbServicios.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
+            // CHECKLIST
+            clbServicios.BackColor = Color.White;
+            clbServicios.ForeColor = Color.Black;
+            clbServicios.BorderStyle = BorderStyle.FixedSingle;
+            clbServicios.Font = new Font("Segoe UI", 9F);
             clbServicios.CheckOnClick = true;
 
             // TEXTBOX
-            txtDescripcion.BackColor =
-                Color.White;
+            txtDescripcion.BackColor = Color.White;
+            txtDescripcion.ForeColor = colorMenuLateral;
+            txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
+            txtDescripcion.Font = new Font("Segoe UI", 9F);
 
-            txtDescripcion.ForeColor =
-                colorMenuLateral;
-
-            txtDescripcion.BorderStyle =
-                BorderStyle.FixedSingle;
-
-            txtDescripcion.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
-            // FECHA
-            dtFecha.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
-            dtHora.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
+            // FECHA / HORA
+            dtFecha.Font = dtHora.Font = new Font("Segoe UI", 9F);
 
             // PRECIO
-            lblPrecio.ForeColor =
-                colorMenuLateral;
+            lblPrecio.ForeColor = colorMenuLateral;
+            lblPrecio.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
 
-            lblPrecio.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    18F,
-                    FontStyle.Bold);
-
-            // GUARDAR
-            btnGuardar.BackColor =
-                colorVinoBotones;
-
-            btnGuardar.ForeColor =
-                Color.White;
-
-            btnGuardar.FlatStyle =
-                FlatStyle.Flat;
-
-            btnGuardar.FlatAppearance.BorderSize = 0;
-
-            btnGuardar.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    10F);
-
-            btnGuardar.Height = 40;
-
-            // LIMPIAR
-            btnLimpiar.BackColor =
-                Color.FromArgb(242, 235, 231);
-
-            btnLimpiar.ForeColor =
-                colorMenuLateral;
-
-            btnLimpiar.FlatStyle =
-                FlatStyle.Flat;
-
-            btnLimpiar.FlatAppearance.BorderSize = 0;
-
-            btnLimpiar.Font =
-                new Font(
-                    "Segoe UI",
-                    10F);
-
-            btnLimpiar.Height = 40;
-
-            // ELIMINAR
-            btnEliminar.BackColor =
-                Color.FromArgb(242, 235, 231);
-
-            btnEliminar.ForeColor =
-                colorMenuLateral;
-
-            btnEliminar.FlatStyle =
-                FlatStyle.Flat;
-
-            btnEliminar.FlatAppearance.BorderSize = 0;
-
-            btnEliminar.Height = 40;
-
-            // ACTUALIZAR
-            btnActualizar.BackColor =
-                colorVinoBotones;
-
-            btnActualizar.ForeColor =
-                Color.White;
-
-            btnActualizar.FlatStyle =
-                FlatStyle.Flat;
-
-            btnActualizar.FlatAppearance.BorderSize = 0;
-
-            btnActualizar.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    10F);
-
-            btnActualizar.Height = 40;
-
-
-            // VER HISTORIAL
-            btnHistorial.BackColor =
-                Color.FromArgb(242, 235, 231);
-
-            btnHistorial.ForeColor =
-                colorMenuLateral;
-
-            btnHistorial.FlatStyle =
-                FlatStyle.Flat;
-
-            btnHistorial.FlatAppearance.BorderSize = 0;
-
-            btnHistorial.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    10F);
-
-            btnHistorial.Height = 40;
+            // BOTONES
+            Color beige = Color.FromArgb(242, 235, 231);
+            EstilarBoton(btnGuardar, colorVinoBotones, Color.White, negrita: true);
+            EstilarBoton(btnActualizar, colorVinoBotones, Color.White, negrita: true);
+            EstilarBoton(btnLimpiar, beige, colorMenuLateral);
+            EstilarBoton(btnEliminar, beige, colorMenuLateral);
+            EstilarBoton(btnHistorial, beige, colorMenuLateral, negrita: true);
 
             // TABLA
-            dgvCitas.BackgroundColor =
-                Color.White;
-
-            dgvCitas.BorderStyle =
-                BorderStyle.None;
-
-            dgvCitas.RowHeadersVisible =
-                false;
-
-            dgvCitas.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
-
-            dgvCitas.EnableHeadersVisualStyles =
-                false;
-
-            dgvCitas.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.None;
-
-            dgvCitas.ColumnHeadersDefaultCellStyle.BackColor =
-                colorVinoBotones;
-
-            dgvCitas.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
-
-            dgvCitas.ColumnHeadersDefaultCellStyle.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    9F);
-
+            dgvCitas.BackgroundColor = Color.White;
+            dgvCitas.BorderStyle = BorderStyle.None;
+            dgvCitas.RowHeadersVisible = false;
+            dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCitas.EnableHeadersVisualStyles = false;
+            dgvCitas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvCitas.ColumnHeadersDefaultCellStyle.BackColor = colorVinoBotones;
+            dgvCitas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCitas.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F);
             dgvCitas.ColumnHeadersHeight = 38;
-
-            dgvCitas.DefaultCellStyle.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
-            dgvCitas.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(230, 210, 215);
-
-            dgvCitas.DefaultCellStyle.SelectionForeColor =
-                Color.Black;
-
-            dgvCitas.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(248, 244, 242);
-
-            dgvCitas.GridColor =
-                Color.FromArgb(235, 230, 228);
-        }
-
-        private void BtnHistorial_Click(
-    object sender,
-    EventArgs e)
-        {
-            FrmHistorialCitas frm =
-                new FrmHistorialCitas();
-
-            frm.ShowDialog();
+            dgvCitas.DefaultCellStyle.Font = new Font("Segoe UI", 9F);
+            dgvCitas.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 210, 215);
+            dgvCitas.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCitas.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 244, 242);
+            dgvCitas.GridColor = Color.FromArgb(235, 230, 228);
         }
     }
-
-
 }
