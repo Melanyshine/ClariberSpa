@@ -151,6 +151,7 @@
             this.txtCorreo.Size = new System.Drawing.Size(473, 26);
             this.txtCorreo.TabIndex = 18;
             this.txtCorreo.Text = "Correo Electronico o Usuario";
+            this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
             // 
             // txtContraseña
             // 

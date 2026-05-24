@@ -10,9 +10,6 @@ namespace CapaPresentacion
     {
         Historial_CitaBLL bll = new Historial_CitaBLL();
 
-        private readonly Color colorRosado = Color.RosyBrown;
-        private readonly Color fondo = Color.FromArgb(250, 248, 246);
-
         public FrmHistorialCitas()
         {
             InitializeComponent();
@@ -33,7 +30,9 @@ namespace CapaPresentacion
             CargarHistorial();
         }
 
-    
+        // =========================
+        // FILTRO ESTADO
+        // =========================
         void CargarFiltroEstado()
         {
             cbFiltroEstado.Items.Clear();
@@ -48,7 +47,9 @@ namespace CapaPresentacion
             cbFiltroEstado.SelectedIndex = 0;
         }
 
-     
+        // =========================
+        // CARGAR HISTORIAL
+        // =========================
         private void CargarHistorial()
         {
             try
@@ -73,7 +74,9 @@ namespace CapaPresentacion
             }
         }
 
-     
+        // =========================
+        // BUSCAR
+        // =========================
         void BuscarHistorial()
         {
             try
@@ -83,19 +86,17 @@ namespace CapaPresentacion
                 string filtro =
                     "(nombre_estado = 'Completada' OR nombre_estado = 'Cancelada')";
 
-                // FILTRO ESTADO
                 if (cbFiltroEstado.SelectedIndex > 0)
                 {
-                    filtro =
-                        $"nombre_estado = '{cbFiltroEstado.SelectedItem}'";
+                    filtro +=
+                        $" AND nombre_estado = '{cbFiltroEstado.SelectedItem}'";
                 }
 
-                // TEXTO BUSQUEDA
-                string texto = txtBuscar.Text.Trim().Replace("'", "''");
+                string texto =
+                    txtBuscar.Text.Trim().Replace("'", "''");
 
                 if (!string.IsNullOrEmpty(texto))
                 {
-                    // ✅ VALIDAR SI EXISTE COLUMNA CLIENTE
                     bool tieneCliente =
                         vista.Table.Columns.Contains("cliente");
 
@@ -131,6 +132,9 @@ namespace CapaPresentacion
             }
         }
 
+        // =========================
+        // CONFIG GRID
+        // =========================
         void OcultarColumnas()
         {
             foreach (string col in new[]
@@ -146,7 +150,6 @@ namespace CapaPresentacion
                     dgvHistorial.Columns[col].Visible = false;
             }
 
-            // HEADERS
             if (dgvHistorial.Columns.Contains("cliente"))
                 dgvHistorial.Columns["cliente"].HeaderText = "Cliente";
 
@@ -172,34 +175,10 @@ namespace CapaPresentacion
 
             if (dgvHistorial.Columns.Contains("accion"))
                 dgvHistorial.Columns["accion"].HeaderText = "Acción";
-
-            dgvHistorial.RowTemplate.Height = 38;
-
-            // ✅ QUITAR AZUL
-            dgvHistorial.EnableHeadersVisualStyles = false;
-
-            dgvHistorial.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.None;
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.BackColor =
-                colorRosado;
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    11F,
-                    FontStyle.Bold
-                );
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.Alignment =
-                DataGridViewContentAlignment.MiddleCenter;
         }
 
         // =========================
-        // 🔍 EVENTOS
+        // EVENTOS
         // =========================
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -225,178 +204,206 @@ namespace CapaPresentacion
             CargarHistorial();
         }
 
-      
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-       
-        void EstilarBoton(
-            Button btn,
-            Color fondoBtn,
-            Color texto,
-            bool negrita = false
-        )
-        {
-            btn.BackColor = fondoBtn;
-            btn.ForeColor = texto;
-
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-
-            btn.Font = new Font(
-                "Segoe UI" + (negrita ? " Semibold" : ""),
-                10F
-            );
-
-            btn.Height = 28;
-
-            btn.Cursor = Cursors.Hand;
-        }
-
+        // =========================
+        // DISEÑO
+        // =========================
         private void AplicarDiseno()
         {
-            this.BackColor = fondo;
+            // FORM
+            this.BackColor =
+                Color.FromArgb(249, 245, 242);
 
-            panelTabla.BackColor = Color.White;
+            // PANEL
+            panelTabla.BackColor =
+                Color.White;
 
-            lblTitulo.ForeColor = colorRosado;
+            // TITULO
+            lblTitulo.ForeColor =
+                Color.FromArgb(70, 50, 48);
 
             lblTitulo.Font =
                 new Font(
-                    "Segoe UI Semibold",
-                    28F,
-                    FontStyle.Bold
-                );
+                    "Georgia",
+                    22F,
+                    FontStyle.Regular);
 
-            // =========================
             // BUSCADOR
-            // =========================
-            txtBuscar.BackColor = Color.White;
-            txtBuscar.ForeColor = Color.Gray;
-            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
+            txtBuscar.BackColor =
+                Color.White;
+
+            txtBuscar.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            txtBuscar.BorderStyle =
+                BorderStyle.FixedSingle;
 
             txtBuscar.Font =
-                new Font("Segoe UI", 9F);
+                new Font(
+                    "Segoe UI",
+                    9F);
 
-            txtBuscar.Height = 28;
+            // COMBO FILTRO
+            cbFiltroEstado.BackColor =
+                Color.White;
 
-            // =========================
-            // FILTRO
-            // =========================
-            cbFiltroEstado.BackColor = Color.White;
-            cbFiltroEstado.ForeColor = Color.Black;
-            cbFiltroEstado.FlatStyle = FlatStyle.Flat;
+            cbFiltroEstado.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            cbFiltroEstado.FlatStyle =
+                FlatStyle.Flat;
 
             cbFiltroEstado.Font =
-                new Font("Segoe UI", 9F);
-
-            cbFiltroEstado.Height = 28;
-
-            // =========================
-            // BOTONES
-            // =========================
-            Color beige =
-                Color.FromArgb(242, 235, 231);
-
-            EstilarBoton(
-                btnBuscar,
-                colorRosado,
-                Color.White,
-                true
-            );
-
-            EstilarBoton(
-                btnVerTodos,
-                beige,
-                colorRosado
-            );
-
-            EstilarBoton(
-                btnVolver,
-                colorRosado,
-                Color.White,
-                true
-            );
-
-            btnVolver.Height = 40;
-
-            btnVolver.Font =
                 new Font(
-                    "Segoe UI Semibold",
-                    11F,
-                    FontStyle.Bold
-                );
+                    "Segoe UI",
+                    9F);
 
-            btnVolver.Text = "← Volver";
+            // BOTON PRINCIPAL
+            btnBuscar.BackColor =
+                Color.FromArgb(143, 94, 104);
 
-            // =========================
-            // TABLA
-            // =========================
-            dgvHistorial.BackgroundColor = Color.White;
+            btnBuscar.ForeColor =
+                Color.White;
+
+            btnBuscar.FlatStyle =
+                FlatStyle.Flat;
+
+            btnBuscar.FlatAppearance.BorderSize =
+                0;
+
+            btnBuscar.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Regular);
+
+            btnBuscar.Height = 40;
+
+            // BOTONES SECUNDARIOS
+            Button[] botones =
+            {
+                btnVerTodos,
+                btnVolver
+            };
+
+            foreach (Button btn in botones)
+            {
+                btn.BackColor =
+                    Color.FromArgb(245, 240, 235);
+
+                btn.ForeColor =
+                    Color.FromArgb(100, 80, 80);
+
+                btn.FlatStyle =
+                    FlatStyle.Flat;
+
+                btn.FlatAppearance.BorderColor =
+                    Color.FromArgb(220, 210, 205);
+
+                btn.FlatAppearance.BorderSize =
+                    1;
+
+                btn.Font =
+                    new Font(
+                        "Segoe UI",
+                        9F);
+
+                btn.Height = 38;
+            }
+
+            // GRID
+            dgvHistorial.BackgroundColor =
+                Color.White;
 
             dgvHistorial.BorderStyle =
                 BorderStyle.None;
 
-            dgvHistorial.RowHeadersVisible = false;
+            dgvHistorial.CellBorderStyle =
+                DataGridViewCellBorderStyle.SingleHorizontal;
+
+            dgvHistorial.GridColor =
+                Color.FromArgb(245, 240, 238);
+
+            dgvHistorial.RowHeadersVisible =
+                false;
 
             dgvHistorial.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvHistorial.ColumnHeadersHeight = 45;
-
-            dgvHistorial.DefaultCellStyle.Font =
-                new Font("Segoe UI", 10F);
-
-            dgvHistorial.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(230, 210, 215);
-
-            dgvHistorial.DefaultCellStyle.SelectionForeColor =
-                Color.Black;
-
-            dgvHistorial.DefaultCellStyle.Padding =
-                new Padding(5);
-
-            dgvHistorial.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(248, 244, 242);
-
-            dgvHistorial.GridColor =
-                Color.FromArgb(235, 230, 228);
-
-            dgvHistorial.CellBorderStyle =
-                DataGridViewCellBorderStyle.SingleHorizontal;
-
             dgvHistorial.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
 
-            dgvHistorial.MultiSelect = false;
+            dgvHistorial.MultiSelect =
+                false;
 
-            dgvHistorial.ReadOnly = true;
+            dgvHistorial.ReadOnly =
+                true;
 
-            dgvHistorial.AllowUserToAddRows = false;
-            dgvHistorial.AllowUserToDeleteRows = false;
-            dgvHistorial.AllowUserToResizeRows = false;
-            dgvHistorial.EnableHeadersVisualStyles = false;
+            dgvHistorial.AllowUserToAddRows =
+                false;
 
-            dgvHistorial.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.RosyBrown;
+            dgvHistorial.AllowUserToDeleteRows =
+                false;
 
-            dgvHistorial.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
+            dgvHistorial.AllowUserToResizeRows =
+                false;
 
-            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionBackColor =
-                Color.RosyBrown;
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionForeColor =
-                Color.White;
+            dgvHistorial.EnableHeadersVisualStyles =
+                false;
 
             dgvHistorial.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.None;
 
-            dgvHistorial.ColumnHeadersHeight = 45;
+            // CABECERA
+            dgvHistorial.ColumnHeadersDefaultCellStyle.BackColor =
+                Color.FromArgb(245, 238, 234);
 
-            dgvHistorial.Refresh();
+            dgvHistorial.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            dgvHistorial.ColumnHeadersDefaultCellStyle.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Bold);
+
+            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(245, 238, 234);
+
+            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            dgvHistorial.ColumnHeadersHeight =
+                45;
+
+            // FILAS
+            dgvHistorial.DefaultCellStyle.BackColor =
+                Color.White;
+
+            dgvHistorial.DefaultCellStyle.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            dgvHistorial.DefaultCellStyle.Font =
+                new Font(
+                    "Segoe UI",
+                    9.5F,
+                    FontStyle.Regular);
+
+            dgvHistorial.DefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(250, 245, 242);
+
+            dgvHistorial.DefaultCellStyle.SelectionForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            dgvHistorial.RowTemplate.Height =
+                45;
+
+            dgvHistorial.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.White;
         }
     }
 }

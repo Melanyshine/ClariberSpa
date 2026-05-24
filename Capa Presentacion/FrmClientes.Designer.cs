@@ -30,7 +30,7 @@
         {
             this.panelContenido = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPagina = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAnterior = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             // 
             this.panelContenido.BackColor = System.Drawing.Color.White;
             this.panelContenido.Controls.Add(this.label6);
-            this.panelContenido.Controls.Add(this.label4);
+            this.panelContenido.Controls.Add(this.lblPagina);
             this.panelContenido.Controls.Add(this.label5);
             this.panelContenido.Controls.Add(this.label3);
             this.panelContenido.Controls.Add(this.btnAnterior);
@@ -75,15 +75,15 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "BEAUTY Y SPA";
             // 
-            // label4
+            // lblPagina
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(682, 738);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 22);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "1";
+            this.lblPagina.AutoSize = true;
+            this.lblPagina.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPagina.Location = new System.Drawing.Point(682, 738);
+            this.lblPagina.Name = "lblPagina";
+            this.lblPagina.Size = new System.Drawing.Size(20, 22);
+            this.lblPagina.TabIndex = 9;
+            this.lblPagina.Text = "1";
             // 
             // label5
             // 
@@ -211,7 +211,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPagina;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAnterior;
         private System.Windows.Forms.Button btnSiguiente;

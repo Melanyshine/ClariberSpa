@@ -37,15 +37,15 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.gbDisponibilidad = new System.Windows.Forms.GroupBox();
-            this.lblUsuario = new System.Windows.Forms.Label();
-            this.cbUsuario = new System.Windows.Forms.ComboBox();
-            this.lblFecha = new System.Windows.Forms.Label();
-            this.dtFecha = new System.Windows.Forms.DateTimePicker();
-            this.lblHoraInicio = new System.Windows.Forms.Label();
-            this.lblHoraFin = new System.Windows.Forms.Label();
-            this.dtHoraFin = new System.Windows.Forms.DateTimePicker();
-            this.dtHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.txtIdDisponibilidad = new System.Windows.Forms.TextBox();
+            this.dtHoraInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtHoraFin = new System.Windows.Forms.DateTimePicker();
+            this.lblHoraFin = new System.Windows.Forms.Label();
+            this.lblHoraInicio = new System.Windows.Forms.Label();
+            this.dtFecha = new System.Windows.Forms.DateTimePicker();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.cbUsuario = new System.Windows.Forms.ComboBox();
+            this.lblUsuario = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gbListado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisponibilidad)).BeginInit();
@@ -56,7 +56,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(437, 34);
+            this.lblTitulo.Location = new System.Drawing.Point(423, 41);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(107, 20);
             this.lblTitulo.TabIndex = 0;
@@ -65,7 +65,7 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(427, 99);
+            this.lblDescripcion.Location = new System.Drawing.Point(423, 115);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(242, 40);
             this.lblDescripcion.TabIndex = 1;
@@ -73,9 +73,9 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(1671, 319);
+            this.btnLimpiar.Location = new System.Drawing.Point(1651, 314);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(177, 34);
+            this.btnLimpiar.Size = new System.Drawing.Size(177, 53);
             this.btnLimpiar.TabIndex = 4;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(1671, 269);
+            this.btnGuardar.Location = new System.Drawing.Point(1631, 255);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(231, 34);
+            this.btnGuardar.Size = new System.Drawing.Size(213, 53);
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar Disponibilidad";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@
             // gbListado
             // 
             this.gbListado.Controls.Add(this.dgvDisponibilidad);
-            this.gbListado.Location = new System.Drawing.Point(458, 589);
+            this.gbListado.Location = new System.Drawing.Point(427, 584);
             this.gbListado.Name = "gbListado";
             this.gbListado.Size = new System.Drawing.Size(1220, 340);
             this.gbListado.TabIndex = 6;
@@ -113,9 +113,9 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(1707, 673);
+            this.btnEliminar.Location = new System.Drawing.Point(1685, 680);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(180, 40);
+            this.btnEliminar.Size = new System.Drawing.Size(180, 53);
             this.btnEliminar.TabIndex = 7;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -123,9 +123,9 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(1707, 743);
+            this.btnEditar.Location = new System.Drawing.Point(1685, 739);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(180, 40);
+            this.btnEditar.Size = new System.Drawing.Size(180, 49);
             this.btnEditar.TabIndex = 8;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
@@ -149,22 +149,56 @@
             this.gbDisponibilidad.TabStop = false;
             this.gbDisponibilidad.Text = "Programar Disponibilidad";
             // 
-            // lblUsuario
+            // txtIdDisponibilidad
             // 
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(189, 91);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(64, 20);
-            this.lblUsuario.TabIndex = 0;
-            this.lblUsuario.Text = "Usuario";
+            this.txtIdDisponibilidad.Location = new System.Drawing.Point(174, 38);
+            this.txtIdDisponibilidad.Name = "txtIdDisponibilidad";
+            this.txtIdDisponibilidad.Size = new System.Drawing.Size(100, 26);
+            this.txtIdDisponibilidad.TabIndex = 7;
             // 
-            // cbUsuario
+            // dtHoraInicio
             // 
-            this.cbUsuario.FormattingEnabled = true;
-            this.cbUsuario.Location = new System.Drawing.Point(269, 88);
-            this.cbUsuario.Name = "cbUsuario";
-            this.cbUsuario.Size = new System.Drawing.Size(141, 28);
-            this.cbUsuario.TabIndex = 1;
+            this.dtHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtHoraInicio.Location = new System.Drawing.Point(280, 184);
+            this.dtHoraInicio.Name = "dtHoraInicio";
+            this.dtHoraInicio.ShowUpDown = true;
+            this.dtHoraInicio.Size = new System.Drawing.Size(149, 26);
+            this.dtHoraInicio.TabIndex = 9;
+            // 
+            // dtHoraFin
+            // 
+            this.dtHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtHoraFin.Location = new System.Drawing.Point(821, 178);
+            this.dtHoraFin.Name = "dtHoraFin";
+            this.dtHoraFin.ShowUpDown = true;
+            this.dtHoraFin.Size = new System.Drawing.Size(169, 26);
+            this.dtHoraFin.TabIndex = 8;
+            // 
+            // lblHoraFin
+            // 
+            this.lblHoraFin.AutoSize = true;
+            this.lblHoraFin.Location = new System.Drawing.Point(729, 184);
+            this.lblHoraFin.Name = "lblHoraFin";
+            this.lblHoraFin.Size = new System.Drawing.Size(70, 20);
+            this.lblHoraFin.TabIndex = 7;
+            this.lblHoraFin.Text = "Hora Fin";
+            // 
+            // lblHoraInicio
+            // 
+            this.lblHoraInicio.AutoSize = true;
+            this.lblHoraInicio.Location = new System.Drawing.Point(170, 190);
+            this.lblHoraInicio.Name = "lblHoraInicio";
+            this.lblHoraInicio.Size = new System.Drawing.Size(85, 20);
+            this.lblHoraInicio.TabIndex = 6;
+            this.lblHoraInicio.Text = "Hora Inicio";
+            // 
+            // dtFecha
+            // 
+            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFecha.Location = new System.Drawing.Point(821, 83);
+            this.dtFecha.Name = "dtFecha";
+            this.dtFecha.Size = new System.Drawing.Size(169, 26);
+            this.dtFecha.TabIndex = 3;
             // 
             // lblFecha
             // 
@@ -176,61 +210,27 @@
             this.lblFecha.Tag = "";
             this.lblFecha.Text = "Fecha";
             // 
-            // dtFecha
+            // cbUsuario
             // 
-            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFecha.Location = new System.Drawing.Point(821, 83);
-            this.dtFecha.Name = "dtFecha";
-            this.dtFecha.Size = new System.Drawing.Size(169, 26);
-            this.dtFecha.TabIndex = 3;
+            this.cbUsuario.FormattingEnabled = true;
+            this.cbUsuario.Location = new System.Drawing.Point(269, 88);
+            this.cbUsuario.Name = "cbUsuario";
+            this.cbUsuario.Size = new System.Drawing.Size(141, 28);
+            this.cbUsuario.TabIndex = 1;
             // 
-            // lblHoraInicio
+            // lblUsuario
             // 
-            this.lblHoraInicio.AutoSize = true;
-            this.lblHoraInicio.Location = new System.Drawing.Point(189, 189);
-            this.lblHoraInicio.Name = "lblHoraInicio";
-            this.lblHoraInicio.Size = new System.Drawing.Size(85, 20);
-            this.lblHoraInicio.TabIndex = 6;
-            this.lblHoraInicio.Text = "Hora Inicio";
-            // 
-            // lblHoraFin
-            // 
-            this.lblHoraFin.AutoSize = true;
-            this.lblHoraFin.Location = new System.Drawing.Point(729, 184);
-            this.lblHoraFin.Name = "lblHoraFin";
-            this.lblHoraFin.Size = new System.Drawing.Size(70, 20);
-            this.lblHoraFin.TabIndex = 7;
-            this.lblHoraFin.Text = "Hora Fin";
-            // 
-            // dtHoraFin
-            // 
-            this.dtHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtHoraFin.Location = new System.Drawing.Point(821, 178);
-            this.dtHoraFin.Name = "dtHoraFin";
-            this.dtHoraFin.ShowUpDown = true;
-            this.dtHoraFin.Size = new System.Drawing.Size(169, 26);
-            this.dtHoraFin.TabIndex = 8;
-            // 
-            // dtHoraInicio
-            // 
-            this.dtHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtHoraInicio.Location = new System.Drawing.Point(280, 184);
-            this.dtHoraInicio.Name = "dtHoraInicio";
-            this.dtHoraInicio.ShowUpDown = true;
-            this.dtHoraInicio.Size = new System.Drawing.Size(149, 26);
-            this.dtHoraInicio.TabIndex = 9;
-            // 
-            // txtIdDisponibilidad
-            // 
-            this.txtIdDisponibilidad.Location = new System.Drawing.Point(494, 60);
-            this.txtIdDisponibilidad.Name = "txtIdDisponibilidad";
-            this.txtIdDisponibilidad.Size = new System.Drawing.Size(100, 26);
-            this.txtIdDisponibilidad.TabIndex = 7;
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(177, 91);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(64, 20);
+            this.lblUsuario.TabIndex = 0;
+            this.lblUsuario.Text = "Usuario";
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.gbDisponibilidad);
-            this.panel1.Location = new System.Drawing.Point(431, 163);
+            this.panel1.Location = new System.Drawing.Point(400, 158);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1234, 395);
             this.panel1.TabIndex = 10;

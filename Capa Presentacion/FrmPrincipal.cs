@@ -71,7 +71,7 @@ namespace Capa_Presentacion
             lblTitulo.Font =
                 new Font(
                     "Georgia",
-                    24,
+                    20,
                     FontStyle.Bold);
 
             lblTitulo.AutoSize =

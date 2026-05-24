@@ -24,7 +24,6 @@ namespace Presentacion
 
         private void FrmEmpleado_Load(object sender, EventArgs e)
         {
-            
             txtIdUsuario.Visible = false;
 
             CargarRoles();
@@ -327,6 +326,7 @@ namespace Presentacion
                 cbRol.SelectedValue =
                     fila.Cells["id_rol"].Value;
 
+                dtFechaRegistro.Value =
                     Convert.ToDateTime(
                         fila.Cells["fecha_registro"].Value);
             }
@@ -352,34 +352,196 @@ namespace Presentacion
         // =========================
         private void AplicarDiseno()
         {
+            // FORMULARIO
             this.BackColor =
-                Color.FromArgb(248, 244, 240);
+                Color.FromArgb(249, 245, 242);
 
-     
-
+            // TÍTULO
             lblTitulo.ForeColor =
-                Color.FromArgb(90, 70, 70);
+                Color.FromArgb(70, 50, 48);
 
             lblTitulo.Font =
                 new Font(
-                    "Segoe UI Semibold",
+                    "Georgia",
                     22F,
-                    FontStyle.Bold);
+                    FontStyle.Regular);
 
+            // DESCRIPCIÓN
             lblDescripcion.ForeColor =
-                Color.FromArgb(140, 120, 120);
+                Color.FromArgb(120, 110, 110);
 
+            lblDescripcion.Font =
+                new Font(
+                    "Segoe UI",
+                    10F);
+
+            // GROUPBOX
             gbDatosUsuario.BackColor =
                 Color.White;
 
             gbListadoUsuarios.BackColor =
                 Color.White;
 
+            gbDatosUsuario.ForeColor =
+                Color.FromArgb(90, 70, 70);
+
+            gbListadoUsuarios.ForeColor =
+                Color.FromArgb(90, 70, 70);
+
+            gbDatosUsuario.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    11F,
+                    FontStyle.Bold);
+
+            gbListadoUsuarios.Font =
+                new Font(
+                    "Segoe UI Semibold",
+                    11F,
+                    FontStyle.Bold);
+
+            // LABELS
+            Label[] labels =
+            {
+                lblNombre,
+                lblApellido,
+                lblCorreo,
+                lblTelefono,
+                lblNombreUsuario,
+                lblContraseña,
+                lblRol,
+                lblFecha
+            };
+
+            foreach (Label lbl in labels)
+            {
+                lbl.ForeColor =
+                    Color.FromArgb(100, 80, 80);
+
+                lbl.Font =
+                    new Font(
+                        "Segoe UI",
+                        9F);
+            }
+
+            // TEXTBOX
+            TextBox[] textos =
+            {
+                txtNombre,
+                txtApellido,
+                txtCorreo,
+                txtTelefono,
+                txtNombreUsuario,
+                txtContraseña,
+                txtBuscar
+            };
+
+            foreach (TextBox txt in textos)
+            {
+                txt.Font =
+                    new Font(
+                        "Segoe UI",
+                        9F);
+
+                txt.BorderStyle =
+                    BorderStyle.FixedSingle;
+
+                txt.BackColor =
+                    Color.White;
+
+                txt.ForeColor =
+                    Color.FromArgb(70, 50, 48);
+            }
+
+            // COMBOBOX
+            cbRol.Font =
+                new Font(
+                    "Segoe UI",
+                    9F);
+
+            cbRol.BackColor =
+                Color.White;
+
+            cbRol.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            cbRol.FlatStyle =
+                FlatStyle.Flat;
+
+            // DATETIME
+            dtFechaRegistro.Font =
+                new Font(
+                    "Segoe UI",
+                    9F);
+
+            // BOTÓN PRINCIPAL
+            btnGuardar.BackColor =
+                Color.FromArgb(143, 94, 104);
+
+            btnGuardar.ForeColor =
+                Color.White;
+
+            btnGuardar.FlatStyle =
+                FlatStyle.Flat;
+
+            btnGuardar.FlatAppearance.BorderSize =
+                0;
+
+            btnGuardar.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Regular);
+
+            btnGuardar.Height = 40;
+
+            // BOTONES SECUNDARIOS
+            Button[] botones =
+            {
+                btnNuevo,
+                btnEditar,
+                btnEliminar,
+                btnCancelar,
+                btnBuscar
+            };
+
+            foreach (Button btn in botones)
+            {
+                btn.BackColor =
+                    Color.FromArgb(245, 240, 235);
+
+                btn.ForeColor =
+                    Color.FromArgb(100, 80, 80);
+
+                btn.FlatStyle =
+                    FlatStyle.Flat;
+
+                btn.FlatAppearance.BorderColor =
+                    Color.FromArgb(220, 210, 205);
+
+                btn.FlatAppearance.BorderSize =
+                    1;
+
+                btn.Font =
+                    new Font(
+                        "Segoe UI",
+                        9F);
+
+                btn.Height = 38;
+            }
+
+            // DATAGRIDVIEW
             dgvUsuarios.BackgroundColor =
                 Color.White;
 
             dgvUsuarios.BorderStyle =
                 BorderStyle.None;
+
+            dgvUsuarios.CellBorderStyle =
+                DataGridViewCellBorderStyle.SingleHorizontal;
+
+            dgvUsuarios.GridColor =
+                Color.FromArgb(245, 240, 238);
 
             dgvUsuarios.RowHeadersVisible =
                 false;
@@ -390,66 +552,58 @@ namespace Presentacion
             dgvUsuarios.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
 
-            dgvUsuarios.MultiSelect = false;
+            dgvUsuarios.MultiSelect =
+                false;
 
-            dgvUsuarios.EnableHeadersVisualStyles = false;
+            dgvUsuarios.EnableHeadersVisualStyles =
+                false;
 
+            dgvUsuarios.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.None;
+
+            // CABECERA
             dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(235, 225, 220);
+                Color.FromArgb(245, 238, 234);
 
             dgvUsuarios.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.FromArgb(90, 70, 70);
+                Color.FromArgb(70, 50, 48);
 
-            dgvUsuarios.ColumnHeadersHeight = 38;
-
-            BotonPrincipal(btnGuardar);
-
-            BotonSecundario(btnNuevo);
-            BotonSecundario(btnEditar);
-            BotonSecundario(btnEliminar);
-            BotonSecundario(btnCancelar);
-        }
-
-        private void BotonPrincipal(Button btn)
-        {
-            btn.BackColor =
-                Color.FromArgb(170, 105, 120);
-
-            btn.ForeColor =
-                Color.White;
-
-            btn.FlatStyle =
-                FlatStyle.Flat;
-
-            btn.FlatAppearance.BorderSize = 0;
-
-            btn.Font =
-                new Font(
-                    "Segoe UI Semibold",
-                    9F);
-
-            btn.Height = 38;
-        }
-
-        private void BotonSecundario(Button btn)
-        {
-            btn.BackColor =
-                Color.FromArgb(245, 240, 235);
-
-            btn.ForeColor =
-                Color.FromArgb(100, 80, 80);
-
-            btn.FlatStyle =
-                FlatStyle.Flat;
-
-            btn.FlatAppearance.BorderSize = 1;
-
-            btn.Font =
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.Font =
                 new Font(
                     "Segoe UI",
-                    9F);
+                    10F,
+                    FontStyle.Bold);
 
-            btn.Height = 38;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(245, 238, 234);
+
+            dgvUsuarios.ColumnHeadersHeight =
+                45;
+
+            // FILAS
+            dgvUsuarios.DefaultCellStyle.BackColor =
+                Color.White;
+
+            dgvUsuarios.DefaultCellStyle.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            dgvUsuarios.DefaultCellStyle.Font =
+                new Font(
+                    "Segoe UI",
+                    9.5F,
+                    FontStyle.Regular);
+
+            dgvUsuarios.DefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(250, 245, 242);
+
+            dgvUsuarios.DefaultCellStyle.SelectionForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            dgvUsuarios.RowTemplate.Height =
+                45;
+
+            dgvUsuarios.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.White;
         }
     }
 }

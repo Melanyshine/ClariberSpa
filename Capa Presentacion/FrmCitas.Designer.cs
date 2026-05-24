@@ -155,7 +155,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(220, 488);
+            this.lblPrecio.Location = new System.Drawing.Point(188, 505);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(49, 20);
             this.lblPrecio.TabIndex = 16;
@@ -253,7 +253,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(1431, 74);
+            this.lblTitulo.Location = new System.Drawing.Point(1431, 54);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(151, 20);
             this.lblTitulo.TabIndex = 4;
@@ -311,9 +311,9 @@
             // 
             // btnVerTodos
             // 
-            this.btnVerTodos.Location = new System.Drawing.Point(1205, 32);
+            this.btnVerTodos.Location = new System.Drawing.Point(1205, 46);
             this.btnVerTodos.Name = "btnVerTodos";
-            this.btnVerTodos.Size = new System.Drawing.Size(96, 13);
+            this.btnVerTodos.Size = new System.Drawing.Size(96, 12);
             this.btnVerTodos.TabIndex = 13;
             this.btnVerTodos.Text = "Ver todos";
             this.btnVerTodos.UseVisualStyleBackColor = true;

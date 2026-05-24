@@ -28,45 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTelefono = new System.Windows.Forms.Label();
+            this.lblCorreo = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTelefono
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(417, 280);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Telefono";
+            this.lblTelefono.AutoSize = true;
+            this.lblTelefono.Location = new System.Drawing.Point(417, 280);
+            this.lblTelefono.Name = "lblTelefono";
+            this.lblTelefono.Size = new System.Drawing.Size(71, 20);
+            this.lblTelefono.TabIndex = 0;
+            this.lblTelefono.Text = "Telefono";
             // 
-            // label2
+            // lblCorreo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 277);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Correo";
+            this.lblCorreo.AutoSize = true;
+            this.lblCorreo.Location = new System.Drawing.Point(77, 277);
+            this.lblCorreo.Name = "lblCorreo";
+            this.lblCorreo.Size = new System.Drawing.Size(57, 20);
+            this.lblCorreo.TabIndex = 1;
+            this.lblCorreo.Text = "Correo";
             // 
-            // label3
+            // lblApellido
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(417, 190);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Apellido";
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(417, 190);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(65, 20);
+            this.lblApellido.TabIndex = 2;
+            this.lblApellido.Text = "Apellido";
             // 
             // txtNombre
             // 
@@ -96,14 +96,14 @@
             this.txtCorreo.Size = new System.Drawing.Size(207, 26);
             this.txtCorreo.TabIndex = 6;
             // 
-            // label4
+            // lblNombre
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(69, 190);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Nombre";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(69, 190);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(65, 20);
+            this.lblNombre.TabIndex = 7;
+            this.lblNombre.Text = "Nombre";
             // 
             // btnGuardar
             // 
@@ -125,31 +125,31 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // label5
+            // lblTitulo
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(347, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 20);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Nuevo Cliente";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(347, 78);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(107, 20);
+            this.lblTitulo.TabIndex = 10;
+            this.lblTitulo.Text = "Nuevo Cliente";
             // 
             // FrmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 584);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblApellido);
+            this.Controls.Add(this.lblCorreo);
+            this.Controls.Add(this.lblTelefono);
             this.Name = "FrmCliente";
             this.Text = "FrmCliente";
             this.Load += new System.EventHandler(this.FrmCliente_Load);
@@ -160,16 +160,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblTelefono;
+        private System.Windows.Forms.Label lblCorreo;
+        private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblTitulo;
     }
 }

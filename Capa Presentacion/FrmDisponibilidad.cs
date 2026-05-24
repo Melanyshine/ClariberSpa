@@ -290,23 +290,32 @@ namespace Capa_Presentacion
         // ======================================
         // DISEÑO
         // ======================================
+        // ======================================
+        // DISEÑO ESTILO SERVICIO
+        // ======================================
         private void AplicarDiseno()
         {
+            // ======================================
             // FORM
+            // ======================================
             this.BackColor =
-                Color.FromArgb(248, 244, 240);
+                Color.FromArgb(249, 245, 242);
 
+            // ======================================
             // TITULO
+            // ======================================
             lblTitulo.Font =
                 new Font(
                     "Georgia",
-                    24F,
+                    22F,
                     FontStyle.Regular);
 
             lblTitulo.ForeColor =
-                Color.FromArgb(70, 55, 55);
+                Color.FromArgb(70, 50, 48);
 
+            // ======================================
             // DESCRIPCION
+            // ======================================
             lblDescripcion.Font =
                 new Font(
                     "Segoe UI",
@@ -315,7 +324,9 @@ namespace Capa_Presentacion
             lblDescripcion.ForeColor =
                 Color.FromArgb(120, 110, 110);
 
+            // ======================================
             // GROUPBOX
+            // ======================================
             gbDisponibilidad.BackColor =
                 Color.White;
 
@@ -323,24 +334,26 @@ namespace Capa_Presentacion
                 Color.White;
 
             gbDisponibilidad.ForeColor =
-                Color.FromArgb(90, 70, 70);
+                Color.FromArgb(70, 50, 48);
 
             gbListado.ForeColor =
-                Color.FromArgb(90, 70, 70);
+                Color.FromArgb(70, 50, 48);
 
             gbDisponibilidad.Font =
                 new Font(
                     "Segoe UI Semibold",
-                    11F,
+                    10F,
                     FontStyle.Bold);
 
             gbListado.Font =
                 new Font(
                     "Segoe UI Semibold",
-                    11F,
+                    10F,
                     FontStyle.Bold);
 
+            // ======================================
             // LABELS
+            // ======================================
             Label[] labels =
             {
         lblUsuario,
@@ -352,39 +365,54 @@ namespace Capa_Presentacion
             foreach (Label lbl in labels)
             {
                 lbl.ForeColor =
-                    Color.FromArgb(100, 80, 80);
+                    Color.FromArgb(70, 50, 48);
 
                 lbl.Font =
                     new Font(
                         "Segoe UI",
-                        9F);
+                        9.5F);
             }
 
+            // ======================================
             // COMBOBOX
+            // ======================================
+            cbUsuario.BackColor =
+                Color.White;
+
+            cbUsuario.ForeColor =
+                Color.FromArgb(70, 50, 48);
+
+            cbUsuario.FlatStyle =
+                FlatStyle.Flat;
+
             cbUsuario.Font =
                 new Font(
                     "Segoe UI",
-                    9F);
+                    9.5F);
 
+            // ======================================
             // DATETIME
+            // ======================================
             dtFecha.Font =
                 new Font(
                     "Segoe UI",
-                    9F);
+                    9.5F);
 
             dtHoraInicio.Font =
                 new Font(
                     "Segoe UI",
-                    9F);
+                    9.5F);
 
             dtHoraFin.Font =
                 new Font(
                     "Segoe UI",
-                    9F);
+                    9.5F);
 
+            // ======================================
             // BOTON GUARDAR
+            // ======================================
             btnGuardar.BackColor =
-                Color.FromArgb(170, 105, 120);
+                Color.FromArgb(143, 94, 104);
 
             btnGuardar.ForeColor =
                 Color.White;
@@ -397,48 +425,63 @@ namespace Capa_Presentacion
 
             btnGuardar.Font =
                 new Font(
-                    "Segoe UI Semibold",
-                    9F);
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Regular);
 
-            btnGuardar.Width = 150;
-            btnGuardar.Height = 40;
+   
 
-            // BOTONES
+            // ======================================
+            // BOTONES SECUNDARIOS
+            // ======================================
             Button[] botones =
             {
         btnEditar,
         btnEliminar,
-        btnLimpiar
+        btnLimpiar,
+
     };
 
             foreach (Button btn in botones)
             {
                 btn.BackColor =
-                    Color.FromArgb(245, 240, 235);
+                    Color.White;
 
                 btn.ForeColor =
-                    Color.FromArgb(100, 80, 80);
+                    Color.FromArgb(70, 50, 48);
 
                 btn.FlatStyle =
                     FlatStyle.Flat;
 
+                btn.FlatAppearance.BorderColor =
+                    Color.FromArgb(230, 220, 215);
+
                 btn.FlatAppearance.BorderSize =
-                    0;
+                    1;
 
                 btn.Font =
                     new Font(
                         "Segoe UI",
-                        9F);
+                        9F,
+                        FontStyle.Regular);
 
-                btn.Height = 38;
+
             }
 
+            // ======================================
             // DATAGRIDVIEW
+            // ======================================
             dgvDisponibilidad.BackgroundColor =
                 Color.White;
 
             dgvDisponibilidad.BorderStyle =
                 BorderStyle.None;
+
+            dgvDisponibilidad.CellBorderStyle =
+                DataGridViewCellBorderStyle.SingleHorizontal;
+
+            dgvDisponibilidad.GridColor =
+                Color.FromArgb(245, 240, 238);
 
             dgvDisponibilidad.EnableHeadersVisualStyles =
                 false;
@@ -446,43 +489,55 @@ namespace Capa_Presentacion
             dgvDisponibilidad.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.None;
 
+            // CABECERA
             dgvDisponibilidad.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(235, 225, 220);
+                Color.FromArgb(245, 238, 234);
 
             dgvDisponibilidad.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.FromArgb(90, 70, 70);
+                Color.FromArgb(70, 50, 48);
 
             dgvDisponibilidad.ColumnHeadersDefaultCellStyle.Font =
                 new Font(
-                    "Segoe UI Semibold",
-                    9F,
+                    "Segoe UI",
+                    10F,
                     FontStyle.Bold);
 
+            dgvDisponibilidad.ColumnHeadersDefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(245, 238, 234);
+
             dgvDisponibilidad.ColumnHeadersHeight =
-                38;
+                45;
+
+            // FILAS
+            dgvDisponibilidad.DefaultCellStyle.BackColor =
+                Color.White;
+
+            dgvDisponibilidad.DefaultCellStyle.ForeColor =
+                Color.FromArgb(70, 50, 48);
 
             dgvDisponibilidad.DefaultCellStyle.Font =
                 new Font(
                     "Segoe UI",
-                    9F);
+                    9.5F,
+                    FontStyle.Regular);
 
             dgvDisponibilidad.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(220, 200, 200);
+                Color.FromArgb(250, 245, 242);
 
             dgvDisponibilidad.DefaultCellStyle.SelectionForeColor =
-                Color.Black;
+                Color.FromArgb(70, 50, 48);
 
-            dgvDisponibilidad.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(250, 247, 245);
-
-            dgvDisponibilidad.GridColor =
-                Color.FromArgb(235, 225, 220);
+            dgvDisponibilidad.RowTemplate.Height =
+                45;
 
             dgvDisponibilidad.RowHeadersVisible =
                 false;
 
             dgvDisponibilidad.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvDisponibilidad.AllowUserToAddRows =
+                false;
         }
 
 
