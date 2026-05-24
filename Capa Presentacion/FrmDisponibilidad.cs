@@ -81,14 +81,25 @@ namespace Capa_Presentacion
                 bll.Listar();
 
             if (dgvDisponibilidad.Columns["id_disponibilidad"] != null)
-                dgvDisponibilidad.Columns["id_disponibilidad"].Visible =
-                    false;
+                dgvDisponibilidad.Columns["id_disponibilidad"].Visible = false;
 
             if (dgvDisponibilidad.Columns["id_usuario"] != null)
-                dgvDisponibilidad.Columns["id_usuario"].Visible =
-                    false;
-        }
+                dgvDisponibilidad.Columns["id_usuario"].Visible = false;
 
+            // FORMATO HORA
+            if (dgvDisponibilidad.Columns["hora_inicio"] != null)
+            {
+                dgvDisponibilidad.Columns["hora_inicio"]
+                    .DefaultCellStyle.Format = "hh\\:mm";
+            }
+
+            if (dgvDisponibilidad.Columns["hora_fin"] != null)
+            {
+                dgvDisponibilidad.Columns["hora_fin"]
+                    .DefaultCellStyle.Format = "hh\\:mm";
+            }
+        }
+        
         // ======================================
         // LIMPIAR
         // ======================================
