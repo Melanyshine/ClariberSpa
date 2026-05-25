@@ -38,11 +38,19 @@
             this.btnServicios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.btnSeleccionarCarpt = new System.Windows.Forms.Button();
+            this.btnRestoreBackup = new System.Windows.Forms.Button();
+            this.btnBackupFull = new System.Windows.Forms.Button();
+            this.btnBackupDifferential = new System.Windows.Forms.Button();
+            this.btnBackupLog = new System.Windows.Forms.Button();
+            this.btnInicio = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
+            this.panelContenido.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.btnInicio);
             this.panelMenu.Controls.Add(this.btnFactura);
             this.panelMenu.Controls.Add(this.btnUsuario);
             this.panelMenu.Controls.Add(this.lblTitulo);
@@ -137,10 +145,75 @@
             // 
             // panelContenido
             // 
+            this.panelContenido.Controls.Add(this.btnSeleccionarCarpt);
+            this.panelContenido.Controls.Add(this.btnRestoreBackup);
+            this.panelContenido.Controls.Add(this.btnBackupFull);
+            this.panelContenido.Controls.Add(this.btnBackupDifferential);
+            this.panelContenido.Controls.Add(this.btnBackupLog);
             this.panelContenido.Location = new System.Drawing.Point(393, -12);
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(1027, 976);
             this.panelContenido.TabIndex = 1;
+            // 
+            // btnSeleccionarCarpt
+            // 
+            this.btnSeleccionarCarpt.Location = new System.Drawing.Point(912, 153);
+            this.btnSeleccionarCarpt.Name = "btnSeleccionarCarpt";
+            this.btnSeleccionarCarpt.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionarCarpt.TabIndex = 4;
+            this.btnSeleccionarCarpt.Text = "Carpeta";
+            this.btnSeleccionarCarpt.UseVisualStyleBackColor = true;
+            this.btnSeleccionarCarpt.Click += new System.EventHandler(this.btnSeleccionarCarpt_Click);
+            // 
+            // btnRestoreBackup
+            // 
+            this.btnRestoreBackup.Location = new System.Drawing.Point(912, 115);
+            this.btnRestoreBackup.Name = "btnRestoreBackup";
+            this.btnRestoreBackup.Size = new System.Drawing.Size(75, 23);
+            this.btnRestoreBackup.TabIndex = 3;
+            this.btnRestoreBackup.Text = "Restaurar";
+            this.btnRestoreBackup.UseVisualStyleBackColor = true;
+            this.btnRestoreBackup.Click += new System.EventHandler(this.btnRestoreBackup_Click_1);
+            // 
+            // btnBackupFull
+            // 
+            this.btnBackupFull.Location = new System.Drawing.Point(912, 24);
+            this.btnBackupFull.Name = "btnBackupFull";
+            this.btnBackupFull.Size = new System.Drawing.Size(75, 23);
+            this.btnBackupFull.TabIndex = 2;
+            this.btnBackupFull.Text = "Full";
+            this.btnBackupFull.UseVisualStyleBackColor = true;
+            this.btnBackupFull.Click += new System.EventHandler(this.btnBackupFull_Click_1);
+            // 
+            // btnBackupDifferential
+            // 
+            this.btnBackupDifferential.Location = new System.Drawing.Point(912, 53);
+            this.btnBackupDifferential.Name = "btnBackupDifferential";
+            this.btnBackupDifferential.Size = new System.Drawing.Size(75, 23);
+            this.btnBackupDifferential.TabIndex = 1;
+            this.btnBackupDifferential.Text = "Diferencial";
+            this.btnBackupDifferential.UseVisualStyleBackColor = true;
+            this.btnBackupDifferential.Click += new System.EventHandler(this.btnBackupDifferential_Click_1);
+            // 
+            // btnBackupLog
+            // 
+            this.btnBackupLog.Location = new System.Drawing.Point(912, 82);
+            this.btnBackupLog.Name = "btnBackupLog";
+            this.btnBackupLog.Size = new System.Drawing.Size(75, 23);
+            this.btnBackupLog.TabIndex = 0;
+            this.btnBackupLog.Text = "incremental";
+            this.btnBackupLog.UseVisualStyleBackColor = true;
+            this.btnBackupLog.Click += new System.EventHandler(this.btnBackupLog_Click_1);
+            // 
+            // btnInicio
+            // 
+            this.btnInicio.Location = new System.Drawing.Point(261, 195);
+            this.btnInicio.Name = "btnInicio";
+            this.btnInicio.Size = new System.Drawing.Size(98, 73);
+            this.btnInicio.TabIndex = 5;
+            this.btnInicio.Text = "Inicio";
+            this.btnInicio.UseVisualStyleBackColor = true;
+            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
             // 
             // FrmPrincipal
             // 
@@ -154,6 +227,7 @@
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
+            this.panelContenido.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -170,5 +244,11 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnUsuario;
         private System.Windows.Forms.Button btnFactura;
+        private System.Windows.Forms.Button btnBackupFull;
+        private System.Windows.Forms.Button btnBackupDifferential;
+        private System.Windows.Forms.Button btnBackupLog;
+        private System.Windows.Forms.Button btnSeleccionarCarpt;
+        private System.Windows.Forms.Button btnRestoreBackup;
+        private System.Windows.Forms.Button btnInicio;
     }
 }
