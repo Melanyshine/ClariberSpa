@@ -97,7 +97,7 @@
             this.panelDetalle.Controls.Add(this.btnActualizar);
             this.panelDetalle.Controls.Add(this.btnGuardar);
             this.panelDetalle.Controls.Add(this.lblServicio);
-            this.panelDetalle.Location = new System.Drawing.Point(479, 30);
+            this.panelDetalle.Location = new System.Drawing.Point(477, 101);
             this.panelDetalle.Name = "panelDetalle";
             this.panelDetalle.Size = new System.Drawing.Size(517, 837);
             this.panelDetalle.TabIndex = 0;
@@ -349,7 +349,7 @@
             // lblTabla
             // 
             this.lblTabla.AutoSize = true;
-            this.lblTabla.Location = new System.Drawing.Point(1060, 40);
+            this.lblTabla.Location = new System.Drawing.Point(1058, 111);
             this.lblTabla.Name = "lblTabla";
             this.lblTabla.Size = new System.Drawing.Size(144, 20);
             this.lblTabla.TabIndex = 1;
@@ -357,7 +357,7 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(1064, 122);
+            this.txtBuscar.Location = new System.Drawing.Point(1062, 193);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(303, 26);
             this.txtBuscar.TabIndex = 2;
@@ -365,14 +365,14 @@
             // cbFiltroFactura
             // 
             this.cbFiltroFactura.FormattingEnabled = true;
-            this.cbFiltroFactura.Location = new System.Drawing.Point(1528, 120);
+            this.cbFiltroFactura.Location = new System.Drawing.Point(1530, 193);
             this.cbFiltroFactura.Name = "cbFiltroFactura";
             this.cbFiltroFactura.Size = new System.Drawing.Size(121, 28);
             this.cbFiltroFactura.TabIndex = 3;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(1373, 115);
+            this.btnBuscar.Location = new System.Drawing.Point(1384, 186);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(92, 40);
             this.btnBuscar.TabIndex = 4;
@@ -382,7 +382,7 @@
             // dgvDetalle
             // 
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalle.Location = new System.Drawing.Point(1064, 198);
+            this.dgvDetalle.Location = new System.Drawing.Point(1062, 269);
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
             this.dgvDetalle.RowHeadersWidth = 62;
@@ -392,14 +392,14 @@
             // 
             // panelTabla
             // 
-            this.panelTabla.Location = new System.Drawing.Point(1055, 187);
+            this.panelTabla.Location = new System.Drawing.Point(1053, 258);
             this.panelTabla.Name = "panelTabla";
             this.panelTabla.Size = new System.Drawing.Size(764, 628);
             this.panelTabla.TabIndex = 6;
             // 
             // btnHistorial
             // 
-            this.btnHistorial.Location = new System.Drawing.Point(810, 873);
+            this.btnHistorial.Location = new System.Drawing.Point(808, 944);
             this.btnHistorial.Name = "btnHistorial";
             this.btnHistorial.Size = new System.Drawing.Size(186, 47);
             this.btnHistorial.TabIndex = 7;
