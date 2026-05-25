@@ -80,17 +80,17 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(595, 153);
+            this.btnBuscar.Location = new System.Drawing.Point(595, 141);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(90, 32);
+            this.btnBuscar.Size = new System.Drawing.Size(90, 44);
             this.btnBuscar.TabIndex = 6;
             this.btnBuscar.Text = "Buscar";
             // 
             // btnVerTodos
             // 
-            this.btnVerTodos.Location = new System.Drawing.Point(835, 153);
+            this.btnVerTodos.Location = new System.Drawing.Point(835, 141);
             this.btnVerTodos.Name = "btnVerTodos";
-            this.btnVerTodos.Size = new System.Drawing.Size(110, 32);
+            this.btnVerTodos.Size = new System.Drawing.Size(110, 44);
             this.btnVerTodos.TabIndex = 7;
             this.btnVerTodos.Text = "Ver Todos";
             // 

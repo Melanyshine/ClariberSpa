@@ -89,7 +89,7 @@ namespace Capa_Presentacion
             DiseñoBoton(btnUsuario);
             DiseñoBoton(btnCitas);
             DiseñoBoton(btnDisponibilidad);
-            DiseñoBoton(btnHistorial);
+            DiseñoBoton(btnFactura);
             DiseñoBoton(btnCerrarSesion);
 
             // =========================================
@@ -111,8 +111,8 @@ namespace Capa_Presentacion
             btnDisponibilidad.Text =
                 "🕒 Disponibilidad";
 
-            btnHistorial.Text =
-                "📋 Historial";
+            btnFactura.Text =
+                "🧾 Factura";
 
             btnCerrarSesion.Text =
                 "↩ Cerrar Sesión";
@@ -293,12 +293,12 @@ namespace Capa_Presentacion
         // HISTORIAL
         // =========================================
 
-        private void btnHistorial_Click(
+        private void btnFactura_Click(
             object sender,
             EventArgs e)
         {
             AbrirFormulario(
-                new FrmHistorialCitas());
+                new FrmFactura());
         }
 
         // =========================================

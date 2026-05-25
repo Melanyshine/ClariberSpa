@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnFactura = new System.Windows.Forms.Button();
             this.btnUsuario = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.btnHistorial = new System.Windows.Forms.Button();
             this.btnDisponibilidad = new System.Windows.Forms.Button();
             this.btnCitas = new System.Windows.Forms.Button();
             this.btnServicios = new System.Windows.Forms.Button();
@@ -43,10 +43,10 @@
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.btnFactura);
             this.panelMenu.Controls.Add(this.btnUsuario);
             this.panelMenu.Controls.Add(this.lblTitulo);
             this.panelMenu.Controls.Add(this.btnCerrarSesion);
-            this.panelMenu.Controls.Add(this.btnHistorial);
             this.panelMenu.Controls.Add(this.btnDisponibilidad);
             this.panelMenu.Controls.Add(this.btnCitas);
             this.panelMenu.Controls.Add(this.btnServicios);
@@ -55,6 +55,16 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(430, 1126);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnFactura
+            // 
+            this.btnFactura.Location = new System.Drawing.Point(97, 525);
+            this.btnFactura.Name = "btnFactura";
+            this.btnFactura.Size = new System.Drawing.Size(143, 44);
+            this.btnFactura.TabIndex = 0;
+            this.btnFactura.Text = "Factura";
+            this.btnFactura.UseVisualStyleBackColor = true;
+            this.btnFactura.Click += new System.EventHandler(this.btnFactura_Click);
             // 
             // btnUsuario
             // 
@@ -84,16 +94,6 @@
             this.btnCerrarSesion.Text = "Cerrar Sesión";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
-            // 
-            // btnHistorial
-            // 
-            this.btnHistorial.Location = new System.Drawing.Point(91, 530);
-            this.btnHistorial.Name = "btnHistorial";
-            this.btnHistorial.Size = new System.Drawing.Size(143, 44);
-            this.btnHistorial.TabIndex = 1;
-            this.btnHistorial.Text = "Historial ";
-            this.btnHistorial.UseVisualStyleBackColor = true;
-            this.btnHistorial.Click += new System.EventHandler(this.btnHistorial_Click);
             // 
             // btnDisponibilidad
             // 
@@ -166,9 +166,9 @@
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Button btnDisponibilidad;
         private System.Windows.Forms.Button btnCerrarSesion;
-        private System.Windows.Forms.Button btnHistorial;
         private System.Windows.Forms.Panel panelContenido;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnUsuario;
+        private System.Windows.Forms.Button btnFactura;
     }
 }
