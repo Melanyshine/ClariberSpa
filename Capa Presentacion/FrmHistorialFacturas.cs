@@ -256,10 +256,22 @@ namespace Capa_Presentacion
                     .Cells["id_factura"].Value);
 
             FrmDetalleFactura frmDetalle =
-                new FrmDetalleFactura(idFactura);
+     new FrmDetalleFactura(idFactura);
 
             frmDetalle.ShowDialog();
         }
+
+        private void btnVolver_Click(
+    object sender,
+    EventArgs e)
+        {
+            FrmPrincipal principal =
+                (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
+
+            principal.AbrirFormulario(
+                new FrmFactura());
+        }
+
 
         // =========================================
         // BOTONES
@@ -534,12 +546,6 @@ namespace Capa_Presentacion
         // =========================================
         // VOLVER
         // =========================================
-
-        private void btnVolver_Click(
-            object sender,
-            EventArgs e)
-        {
-            this.Close();
-        }
+       
     }
 }

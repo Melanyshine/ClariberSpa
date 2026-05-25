@@ -242,7 +242,7 @@ ALTER DATABASE ClaribetSpa SET MULTI_USER;";
         // =========================================
         // FORMULARIOS
         // =========================================
-        private void AbrirFormulario(Form frm)
+        public void AbrirFormulario(Form frm)
         {
             panelContenido.Controls.Clear();
 
@@ -317,7 +317,7 @@ ALTER DATABASE ClaribetSpa SET MULTI_USER;";
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FrmPrincipal());
+            panelContenido.Controls.Clear();
         }
     }
 }

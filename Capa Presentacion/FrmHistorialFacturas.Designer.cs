@@ -40,7 +40,7 @@
             // panelTabla
             // 
             this.panelTabla.Controls.Add(this.dgvHistorial);
-            this.panelTabla.Location = new System.Drawing.Point(362, 206);
+            this.panelTabla.Location = new System.Drawing.Point(741, 202);
             this.panelTabla.Name = "panelTabla";
             this.panelTabla.Size = new System.Drawing.Size(718, 541);
             this.panelTabla.TabIndex = 1;
@@ -48,7 +48,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(372, 16);
+            this.lblTitulo.Location = new System.Drawing.Point(751, 12);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(155, 20);
             this.lblTitulo.TabIndex = 2;
@@ -57,7 +57,7 @@
             // lblSubtitulo
             // 
             this.lblSubtitulo.AutoSize = true;
-            this.lblSubtitulo.Location = new System.Drawing.Point(373, 63);
+            this.lblSubtitulo.Location = new System.Drawing.Point(752, 59);
             this.lblSubtitulo.Name = "lblSubtitulo";
             this.lblSubtitulo.Size = new System.Drawing.Size(208, 20);
             this.lblSubtitulo.TabIndex = 3;
@@ -65,7 +65,7 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(362, 155);
+            this.txtBuscar.Location = new System.Drawing.Point(741, 151);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(219, 26);
             this.txtBuscar.TabIndex = 4;
@@ -73,14 +73,14 @@
             // cbFiltroEstado
             // 
             this.cbFiltroEstado.FormattingEnabled = true;
-            this.cbFiltroEstado.Location = new System.Drawing.Point(700, 155);
+            this.cbFiltroEstado.Location = new System.Drawing.Point(1079, 151);
             this.cbFiltroEstado.Name = "cbFiltroEstado";
             this.cbFiltroEstado.Size = new System.Drawing.Size(121, 28);
             this.cbFiltroEstado.TabIndex = 5;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(595, 141);
+            this.btnBuscar.Location = new System.Drawing.Point(974, 137);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(90, 44);
             this.btnBuscar.TabIndex = 6;
@@ -88,7 +88,7 @@
             // 
             // btnVerTodos
             // 
-            this.btnVerTodos.Location = new System.Drawing.Point(835, 141);
+            this.btnVerTodos.Location = new System.Drawing.Point(1214, 137);
             this.btnVerTodos.Name = "btnVerTodos";
             this.btnVerTodos.Size = new System.Drawing.Size(110, 44);
             this.btnVerTodos.TabIndex = 7;
@@ -96,7 +96,7 @@
             // 
             // btnVerDetalle
             // 
-            this.btnVerDetalle.Location = new System.Drawing.Point(667, 760);
+            this.btnVerDetalle.Location = new System.Drawing.Point(1046, 756);
             this.btnVerDetalle.Name = "btnVerDetalle";
             this.btnVerDetalle.Size = new System.Drawing.Size(120, 36);
             this.btnVerDetalle.TabIndex = 8;
@@ -104,7 +104,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(362, 760);
+            this.btnVolver.Location = new System.Drawing.Point(741, 756);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(90, 36);
             this.btnVolver.TabIndex = 9;
@@ -115,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1140, 820);
+            this.ClientSize = new System.Drawing.Size(1753, 820);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnVerDetalle);
             this.Controls.Add(this.btnVerTodos);

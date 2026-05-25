@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnInicio = new System.Windows.Forms.Button();
             this.btnFactura = new System.Windows.Forms.Button();
             this.btnUsuario = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.btnBackupFull = new System.Windows.Forms.Button();
             this.btnBackupDifferential = new System.Windows.Forms.Button();
             this.btnBackupLog = new System.Windows.Forms.Button();
-            this.btnInicio = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelContenido.SuspendLayout();
             this.SuspendLayout();
@@ -59,14 +59,25 @@
             this.panelMenu.Controls.Add(this.btnCitas);
             this.panelMenu.Controls.Add(this.btnServicios);
             this.panelMenu.Controls.Add(this.btnClientes);
-            this.panelMenu.Location = new System.Drawing.Point(-50, -15);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(430, 1126);
+            this.panelMenu.Size = new System.Drawing.Size(294, 935);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnInicio
+            // 
+            this.btnInicio.Location = new System.Drawing.Point(55, 648);
+            this.btnInicio.Name = "btnInicio";
+            this.btnInicio.Size = new System.Drawing.Size(98, 73);
+            this.btnInicio.TabIndex = 5;
+            this.btnInicio.Text = "Inicio";
+            this.btnInicio.UseVisualStyleBackColor = true;
+            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
             // 
             // btnFactura
             // 
-            this.btnFactura.Location = new System.Drawing.Point(97, 525);
+            this.btnFactura.Location = new System.Drawing.Point(55, 559);
             this.btnFactura.Name = "btnFactura";
             this.btnFactura.Size = new System.Drawing.Size(143, 44);
             this.btnFactura.TabIndex = 0;
@@ -76,7 +87,7 @@
             // 
             // btnUsuario
             // 
-            this.btnUsuario.Location = new System.Drawing.Point(91, 369);
+            this.btnUsuario.Location = new System.Drawing.Point(55, 402);
             this.btnUsuario.Name = "btnUsuario";
             this.btnUsuario.Size = new System.Drawing.Size(149, 44);
             this.btnUsuario.TabIndex = 0;
@@ -87,7 +98,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(62, 48);
+            this.lblTitulo.Location = new System.Drawing.Point(26, 81);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(51, 20);
             this.lblTitulo.TabIndex = 1;
@@ -95,7 +106,7 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(91, 733);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(72, 806);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(143, 44);
             this.btnCerrarSesion.TabIndex = 1;
@@ -105,7 +116,7 @@
             // 
             // btnDisponibilidad
             // 
-            this.btnDisponibilidad.Location = new System.Drawing.Point(91, 118);
+            this.btnDisponibilidad.Location = new System.Drawing.Point(55, 151);
             this.btnDisponibilidad.Name = "btnDisponibilidad";
             this.btnDisponibilidad.Size = new System.Drawing.Size(149, 44);
             this.btnDisponibilidad.TabIndex = 3;
@@ -115,7 +126,7 @@
             // 
             // btnCitas
             // 
-            this.btnCitas.Location = new System.Drawing.Point(91, 448);
+            this.btnCitas.Location = new System.Drawing.Point(55, 481);
             this.btnCitas.Name = "btnCitas";
             this.btnCitas.Size = new System.Drawing.Size(149, 44);
             this.btnCitas.TabIndex = 2;
@@ -125,7 +136,7 @@
             // 
             // btnServicios
             // 
-            this.btnServicios.Location = new System.Drawing.Point(91, 284);
+            this.btnServicios.Location = new System.Drawing.Point(55, 317);
             this.btnServicios.Name = "btnServicios";
             this.btnServicios.Size = new System.Drawing.Size(149, 44);
             this.btnServicios.TabIndex = 1;
@@ -135,7 +146,7 @@
             // 
             // btnClientes
             // 
-            this.btnClientes.Location = new System.Drawing.Point(91, 195);
+            this.btnClientes.Location = new System.Drawing.Point(55, 228);
             this.btnClientes.Name = "btnClientes";
             this.btnClientes.Size = new System.Drawing.Size(149, 44);
             this.btnClientes.TabIndex = 1;
@@ -150,9 +161,10 @@
             this.panelContenido.Controls.Add(this.btnBackupFull);
             this.panelContenido.Controls.Add(this.btnBackupDifferential);
             this.panelContenido.Controls.Add(this.btnBackupLog);
-            this.panelContenido.Location = new System.Drawing.Point(393, -12);
+            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenido.Location = new System.Drawing.Point(0, 0);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1027, 976);
+            this.panelContenido.Size = new System.Drawing.Size(1524, 935);
             this.panelContenido.TabIndex = 1;
             // 
             // btnSeleccionarCarpt
@@ -204,16 +216,6 @@
             this.btnBackupLog.Text = "incremental";
             this.btnBackupLog.UseVisualStyleBackColor = true;
             this.btnBackupLog.Click += new System.EventHandler(this.btnBackupLog_Click_1);
-            // 
-            // btnInicio
-            // 
-            this.btnInicio.Location = new System.Drawing.Point(261, 195);
-            this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(98, 73);
-            this.btnInicio.TabIndex = 5;
-            this.btnInicio.Text = "Inicio";
-            this.btnInicio.UseVisualStyleBackColor = true;
-            this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
             // 
             // FrmPrincipal
             // 

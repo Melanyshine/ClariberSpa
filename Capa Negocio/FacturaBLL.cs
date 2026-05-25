@@ -9,7 +9,7 @@ namespace CapaNegocio
     {
         FacturaDAL dal = new FacturaDAL();
 
-      
+
         public DataTable Listar()
         {
             return dal.MostrarFacturas();
@@ -40,7 +40,7 @@ namespace CapaNegocio
                 f.estado_pago);
         }
 
-       
+
         public void Eliminar(int id_factura)
         {
             if (id_factura <= 0)
@@ -49,5 +49,15 @@ namespace CapaNegocio
 
             dal.EliminarFactura(id_factura);
         }
+
+        public void ActualizarEstado(
+            int idFactura,
+            string estado)
+        {
+            dal.ActualizarFactura(
+                idFactura,
+                estado);
+        }
     }
+
 }

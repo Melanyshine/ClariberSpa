@@ -11,7 +11,7 @@ namespace CapaDatos
     {
         
         private static string cadena =
-            "Server=localhost;Database=ClaribetSpa;Integrated Security=true;";
+            "Server=DESKTOP-8GIEJA0\\SQLEXPRESS;Database=ClaribetSpa;Integrated Security=true;";
 
       
         public static SqlConnection ObtenerConexion()

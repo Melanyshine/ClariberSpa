@@ -58,33 +58,31 @@ namespace CapaDatos
         // ACTUALIZAR
         // =========================
         public void ActualizarFactura(
-            int id_factura,
-            string estado_pago)
+     int idFactura,
+     string estado)
         {
-            SqlConnection con =
-                Conexion.ObtenerConexion();
+            using (SqlConnection con =
+                Conexion.ObtenerConexion())
+            {
+                con.Open();
 
-            con.Open();
+                SqlCommand cmd =
+                    new SqlCommand(
+                        @"UPDATE Factura
+                  SET estado_pago = @estado
+                  WHERE id_factura = @id",
+                        con);
 
-            SqlCommand cmd =
-                new SqlCommand(
-                    "sp_factura_actualizar",
-                    con);
+                cmd.Parameters.AddWithValue(
+                    "@estado",
+                    estado);
 
-            cmd.CommandType =
-                CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue(
+                    "@id",
+                    idFactura);
 
-            cmd.Parameters.AddWithValue(
-                "@id_factura",
-                id_factura);
-
-            cmd.Parameters.AddWithValue(
-                "@estado_pago",
-                estado_pago);
-
-            cmd.ExecuteNonQuery();
-
-            con.Close();
+                cmd.ExecuteNonQuery();
+            }
         }
 
         // =========================
@@ -114,5 +112,7 @@ namespace CapaDatos
 
             con.Close();
         }
+
+
     }
 }
