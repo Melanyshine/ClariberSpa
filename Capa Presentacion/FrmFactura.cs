@@ -27,11 +27,10 @@ namespace Capa_Presentacion
 
         public FrmFactura() { InitializeComponent(); }
 
-        // =========================
-        // LOAD
-        // =========================
+     
         private void FrmFacturaPagos_Load(object sender, EventArgs e)
         {
+
 
             nudCantidad.ValueChanged += nudCantidad_ValueChanged;
             this.WindowState = FormWindowState.Maximized;
@@ -39,7 +38,10 @@ namespace Capa_Presentacion
 
             // Eventos buscador
             txtBuscar.TextChanged += txtBuscar_TextChanged;
+            btnHistorial.Click += btnHistorial_Click;
             btnBuscar.Click += btnBuscar_Click;
+
+
             cbFiltroFactura.SelectedIndexChanged += cbFiltroFactura_SelectedIndexChanged;
 
            
@@ -111,8 +113,10 @@ namespace Capa_Presentacion
             cbFiltroFactura.Items.Add("Todas");
             DataTable dt = facturaBLL.Listar();
             foreach (DataRow fila in dt.Rows)
-                cbFiltroFactura.Items.Add(
-                    fila["id_factura"].ToString());
+            {
+                if (fila["estado_pago"].ToString() == "Pendiente")
+                    cbFiltroFactura.Items.Add(fila["id_factura"].ToString());
+            }
             cbFiltroFactura.SelectedIndex = 0;
         }
 
@@ -155,8 +159,9 @@ namespace Capa_Presentacion
         // =========================
         void MostrarFacturas()
         {
-            DataTable dt = facturaBLL.Listar();
-            dgvDetalle.DataSource = dt;
+            DataView vista = facturaBLL.Listar().DefaultView;
+            vista.RowFilter = "estado_pago = 'Pendiente'";
+            dgvDetalle.DataSource = vista;
             dgvDetalle.Visible = true;
             dgvDetalle.BringToFront();
             OcultarColumnas();
@@ -167,32 +172,20 @@ namespace Capa_Presentacion
         // =========================
         void BuscarFacturas()
         {
-            DataView vista =
-                facturaBLL.Listar().DefaultView;
-
-            string filtro = "";
+            DataView vista = facturaBLL.Listar().DefaultView;
+            string filtro = "estado_pago = 'Pendiente'";
 
             if (cbFiltroFactura.SelectedIndex > 0)
-                filtro =
-                    $"id_factura = {cbFiltroFactura.SelectedItem}";
+                filtro += $" AND id_factura = {cbFiltroFactura.SelectedItem}";
 
             string texto = txtBuscar.Text.Trim();
-
             if (!string.IsNullOrEmpty(texto))
-            {
-                string tf =
-                    $"estado_pago LIKE '%{texto}%'";
-
-                filtro = string.IsNullOrEmpty(filtro)
-                    ? tf
-                    : filtro + " AND " + tf;
-            }
+                filtro += $" AND cliente LIKE '%{texto}%'";
 
             vista.RowFilter = filtro;
             dgvDetalle.DataSource = vista;
             OcultarColumnas();
         }
-
         void OcultarColumnas()
         {
             if (dgvDetalle.Columns.Contains("id_cliente"))
@@ -279,8 +272,7 @@ namespace Capa_Presentacion
 
             // Toma el ID de la fila seleccionada (ajusta el nombre de la columna)
             int idFactura = Convert.ToInt32(dgvDetalle.SelectedRows[0].Cells["id_factura"].Value);
-
-            FrmDetalleFactura frm = new FrmDetalleFactura();
+            FrmDetalleFactura frm = new FrmDetalleFactura(idFactura);
             frm.ShowDialog();
         }
 
@@ -359,21 +351,37 @@ namespace Capa_Presentacion
         // =========================
         // GUARDAR
         // =========================
-        private void btnGuardar_Click(
-            object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!ValidarCampos()) return;
 
             try
             {
                 Factura f = ObtenerFacturaDesdeCampos();
-                facturaBLL.Guardar(f);
+                int idNuevaFactura = facturaBLL.Guardar(f);
 
-                MessageBox.Show(
-                    "✅ Pago registrado correctamente.",
-                    "Éxito",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                // Obtener id_servicio desde Detalle_Cita
+                int idCita = Convert.ToInt32(cbCita.SelectedValue);
+                DataTable dtDetalleCita = new DetalleCitas_BLL().ObtenerPorCita(idCita);
+
+                decimal monto = Convert.ToDecimal(txtMonto.Text);
+                int cantidad = Convert.ToInt32(nudCantidad.Value);
+
+                foreach (DataRow fila in dtDetalleCita.Rows)
+                {
+                    Detalle_Factura detalle = new Detalle_Factura
+                    {
+                        id_factura = idNuevaFactura,
+                        id_servicio = Convert.ToInt32(fila["id_servicio"]),
+                        descripcion = txtServicios.Text,
+                        cantidad = cantidad,
+                        subtotal = monto * cantidad
+                    };
+                    detalleBLL.Guardar(detalle);
+                }
+
+                MessageBox.Show("✅ Pago registrado correctamente.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CargarFiltro();
                 MostrarFacturas();
@@ -381,61 +389,41 @@ namespace Capa_Presentacion
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         // =========================
         // ACTUALIZAR
         // =========================
-        private void btnActualizar_Click(
-            object sender, EventArgs e)
+        private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (dgvDetalle.CurrentRow == null)
             {
-                MessageBox.Show(
-                    "⚠️ Selecciona una factura de la tabla.",
-                    "Sin selección",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBox.Show("⚠️ Selecciona una factura de la tabla.", "Sin selección",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (!ValidarCampos()) return;
 
             try
             {
                 Factura f = ObtenerFacturaDesdeCampos();
-
-                f.id_factura = Convert.ToInt32(
-                    dgvDetalle.CurrentRow
-                               .Cells["id_factura"].Value);
-
+                f.id_factura = Convert.ToInt32(dgvDetalle.CurrentRow.Cells["id_factura"].Value);
                 facturaBLL.Actualizar(f);
 
-                MessageBox.Show(
-                    "✅ Factura actualizada.",
-                    "Éxito",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MessageBox.Show("✅ Factura actualizada.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 MostrarFacturas();
                 LimpiarCampos();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         // =========================
         // ELIMINAR
         // =========================
@@ -496,7 +484,6 @@ namespace Capa_Presentacion
             cbMetodoPago.SelectedIndex = -1;
             cbEstado.SelectedIndex = 0;
             dtpFecha.Value = DateTime.Today;
-            txtReferencia.Clear();
             txtNotas.Clear();
             dgvDetalle.ClearSelection();
         }
@@ -535,9 +522,9 @@ namespace Capa_Presentacion
             // Labels del formulario
             foreach (Label lbl in new[]
             {
-                lblCita, lblCliente, lblServicios,
+                lblCita, lblCliente, lblServicio,
                 lblEmpleado, lblMonto, lblMetodoPago,
-                lblFecha, lblEstado, lblReferencia, lblNotas
+                lblFecha, lblEstado,lblNotas
             })
             {
                 lbl.ForeColor = Color.Black;
@@ -567,7 +554,7 @@ namespace Capa_Presentacion
 
             // Campos editables
             foreach (TextBox txt in new[]
-            { txtReferencia, txtNotas })
+            { txtNotas })
             {
                 txt.BackColor = Color.White;
                 txt.ForeColor = Color.Black;
@@ -590,6 +577,7 @@ namespace Capa_Presentacion
             cbFiltroFactura.Font = new Font("Segoe UI", 9F);
 
             // Botones
+            EstilarBoton(btnHistorial, colorBeige, colorVino, negrita: true);
             EstilarBoton(btnGuardar, colorVino, Color.White, negrita: true);
             EstilarBoton(btnActualizar, colorVino, Color.White, negrita: true);
             EstilarBoton(btnEliminar, colorBeige, colorRosado);
@@ -645,6 +633,12 @@ namespace Capa_Presentacion
             decimal monto = 0;
             decimal.TryParse(txtMonto.Text, out monto);
             lblSubtotal.Text = "RD$ " + (nudCantidad.Value * monto).ToString("N2");
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            FrmHistorialFacturas frm = new FrmHistorialFacturas();
+            frm.ShowDialog();
         }
     }
 }

@@ -15,29 +15,16 @@ namespace CapaNegocio
             return dal.MostrarFacturas();
         }
 
-        public void Guardar(Factura f)
+        public int Guardar(Factura f)
         {
             if (f.id_cliente <= 0)
-                throw new Exception(
-                    "Debe seleccionar un cliente.");
-
+                throw new Exception("Debe seleccionar un cliente.");
             if (string.IsNullOrWhiteSpace(f.metodo_pago))
-                throw new Exception(
-                    "El método de pago es obligatorio.");
-
+                throw new Exception("El método de pago es obligatorio.");
             if (string.IsNullOrWhiteSpace(f.estado_pago))
-                throw new Exception(
-                    "El estado de pago es obligatorio.");
-
-            dal.InsertarFactura(
-                f.id_cliente,
-                f.fecha_factura,
-                f.total,
-                f.metodo_pago,
-                f.estado_pago);
+                throw new Exception("El estado de pago es obligatorio.");
+            return dal.InsertarFactura(f.id_cliente, f.fecha_factura, f.total, f.metodo_pago, f.estado_pago);
         }
-
-     
         public void Actualizar(Factura f)
         {
             if (f.id_factura <= 0)

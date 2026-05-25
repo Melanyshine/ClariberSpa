@@ -94,6 +94,12 @@
     <Compile Include="FrmHistorialCitas.Designer.cs">
       <DependentUpon>FrmHistorialCitas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHistorialFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHistorialFacturas.Designer.cs">
+      <DependentUpon>FrmHistorialFacturas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHistorialCitas.resx">
       <DependentUpon>FrmHistorialCitas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHistorialFacturas.resx">
+      <DependentUpon>FrmHistorialFacturas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>

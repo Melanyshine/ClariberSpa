@@ -72,5 +72,10 @@ namespace CapaNegocio
 
             dal.EliminarDetalle(id_detalle_factura);
         }
+
+        public DataTable ObtenerPorFactura(int idFactura)
+        {
+            return dal.ObtenerPorFactura(idFactura);
+        }
     }
 }

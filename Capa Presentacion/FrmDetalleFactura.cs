@@ -35,40 +35,29 @@ namespace Capa_Presentacion
         // =========================
         // CONSTRUCTOR
         // =========================
-        public FrmDetalleFactura()
+        private int _idFactura;
+
+        public FrmDetalleFactura(int idFactura)
         {
             InitializeComponent();
+            _idFactura = idFactura;
         }
 
-        // =========================
-        // LOAD
-        // =========================
-        private void FrmDetalleFactura_Load(
-            object sender,
-            EventArgs e)
+        private void FrmDetalleFactura_Load(object sender, EventArgs e)
         {
-            this.WindowState =
-                FormWindowState.Maximized;
-
+            this.WindowState = FormWindowState.Maximized;
             AplicarDiseno();
 
-            // =====================
-            // COMBO FILTRO
-            // =====================
-
             cbFiltro.Items.Clear();
-
             cbFiltro.Items.Add("Factura");
             cbFiltro.Items.Add("Servicio");
             cbFiltro.Items.Add("Descripcion");
-
             cbFiltro.SelectedIndex = 0;
 
-            // =====================
-            // MOSTRAR DATOS
-            // =====================
-
-            MostrarDetalle();
+            // Cargar solo los detalles de esa factura
+            tablaDetalle = detalleBLL.ObtenerPorFactura(_idFactura);
+            dgvDetalle.DataSource = tablaDetalle;
+            OcultarColumnas();
         }
 
         // =========================

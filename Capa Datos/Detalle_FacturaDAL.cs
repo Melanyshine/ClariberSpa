@@ -143,5 +143,22 @@ namespace CapaDatos
 
             con.Close();
         }
+
+        public DataTable ObtenerPorFactura(int idFactura)
+        {
+            SqlConnection con = Conexion.ObtenerConexion();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("sp_detalle_factura_listar", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+
+            // Filtrar por idFactura
+            DataView vista = dt.DefaultView;
+            vista.RowFilter = $"id_factura = {idFactura}";
+            return vista.ToTable();
+        }
     }
 }

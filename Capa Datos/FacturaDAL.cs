@@ -38,49 +38,20 @@ namespace CapaDatos
         // =========================
         // INSERTAR
         // =========================
-        public void InsertarFactura(
-            int id_cliente,
-            DateTime fecha_factura,
-            decimal total,
-            string metodo_pago,
-            string estado_pago)
+        public int InsertarFactura(int id_cliente, DateTime fecha_factura, decimal total, string metodo_pago, string estado_pago)
         {
-            SqlConnection con =
-                Conexion.ObtenerConexion();
-
+            SqlConnection con = Conexion.ObtenerConexion();
             con.Open();
-
-            SqlCommand cmd =
-                new SqlCommand(
-                    "sp_factura_insertar",
-                    con);
-
-            cmd.CommandType =
-                CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue(
-                "@id_cliente",
-                id_cliente);
-
-            cmd.Parameters.AddWithValue(
-                "@fecha_factura",
-                fecha_factura);
-
-            cmd.Parameters.AddWithValue(
-                "@total",
-                total);
-
-            cmd.Parameters.AddWithValue(
-                "@metodo_pago",
-                metodo_pago);
-
-            cmd.Parameters.AddWithValue(
-                "@estado_pago",
-                estado_pago);
-
-            cmd.ExecuteNonQuery();
-
+            SqlCommand cmd = new SqlCommand("sp_factura_insertar", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id_cliente", id_cliente);
+            cmd.Parameters.AddWithValue("@fecha_factura", fecha_factura);
+            cmd.Parameters.AddWithValue("@total", total);
+            cmd.Parameters.AddWithValue("@metodo_pago", metodo_pago);
+            cmd.Parameters.AddWithValue("@estado_pago", estado_pago);
+            int idNuevo = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
+            return idNuevo;
         }
 
         // =========================
