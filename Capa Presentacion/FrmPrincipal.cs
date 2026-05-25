@@ -112,7 +112,7 @@ namespace Capa_Presentacion
                 "🕒 Disponibilidad";
 
             btnFactura.Text =
-                "🧾  Factura";
+                "🧾 Factura";
 
             btnCerrarSesion.Text =
                 "↩ Cerrar Sesión";

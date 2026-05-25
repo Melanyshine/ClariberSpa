@@ -176,5 +176,23 @@ namespace CapaDatos
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public DataTable Login(string correo, string contrasena)
+        {
+            using (SqlConnection con = Conexion.ObtenerConexion())
+            {
+                SqlCommand cmd = new SqlCommand("SP_Login", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@correo", correo);
+                cmd.Parameters.AddWithValue("@contraseña", contrasena);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
     }
 }
