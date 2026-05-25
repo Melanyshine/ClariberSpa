@@ -477,7 +477,7 @@ namespace Capa_Presentacion
             lblPrecio.Font =
                 new Font(
                     "Georgia",
-                    20F,
+                    16F,
                     FontStyle.Bold);
 
             // =========================================

@@ -549,7 +549,7 @@ namespace Capa_Presentacion
             nudCantidad.ForeColor = Color.FromArgb(70, 50, 48);
 
             lblSubtotal.ForeColor = COLOR_ROSADO;
-            lblSubtotal.Font = new Font("Georgia", 15F, FontStyle.Bold);
+            lblSubtotal.Font = new Font("Georgia", 12F, FontStyle.Bold);
         }
 
         // --- Botones ----------------------------------------------------------

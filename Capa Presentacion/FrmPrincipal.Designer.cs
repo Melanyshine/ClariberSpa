@@ -58,9 +58,9 @@
             // 
             // btnFactura
             // 
-            this.btnFactura.Location = new System.Drawing.Point(97, 525);
+            this.btnFactura.Location = new System.Drawing.Point(91, 525);
             this.btnFactura.Name = "btnFactura";
-            this.btnFactura.Size = new System.Drawing.Size(143, 44);
+            this.btnFactura.Size = new System.Drawing.Size(149, 44);
             this.btnFactura.TabIndex = 0;
             this.btnFactura.Text = "Factura";
             this.btnFactura.UseVisualStyleBackColor = true;
