@@ -145,12 +145,14 @@
             // 
             // txtCorreo
             // 
+           
             this.txtCorreo.ForeColor = System.Drawing.Color.Gray;
             this.txtCorreo.Location = new System.Drawing.Point(67, 218);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(473, 26);
             this.txtCorreo.TabIndex = 18;
             this.txtCorreo.Text = "Correo Electronico o Usuario";
+
             this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
             // 
             // txtContraseña
@@ -213,7 +215,7 @@
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Inicio_Load_1);
+            this.Load += new System.EventHandler(this.Inicio_Load);
             this.panelFormulario.ResumeLayout(false);
             this.panelFormulario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicFondo)).EndInit();

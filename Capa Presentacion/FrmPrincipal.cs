@@ -73,12 +73,32 @@ namespace Capa_Presentacion
             btnFactura.Text = "🧾 Factura";
             btnCerrarSesion.Text = "↩ Cerrar Sesión";
 
+<<<<<<< HEAD
             // TEXTOS BACKUP
             btnBackupFull.Text = "💾 Backup Full";
             btnBackupDifferential.Text = "🗂 Backup Differential";
             btnBackupLog.Text = "📦 Backup Incremental";
             btnRestoreBackup.Text = "♻ Restaurar Backup";
             btnSeleccionarCarpt.Text = "📁 Seleccionar Carpeta";
+=======
+            btnServicios.Text =
+                "🌸 Servicios";
+
+            btnUsuario.Text =
+                "👥 Usuarios";
+
+            btnCitas.Text =
+                "📅 Citas";
+
+            btnDisponibilidad.Text =
+                "🕒 Disponibilidad";
+
+            btnFactura.Text =
+                "🧾 Factura";
+
+            btnCerrarSesion.Text =
+                "↩ Cerrar Sesión";
+>>>>>>> e34d078f2ff80be6273d335fe1b4f89af5cf5e78
         }
 
         // =========================================

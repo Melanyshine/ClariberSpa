@@ -10,12 +10,11 @@ namespace CapaNegocio
     {
         UsuarioDAL dal = new UsuarioDAL();
         UsuarioDAL objDAL = new UsuarioDAL();
+
         public int ObtenerSiguienteId()
         {
             return objDAL.ObtenerSiguienteId();
         }
-
-
 
         // =========================
         // LISTAR USUARIOS
@@ -56,5 +55,15 @@ namespace CapaNegocio
         {
             dal.EliminarUsuario(id);
         }
+
+        // =========================
+        // LOGIN
+        // =========================
+        public DataTable Login(string correo, string contrasena)
+        {
+            return objDAL.Login(correo, contrasena);
+        }
+
+
     }
 }

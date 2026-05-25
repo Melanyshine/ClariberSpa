@@ -1,38 +1,37 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using CapaNegocio;
 
 namespace Capa_Presentacion
 {
     public partial class Inicio : Form
     {
-        // ======================================================================================
-        // CADENA DE CONEXIÓN PERFECTA Y CORREGIDA PARA TU COMPUTADORA
-        // ======================================================================================
-        private readonly string cadenaConexion = "Data Source=localhost;Initial Catalog=ClaribetSpa;Integrated Security=True";
+        // =============================================
+        // CAMPOS DE CLASE
+        // =============================================
+        UsuarioBLL negocio = new UsuarioBLL();
 
-        // Paleta de colores personalizada de Claribet Beauty Center & Spa
-        private readonly Color colorFondoFormulario = Color.FromArgb(245, 240, 238);
-        private readonly Color colorTarjeta = Color.White;
-        private readonly Color colorBoton = Color.FromArgb(140, 79, 94);
-        private readonly Color colorTexto = Color.FromArgb(92, 68, 67);
+        Color colorFondoFormulario = Color.FromArgb(245, 240, 238);
+        Color colorTarjeta = Color.White;
+        Color colorBoton = Color.FromArgb(140, 79, 94);
+        Color colorTexto = Color.FromArgb(92, 68, 67);
 
+        // =============================================
+        // CONSTRUCTOR
+        // =============================================
         public Inicio()
         {
             InitializeComponent();
-
-            // Forzamos los enlaces de los eventos principales para asegurar el funcionamiento
-            this.Load += new System.EventHandler(this.Inicio_Load);
-            btnInicioSesion.Click += new System.EventHandler(this.btnInicioSesion_Click);
-            linkOlvidoPassword.Click += new System.EventHandler(this.lblOlvideContraseña_Click);
         }
 
+        // =============================================
+        // CARGA DEL FORMULARIO
+        // =============================================
         private void Inicio_Load(object sender, EventArgs e)
         {
-            // 1. Configuración de la Ventana Maximada sin bordes molestos
             this.WindowState = FormWindowState.Maximized;
             this.FormBorderStyle = FormBorderStyle.None;
             this.BackColor = colorFondoFormulario;
@@ -40,193 +39,119 @@ namespace Capa_Presentacion
             if (PicFondo != null)
                 PicFondo.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            // 2. Aplicar Diseño y Bordes Redondeados a tu panel gris
-            EstilarFormulario();
-            EstilarControles();
-            panelFormulario.Paint += new PaintEventHandler(DibujarBordesRedondeados);
+            AplicarDiseno();
+            InicializarPlaceholders();
+            CargarRoles();
+
+            panelFormulario.Paint += DibujarBordesRedondeados;
             panelFormulario.Invalidate();
 
-            // 3. Inicializar Placeholders (Efecto de abrir/cerrar texto en los cuadros)
-            InicializarPlaceholders();
-
-            // 4. Llenar el ComboBox de Roles con tus roles reales de SQL Server
-            CargarRolesDesdeBD();
+            btnInicioSesion.Click += btnInicioSesion_Click;
+            linkOlvidoPassword.Click += linkOlvidoPassword_Click;
         }
 
-        // =================================================
-        // CONEXIÓN A LA BASE DE DATOS Y LÓGICA DEL LOGIN
-        // ================================================
-
+        // =============================================
+        // INICIO DE SESIÓN
+        // =============================================
         private void btnInicioSesion_Click(object sender, EventArgs e)
         {
-            // VALIDAR CAMPOS
-            if (!ValidarCampos())
-                return;
+            if (!ValidarCampos()) return;
 
-            string correoIngresado =
-                txtCorreo.Text.Trim();
+            string correo = txtCorreo.Text.Trim();
+            string password = txtContraseña.Text.Trim();
+            string rol = cmbRol.SelectedItem.ToString();
 
-            string contraseñaIngresada =
-                txtContraseña.Text.Trim();
-
-            string rolSeleccionado =
-                cmbRol.SelectedItem.ToString();
-
-            using (SqlConnection conexion =
-                new SqlConnection(cadenaConexion))
+            try
             {
-                try
+                DataTable resultado = negocio.Login(correo, password);
+
+                if (resultado.Rows.Count == 0)
                 {
-                    conexion.Open();
-
-                    using (SqlCommand comando =
-                        new SqlCommand(
-                            "SP_Login",
-                            conexion))
-                    {
-                        comando.CommandType =
-                            CommandType.StoredProcedure;
-
-                        comando.Parameters.AddWithValue(
-                            "@correo",
-                            correoIngresado);
-
-                        comando.Parameters.AddWithValue(
-                            "@contraseña",
-                            contraseñaIngresada);
-
-                        using (SqlDataReader lector =
-                            comando.ExecuteReader())
-                        {
-                            if (lector.Read())
-                            {
-                                string rolBD =
-                                    lector["nombre_rol"].ToString();
-
-                                string nombreUsuario =
-                                    lector["nombre"].ToString()
-                                    + " "
-                                    + lector["apellido"].ToString();
-
-                                // VALIDAR ROL
-                                if (rolBD.Equals(
-                                    rolSeleccionado,
-                                    StringComparison.OrdinalIgnoreCase))
-                                {
-                                    MessageBox.Show(
-                                        "Bienvenido(a) "
-                                        + nombreUsuario,
-                                        "Inicio Correcto",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Information);
-
-                                    // =====================================
-                                    // ABRIR FORM PRINCIPAL
-                                    // =====================================
-
-                                    FrmPrincipal frm =
-                                        new FrmPrincipal();
-
-                                    frm.Show();
-
-                                    // OCULTAR LOGIN
-                                    this.Hide();
-                                }
-                                else
-                                {
-                                    MessageBox.Show(
-                                        "El rol no coincide.",
-                                        "Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Warning);
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show(
-                                    "Correo o contraseña incorrectos.",
-                                    "Error",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
-                            }
-                        }
-                    }
+                    MostrarAlerta("Correo o contraseña incorrectos.", "Acceso denegado", MessageBoxIcon.Error);
+                    return;
                 }
-                catch (Exception ex)
+
+                DataRow fila = resultado.Rows[0];
+                string rolBD = fila["nombre_rol"].ToString();
+                string nombre = fila["nombre"].ToString() + " " + fila["apellido"].ToString();
+
+                if (!rolBD.Equals(rol, StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show(
-                        ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    MostrarAlerta("El rol seleccionado no coincide con su cuenta.", "Rol incorrecto", MessageBoxIcon.Warning);
+                    return;
                 }
+
+                MessageBox.Show("Bienvenido(a) " + nombre, "Inicio correcto",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                FrmPrincipal frm = new FrmPrincipal();
+                frm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta(ex.Message, "Error de conexión", MessageBoxIcon.Error);
             }
         }
 
-        // Carga tus roles dinámicamente mapeando la tabla 'Roles'
-        private void CargarRolesDesdeBD()
+        // =============================================
+        // CARGAR ROLES
+        // =============================================
+        private void CargarRoles()
         {
-            cmbRol.Items.Clear();
-
-            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            try
             {
-                string consulta = "SELECT nombre_rol FROM Roles";
-                SqlCommand comando = new SqlCommand(consulta, conexion);
+                DataTable roles = negocio.ListarRoles();
+                cmbRol.Items.Clear();
 
-                try
-                {
-                    conexion.Open();
-                    SqlDataReader lector = comando.ExecuteReader();
+                foreach (DataRow fila in roles.Rows)
+                    cmbRol.Items.Add(fila["nombre_rol"].ToString());
 
-                    while (lector.Read())
-                    {
-                        cmbRol.Items.Add(lector["nombre_rol"].ToString());
-                    }
-
-                    cmbRol.SelectedIndex = -1; // Dejarlo vacío al inicio
-                }
-                catch (Exception ex)
-                {
-                    // Alerta por si hay un error al conectar con la BD
-                    MessageBox.Show("Error de conexión al cargar los roles: " + ex.Message,
-                                    "Alerta del Sistema",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error);
-                }
+                cmbRol.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta("Error al cargar los roles: " + ex.Message,
+                              "Alerta del sistema", MessageBoxIcon.Error);
             }
         }
 
-        // Lógica del link ¿Olvidaste tu contraseña?
-        private void lblOlvideContraseña_Click(object sender, EventArgs e)
+        // =============================================
+        // OLVIDÉ MI CONTRASEÑA
+        // =============================================
+        private void linkOlvidoPassword_Click(object sender, EventArgs e)
         {
-            string correo = (txtCorreo.Text != "Correo electrónico o usuario") ? txtCorreo.Text : "";
+            string correo = (txtCorreo.Text != "Correo electrónico o usuario")
+                            ? txtCorreo.Text : "";
 
-            MessageBox.Show($"Se ha enviado un enlace de restablecimiento al correo: {correo}\n\nSi el campo está vacío, por favor escriba su correo en el recuadro superior antes de presionar este enlace.",
-                "Restablecer Contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                "Se ha enviado un enlace de restablecimiento al correo: " + correo +
+                "\n\nSi el campo está vacío, escríbalo antes de presionar este enlace.",
+                "Restablecer contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // =================================================
-        // VALIDACIONES Y PLACEHOLDERS
-        // =================================================
+        // =============================================
+        // VALIDACIONES
+        // =============================================
         private bool ValidarCampos()
         {
             if (string.IsNullOrWhiteSpace(txtCorreo.Text) || txtCorreo.Text == "Correo electrónico o usuario")
             {
-                MostrarAlerta("Debe ingresar su correo electrónico o usuario.", "Campo Requerido", MessageBoxIcon.Warning);
+                MostrarAlerta("Debe ingresar su correo electrónico.", "Campo requerido", MessageBoxIcon.Warning);
                 txtCorreo.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txtContraseña.Text) || txtContraseña.Text == "Contraseña")
             {
-                MostrarAlerta("Debe ingresar su contraseña.", "Campo Requerido", MessageBoxIcon.Warning);
+                MostrarAlerta("Debe ingresar su contraseña.", "Campo requerido", MessageBoxIcon.Warning);
                 txtContraseña.Focus();
                 return false;
             }
 
             if (cmbRol.SelectedIndex == -1)
             {
-                MostrarAlerta("Debe seleccionar su rol correspondiente para ingresar.", "Campo Requerido", MessageBoxIcon.Warning);
+                MostrarAlerta("Debe seleccionar su rol.", "Campo requerido", MessageBoxIcon.Warning);
                 cmbRol.Focus();
                 return false;
             }
@@ -234,68 +159,50 @@ namespace Capa_Presentacion
             return true;
         }
 
-        private void InicializarPlaceholders()
-        {
-            txtCorreo.Text = "Correo electrónico o usuario";
-            txtCorreo.ForeColor = Color.Gray;
-            txtContraseña.Text = "Contraseña";
-            txtContraseña.ForeColor = Color.Gray;
-            txtContraseña.UseSystemPasswordChar = false;
-
-            // Al hacer clic en el correo
-            txtCorreo.Enter += (s, e) => {
-                if (txtCorreo.Text == "Correo electrónico o usuario")
-                {
-                    txtCorreo.Text = "";
-                    txtCorreo.ForeColor = colorTexto;
-                }
-            };
-
-            // Al salir del correo
-            txtCorreo.Leave += (s, e) => {
-                if (string.IsNullOrWhiteSpace(txtCorreo.Text))
-                {
-                    txtCorreo.Text = "Correo electrónico o usuario";
-                    txtCorreo.ForeColor = Color.Gray;
-                }
-            };
-
-            // Al hacer clic en la contraseña (Se abre el texto y se oculta con puntitos)
-            txtContraseña.Enter += (s, e) => {
-                if (txtContraseña.Text == "Contraseña")
-                {
-                    txtContraseña.Text = "";
-                    txtContraseña.ForeColor = colorTexto;
-                    txtContraseña.UseSystemPasswordChar = true;
-                }
-            };
-
-            // Al salir de la contraseña
-            txtContraseña.Leave += (s, e) => {
-                if (string.IsNullOrWhiteSpace(txtContraseña.Text))
-                {
-                    txtContraseña.UseSystemPasswordChar = false;
-                    txtContraseña.Text = "Contraseña";
-                    txtContraseña.ForeColor = Color.Gray;
-                }
-            };
-        }
-
         private void MostrarAlerta(string mensaje, string titulo, MessageBoxIcon icono)
         {
             MessageBox.Show(mensaje, titulo, MessageBoxButtons.OK, icono);
         }
 
-        // =================================================
-        // SECCIÓN DE DISEÑO VISUAL
-        // =================================================
-        private void EstilarFormulario()
+        // =============================================
+        // PLACEHOLDERS
+        // =============================================
+        private void InicializarPlaceholders()
         {
-            this.BackColor = colorFondoFormulario;
+            txtCorreo.Text = "Correo electrónico o usuario";
+            txtCorreo.ForeColor = Color.Gray;
+
+            txtContraseña.Text = "Contraseña";
+            txtContraseña.ForeColor = Color.Gray;
+            txtContraseña.UseSystemPasswordChar = false;
+
+            txtCorreo.Enter += (s, e) => {
+                if (txtCorreo.Text == "Correo electrónico o usuario")
+                { txtCorreo.Text = ""; txtCorreo.ForeColor = colorTexto; }
+            };
+
+            txtCorreo.Leave += (s, e) => {
+                if (string.IsNullOrWhiteSpace(txtCorreo.Text))
+                { txtCorreo.Text = "Correo electrónico o usuario"; txtCorreo.ForeColor = Color.Gray; }
+            };
+
+            txtContraseña.Enter += (s, e) => {
+                if (txtContraseña.Text == "Contraseña")
+                { txtContraseña.Text = ""; txtContraseña.ForeColor = colorTexto; txtContraseña.UseSystemPasswordChar = true; }
+            };
+
+            txtContraseña.Leave += (s, e) => {
+                if (string.IsNullOrWhiteSpace(txtContraseña.Text))
+                { txtContraseña.UseSystemPasswordChar = false; txtContraseña.Text = "Contraseña"; txtContraseña.ForeColor = Color.Gray; }
+            };
         }
 
-        private void EstilarControles()
+        // =============================================
+        // DISEÑO VISUAL
+        // =============================================
+        private void AplicarDiseno()
         {
+            this.BackColor = colorFondoFormulario;
             panelFormulario.BackColor = colorTarjeta;
 
             btnInicioSesion.FlatStyle = FlatStyle.Flat;
@@ -304,11 +211,11 @@ namespace Capa_Presentacion
             btnInicioSesion.ForeColor = Color.White;
             btnInicioSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
 
-            EstiloTextbox(txtCorreo);
-            EstiloTextbox(txtContraseña);
+            AplicarEstiloTextbox(txtCorreo);
+            AplicarEstiloTextbox(txtContraseña);
         }
 
-        private void EstiloTextbox(TextBox txt)
+        private void AplicarEstiloTextbox(TextBox txt)
         {
             txt.BorderStyle = BorderStyle.None;
             txt.BackColor = Color.White;
@@ -325,9 +232,7 @@ namespace Capa_Presentacion
             {
                 panel.Region = new Region(path);
                 using (SolidBrush brush = new SolidBrush(Color.White))
-                {
                     e.Graphics.FillPath(brush, path);
-                }
             }
         }
 
@@ -345,14 +250,8 @@ namespace Capa_Presentacion
             return path;
         }
 
-        private void Inicio_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtCorreo_TextChanged(object sender, EventArgs e)
         {
-
         }
     }
 }
