@@ -317,6 +317,23 @@ namespace Capa_Presentacion
             return true;
         }
 
+        bool ValidarCamposActualizar()
+        {
+            if (cbMetodoPago.SelectedIndex < 0)
+            {
+                MessageBox.Show("⚠️ Selecciona el método de pago.", "Campo requerido",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbMetodoPago.Focus(); return false;
+            }
+            if (cbEstado.SelectedIndex < 0)
+            {
+                MessageBox.Show("⚠️ Selecciona el estado.", "Campo requerido",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbEstado.Focus(); return false;
+            }
+            return true;
+        }
+
         // =========================
         // CONSTRUIR OBJETO FACTURA
         // =========================
@@ -404,12 +421,19 @@ namespace Capa_Presentacion
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!ValidarCampos()) return;
+            if (!ValidarCamposActualizar()) return;  // ← cambio aquí
 
             try
             {
-                Factura f = ObtenerFacturaDesdeCampos();
-                f.id_factura = Convert.ToInt32(dgvDetalle.CurrentRow.Cells["id_factura"].Value);
+                Factura f = new Factura
+                {
+                    id_factura = Convert.ToInt32(dgvDetalle.CurrentRow.Cells["id_factura"].Value),
+                    id_cliente = Convert.ToInt32(dgvDetalle.CurrentRow.Cells["id_cliente"].Value),
+                    fecha_factura = dtpFecha.Value,
+                    total = Convert.ToDecimal(txtMonto.Text),
+                    metodo_pago = cbMetodoPago.SelectedItem.ToString(),
+                    estado_pago = cbEstado.SelectedItem.ToString()
+                };
                 facturaBLL.Actualizar(f);
 
                 MessageBox.Show("✅ Factura actualizada.", "Éxito",
@@ -427,31 +451,30 @@ namespace Capa_Presentacion
         // =========================
         // ELIMINAR
         // =========================
-        private void btnEliminar_Click(
-            object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvDetalle.CurrentRow == null) return;
 
-            if (MessageBox.Show(
-                "¿Eliminar esta factura?",
-                "Confirmar",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show("¿Eliminar esta factura?", "Confirmar",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
             try
             {
-                int id = Convert.ToInt32(
-                    dgvDetalle.CurrentRow
-                               .Cells["id_factura"].Value);
+                int id = Convert.ToInt32(dgvDetalle.CurrentRow.Cells["id_factura"].Value);
 
+                // Primero eliminar los detalles
+                DataTable detalles = detalleBLL.ObtenerPorFactura(id);
+                foreach (DataRow fila in detalles.Rows)
+                {
+                    detalleBLL.Eliminar(Convert.ToInt32(fila["id_detalle_factura"]));
+                }
+
+                // Luego eliminar la factura
                 facturaBLL.Eliminar(id);
 
-                MessageBox.Show(
-                    "🗑 Factura eliminada.",
-                    "Éxito",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MessageBox.Show("🗑 Factura eliminada.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CargarFiltro();
                 MostrarFacturas();
@@ -459,11 +482,8 @@ namespace Capa_Presentacion
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error: " + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
