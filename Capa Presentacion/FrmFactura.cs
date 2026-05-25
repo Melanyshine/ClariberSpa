@@ -280,8 +280,8 @@ namespace Capa_Presentacion
             // Toma el ID de la fila seleccionada (ajusta el nombre de la columna)
             int idFactura = Convert.ToInt32(dgvDetalle.SelectedRows[0].Cells["id_factura"].Value);
 
-            FrmDetalleFactura frmDetalle = new FrmDetalleFactura(idFactura); 
-            frmDetalle.ShowDialog();
+            FrmDetalleFactura frm = new FrmDetalleFactura();
+            frm.ShowDialog();
         }
 
         // =========================
