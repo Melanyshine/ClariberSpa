@@ -318,6 +318,7 @@ ALTER DATABASE ClaribetSpa SET MULTI_USER;";
         private void btnInicio_Click(object sender, EventArgs e)
         {
             panelContenido.Controls.Clear();
+          
         }
     }
 }
