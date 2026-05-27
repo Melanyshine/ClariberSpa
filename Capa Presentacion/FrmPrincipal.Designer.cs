@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnConfiguracion = new System.Windows.Forms.Button();
             this.btnInicio = new System.Windows.Forms.Button();
             this.btnFactura = new System.Windows.Forms.Button();
             this.btnUsuario = new System.Windows.Forms.Button();
@@ -39,17 +40,12 @@
             this.btnServicios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.panelContenido = new System.Windows.Forms.Panel();
-            this.btnSeleccionarCarpt = new System.Windows.Forms.Button();
-            this.btnRestoreBackup = new System.Windows.Forms.Button();
-            this.btnBackupFull = new System.Windows.Forms.Button();
-            this.btnBackupDifferential = new System.Windows.Forms.Button();
-            this.btnBackupLog = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
-            this.panelContenido.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.btnConfiguracion);
             this.panelMenu.Controls.Add(this.btnInicio);
             this.panelMenu.Controls.Add(this.btnFactura);
             this.panelMenu.Controls.Add(this.btnUsuario);
@@ -65,11 +61,21 @@
             this.panelMenu.Size = new System.Drawing.Size(294, 935);
             this.panelMenu.TabIndex = 0;
             // 
+            // btnConfiguracion
+            // 
+            this.btnConfiguracion.Location = new System.Drawing.Point(55, 743);
+            this.btnConfiguracion.Name = "btnConfiguracion";
+            this.btnConfiguracion.Size = new System.Drawing.Size(160, 41);
+            this.btnConfiguracion.TabIndex = 0;
+            this.btnConfiguracion.Text = "Configuración";
+            this.btnConfiguracion.UseVisualStyleBackColor = true;
+            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
+            // 
             // btnInicio
             // 
-            this.btnInicio.Location = new System.Drawing.Point(55, 659);
+            this.btnInicio.Location = new System.Drawing.Point(55, 151);
             this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(149, 44);
+            this.btnInicio.Size = new System.Drawing.Size(160, 44);
             this.btnInicio.TabIndex = 5;
             this.btnInicio.Text = "Inicio";
             this.btnInicio.UseVisualStyleBackColor = true;
@@ -79,7 +85,7 @@
             // 
             this.btnFactura.Location = new System.Drawing.Point(55, 575);
             this.btnFactura.Name = "btnFactura";
-            this.btnFactura.Size = new System.Drawing.Size(149, 44);
+            this.btnFactura.Size = new System.Drawing.Size(160, 44);
             this.btnFactura.TabIndex = 0;
             this.btnFactura.Text = "Factura";
             this.btnFactura.UseVisualStyleBackColor = true;
@@ -89,7 +95,7 @@
             // 
             this.btnUsuario.Location = new System.Drawing.Point(55, 402);
             this.btnUsuario.Name = "btnUsuario";
-            this.btnUsuario.Size = new System.Drawing.Size(149, 44);
+            this.btnUsuario.Size = new System.Drawing.Size(160, 44);
             this.btnUsuario.TabIndex = 0;
             this.btnUsuario.Text = "Usuarios";
             this.btnUsuario.UseVisualStyleBackColor = true;
@@ -98,7 +104,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(26, 81);
+            this.lblTitulo.Location = new System.Drawing.Point(27, 55);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(51, 20);
             this.lblTitulo.TabIndex = 1;
@@ -106,9 +112,9 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(72, 806);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(55, 832);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(143, 44);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(160, 44);
             this.btnCerrarSesion.TabIndex = 1;
             this.btnCerrarSesion.Text = "Cerrar Sesión";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
@@ -116,9 +122,9 @@
             // 
             // btnDisponibilidad
             // 
-            this.btnDisponibilidad.Location = new System.Drawing.Point(55, 151);
+            this.btnDisponibilidad.Location = new System.Drawing.Point(55, 657);
             this.btnDisponibilidad.Name = "btnDisponibilidad";
-            this.btnDisponibilidad.Size = new System.Drawing.Size(149, 44);
+            this.btnDisponibilidad.Size = new System.Drawing.Size(160, 44);
             this.btnDisponibilidad.TabIndex = 3;
             this.btnDisponibilidad.Text = "Disponibilidad";
             this.btnDisponibilidad.UseVisualStyleBackColor = true;
@@ -126,9 +132,9 @@
             // 
             // btnCitas
             // 
-            this.btnCitas.Location = new System.Drawing.Point(55, 489);
+            this.btnCitas.Location = new System.Drawing.Point(55, 487);
             this.btnCitas.Name = "btnCitas";
-            this.btnCitas.Size = new System.Drawing.Size(149, 44);
+            this.btnCitas.Size = new System.Drawing.Size(160, 44);
             this.btnCitas.TabIndex = 2;
             this.btnCitas.Text = "Citas";
             this.btnCitas.UseVisualStyleBackColor = true;
@@ -138,7 +144,7 @@
             // 
             this.btnServicios.Location = new System.Drawing.Point(55, 317);
             this.btnServicios.Name = "btnServicios";
-            this.btnServicios.Size = new System.Drawing.Size(149, 44);
+            this.btnServicios.Size = new System.Drawing.Size(160, 44);
             this.btnServicios.TabIndex = 1;
             this.btnServicios.Text = "Servicios";
             this.btnServicios.UseVisualStyleBackColor = true;
@@ -148,7 +154,7 @@
             // 
             this.btnClientes.Location = new System.Drawing.Point(55, 228);
             this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(149, 44);
+            this.btnClientes.Size = new System.Drawing.Size(160, 44);
             this.btnClientes.TabIndex = 1;
             this.btnClientes.Text = "Clientes";
             this.btnClientes.UseVisualStyleBackColor = true;
@@ -156,66 +162,11 @@
             // 
             // panelContenido
             // 
-            this.panelContenido.Controls.Add(this.btnSeleccionarCarpt);
-            this.panelContenido.Controls.Add(this.btnRestoreBackup);
-            this.panelContenido.Controls.Add(this.btnBackupFull);
-            this.panelContenido.Controls.Add(this.btnBackupDifferential);
-            this.panelContenido.Controls.Add(this.btnBackupLog);
             this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContenido.Location = new System.Drawing.Point(0, 0);
             this.panelContenido.Name = "panelContenido";
             this.panelContenido.Size = new System.Drawing.Size(1524, 935);
             this.panelContenido.TabIndex = 1;
-            // 
-            // btnSeleccionarCarpt
-            // 
-            this.btnSeleccionarCarpt.Location = new System.Drawing.Point(912, 153);
-            this.btnSeleccionarCarpt.Name = "btnSeleccionarCarpt";
-            this.btnSeleccionarCarpt.Size = new System.Drawing.Size(75, 23);
-            this.btnSeleccionarCarpt.TabIndex = 4;
-            this.btnSeleccionarCarpt.Text = "Carpeta";
-            this.btnSeleccionarCarpt.UseVisualStyleBackColor = true;
-            this.btnSeleccionarCarpt.Click += new System.EventHandler(this.btnSeleccionarCarpt_Click);
-            // 
-            // btnRestoreBackup
-            // 
-            this.btnRestoreBackup.Location = new System.Drawing.Point(912, 115);
-            this.btnRestoreBackup.Name = "btnRestoreBackup";
-            this.btnRestoreBackup.Size = new System.Drawing.Size(75, 23);
-            this.btnRestoreBackup.TabIndex = 3;
-            this.btnRestoreBackup.Text = "Restaurar";
-            this.btnRestoreBackup.UseVisualStyleBackColor = true;
-            this.btnRestoreBackup.Click += new System.EventHandler(this.btnRestoreBackup_Click_1);
-            // 
-            // btnBackupFull
-            // 
-            this.btnBackupFull.Location = new System.Drawing.Point(912, 24);
-            this.btnBackupFull.Name = "btnBackupFull";
-            this.btnBackupFull.Size = new System.Drawing.Size(75, 23);
-            this.btnBackupFull.TabIndex = 2;
-            this.btnBackupFull.Text = "Full";
-            this.btnBackupFull.UseVisualStyleBackColor = true;
-            this.btnBackupFull.Click += new System.EventHandler(this.btnBackupFull_Click_1);
-            // 
-            // btnBackupDifferential
-            // 
-            this.btnBackupDifferential.Location = new System.Drawing.Point(912, 53);
-            this.btnBackupDifferential.Name = "btnBackupDifferential";
-            this.btnBackupDifferential.Size = new System.Drawing.Size(75, 23);
-            this.btnBackupDifferential.TabIndex = 1;
-            this.btnBackupDifferential.Text = "Diferencial";
-            this.btnBackupDifferential.UseVisualStyleBackColor = true;
-            this.btnBackupDifferential.Click += new System.EventHandler(this.btnBackupDifferential_Click_1);
-            // 
-            // btnBackupLog
-            // 
-            this.btnBackupLog.Location = new System.Drawing.Point(912, 82);
-            this.btnBackupLog.Name = "btnBackupLog";
-            this.btnBackupLog.Size = new System.Drawing.Size(75, 23);
-            this.btnBackupLog.TabIndex = 0;
-            this.btnBackupLog.Text = "incremental";
-            this.btnBackupLog.UseVisualStyleBackColor = true;
-            this.btnBackupLog.Click += new System.EventHandler(this.btnBackupLog_Click_1);
             // 
             // FrmPrincipal
             // 
@@ -229,7 +180,6 @@
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
-            this.panelContenido.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -237,20 +187,27 @@
         #endregion
 
         private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.Button btnCitas;
+
+        public System.Windows.Forms.Button btnCitas;
+
         private System.Windows.Forms.Button btnServicios;
+
         private System.Windows.Forms.Button btnClientes;
-        private System.Windows.Forms.Button btnDisponibilidad;
+
+        public System.Windows.Forms.Button btnDisponibilidad;
+
         private System.Windows.Forms.Button btnCerrarSesion;
+
         private System.Windows.Forms.Panel panelContenido;
+
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Button btnUsuario;
-        private System.Windows.Forms.Button btnFactura;
-        private System.Windows.Forms.Button btnBackupFull;
-        private System.Windows.Forms.Button btnBackupDifferential;
-        private System.Windows.Forms.Button btnBackupLog;
-        private System.Windows.Forms.Button btnSeleccionarCarpt;
-        private System.Windows.Forms.Button btnRestoreBackup;
+
+        public System.Windows.Forms.Button btnUsuario;
+
+        public System.Windows.Forms.Button btnFactura;
+
         private System.Windows.Forms.Button btnInicio;
+
+        public System.Windows.Forms.Button btnConfiguracion;
     }
 }

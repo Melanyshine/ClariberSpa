@@ -4,8 +4,6 @@ using CapaPresentacion;
 using Presentacion;
 using System;
 using System.Drawing;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Capa_Presentacion
@@ -16,15 +14,6 @@ namespace Capa_Presentacion
         {
             InitializeComponent();
         }
-
-        // =========================================
-        // CONEXIÓN Y RUTA BACKUP (GLOBAL)
-        // =========================================
-        string conexion =
-        @"Server=localhost;Database=ClaribetSpa;Integrated Security=true";
-
-        string rutaBackup =
-        @"C:\Backups";
 
         // =========================================
         // LOAD
@@ -46,59 +35,31 @@ namespace Capa_Presentacion
             lblTitulo.AutoSize = true;
             lblTitulo.BackColor = Color.Transparent;
 
-            // BOTONES MENU
+            // =========================================
+            // DISEÑO BOTONES
+            // =========================================
+            DiseñoBoton(btnInicio);
             DiseñoBoton(btnClientes);
             DiseñoBoton(btnServicios);
             DiseñoBoton(btnUsuario);
             DiseñoBoton(btnCitas);
             DiseñoBoton(btnDisponibilidad);
             DiseñoBoton(btnFactura);
-            DiseñoBoton(btnInicio);
+            DiseñoBoton(btnConfiguracion);
             DiseñoBoton(btnCerrarSesion);
 
-            // BOTONES BACKUP
-            DiseñoBoton(btnBackupFull);
-            DiseñoBoton(btnBackupDifferential);
-            DiseñoBoton(btnBackupLog);
-            DiseñoBoton(btnRestoreBackup);
-            DiseñoBoton(btnSeleccionarCarpt);
-
-            // TEXTOS MENU
+            // =========================================
+            // TEXTOS BOTONES
+            // =========================================
+            btnInicio.Text = "🏠 Inicio";
             btnClientes.Text = "👤 Clientes";
             btnServicios.Text = "🌸 Servicios";
-            btnInicio.Text = "🌸 Servicios";
             btnUsuario.Text = "👥 Usuarios";
             btnCitas.Text = "📅 Citas";
             btnDisponibilidad.Text = "🕒 Disponibilidad";
             btnFactura.Text = "🧾 Factura";
+            btnConfiguracion.Text = "⚙️ Configuración";
             btnCerrarSesion.Text = "↩ Cerrar Sesión";
-
-
-            // TEXTOS BACKUP
-            btnBackupFull.Text = "💾 Backup Full";
-            btnBackupDifferential.Text = "🗂 Backup Differential";
-            btnBackupLog.Text = "📦 Backup Incremental";
-            btnRestoreBackup.Text = "♻ Restaurar Backup";
-            btnSeleccionarCarpt.Text = "📁 Seleccionar Carpeta";
-
-            btnServicios.Text =
-                "🌸 Servicios";
-
-            btnUsuario.Text =
-                "👥 Usuarios";
-
-            btnCitas.Text =
-                "📅 Citas";
-
-            btnDisponibilidad.Text =
-                "🕒 Disponibilidad";
-
-            btnFactura.Text =
-                "🧾 Factura";
-
-            btnCerrarSesion.Text =
-                "↩ Cerrar Sesión";
-
         }
 
         // =========================================
@@ -134,113 +95,7 @@ namespace Capa_Presentacion
         }
 
         // =========================================
-        // BACKUP GENERAL
-        // =========================================
-        private void EjecutarBackup(string query, string mensaje)
-        {
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(conexion))
-                {
-                    cn.Open();
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.ExecuteNonQuery();
-                }
-
-                MessageBox.Show(mensaje, "BACKUP",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        // =========================================
-        // FULL BACKUP
-        // =========================================
-        private void btnBackupFull_Click(object sender, EventArgs e)
-        {
-            string ruta = $@"{rutaBackup}\FULL_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
-
-            string query = $@"
-BACKUP DATABASE ClaribetSpa
-TO DISK = '{ruta}'
-WITH FORMAT, INIT";
-
-            EjecutarBackup(query, "Backup FULL realizado");
-        }
-
-        // =========================================
-        // DIFFERENTIAL
-        // =========================================
-        private void btnBackupDifferential_Click(object sender, EventArgs e)
-        {
-            string ruta = $@"{rutaBackup}\DIFF_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
-
-            string query = $@"
-BACKUP DATABASE ClaribetSpa
-TO DISK = '{ruta}'
-WITH DIFFERENTIAL";
-
-            EjecutarBackup(query, "Backup DIFFERENTIAL realizado");
-        }
-
-        // =========================================
-        // LOG (INCREMENTAL)
-        // =========================================
-        private void btnBackupLog_Click(object sender, EventArgs e)
-        {
-            string ruta = $@"{rutaBackup}\LOG_{DateTime.Now:yyyyMMdd_HHmmss}.trn";
-
-            string query = $@"
-BACKUP LOG ClaribetSpa
-TO DISK = '{ruta}'";
-
-            EjecutarBackup(query, "Backup LOG realizado");
-        }
-
-        // =========================================
-        // RESTAURAR BACKUP
-        // =========================================
-        private void btnRestoreBackup_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Backup (*.bak)|*.bak";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                string query = $@"
-USE master;
-ALTER DATABASE ClaribetSpa SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-
-RESTORE DATABASE ClaribetSpa
-FROM DISK = '{ofd.FileName}'
-WITH REPLACE;
-
-ALTER DATABASE ClaribetSpa SET MULTI_USER;";
-
-                EjecutarBackup(query, "Restauración completada");
-            }
-        }
-
-        // =========================================
-        // CAMBIAR CARPETA
-        // =========================================
-        private void btnSelectBackupFolder_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                rutaBackup = fbd.SelectedPath;
-                MessageBox.Show("Carpeta seleccionada: " + rutaBackup);
-            }
-        }
-
-        // =========================================
-        // FORMULARIOS
+        // ABRIR FORMULARIOS
         // =========================================
         public void AbrirFormulario(Form frm)
         {
@@ -251,8 +106,17 @@ ALTER DATABASE ClaribetSpa SET MULTI_USER;";
             frm.Dock = DockStyle.Fill;
 
             panelContenido.Controls.Add(frm);
+
             frm.Show();
             frm.BringToFront();
+        }
+
+        // =========================================
+        // BOTONES MENÚ
+        // =========================================
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            panelContenido.Controls.Clear();
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
@@ -285,40 +149,19 @@ ALTER DATABASE ClaribetSpa SET MULTI_USER;";
             AbrirFormulario(new FrmFactura());
         }
 
+        // =========================================
+        // CONFIGURACIÓN
+        // =========================================
+        private void btnConfiguracion_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new FrmConfiguracion());
+        }
+
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void btnBackupFull_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBackupDifferential_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBackupLog_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRestoreBackup_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSeleccionarCarpt_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnInicio_Click(object sender, EventArgs e)
-        {
-            panelContenido.Controls.Clear();
-          
+            Inicio login = new Inicio();
+            login.Show();
+            this.Hide();
         }
     }
 }

@@ -145,14 +145,12 @@
             // 
             // txtCorreo
             // 
-           
             this.txtCorreo.ForeColor = System.Drawing.Color.Gray;
             this.txtCorreo.Location = new System.Drawing.Point(67, 218);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(473, 26);
             this.txtCorreo.TabIndex = 18;
             this.txtCorreo.Text = "Correo Electronico o Usuario";
-
             this.txtCorreo.TextChanged += new System.EventHandler(this.txtCorreo_TextChanged);
             // 
             // txtContraseña
@@ -209,6 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LavenderBlush;
             this.ClientSize = new System.Drawing.Size(1924, 1050);
             this.Controls.Add(this.PicFondo);
             this.Controls.Add(this.panelFormulario);
