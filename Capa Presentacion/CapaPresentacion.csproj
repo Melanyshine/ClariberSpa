@@ -64,6 +64,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClaribetSpaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaribetSpaDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ClaribetSpaDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaribetSpaDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FrmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +214,28 @@
     <EmbeddedResource Include="Servicio.resx">
       <DependentUpon>Servicio.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClaribetSpaDataSet.xsc">
+      <DependentUpon>ClaribetSpaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ClaribetSpaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ClaribetSpaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClaribetSpaDataSet.xss">
+      <DependentUpon>ClaribetSpaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ClaribetSpaDataSet1.xsc">
+      <DependentUpon>ClaribetSpaDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ClaribetSpaDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ClaribetSpaDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClaribetSpaDataSet1.xss">
+      <DependentUpon>ClaribetSpaDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

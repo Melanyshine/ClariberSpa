@@ -85,7 +85,7 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lblTitulo);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(395, 12);
+            this.panel3.Location = new System.Drawing.Point(417, 12);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1507, 129);
             this.panel3.TabIndex = 5;
@@ -119,7 +119,7 @@
             this.panelServiciosRegistrados.Controls.Add(this.label5);
             this.panelServiciosRegistrados.Controls.Add(this.txtBuscar);
             this.panelServiciosRegistrados.Controls.Add(this.btnNuevoServicio);
-            this.panelServiciosRegistrados.Location = new System.Drawing.Point(395, 168);
+            this.panelServiciosRegistrados.Location = new System.Drawing.Point(417, 168);
             this.panelServiciosRegistrados.Name = "panelServiciosRegistrados";
             this.panelServiciosRegistrados.Size = new System.Drawing.Size(1443, 817);
             this.panelServiciosRegistrados.TabIndex = 6;
