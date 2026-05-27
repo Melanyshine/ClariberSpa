@@ -38,11 +38,10 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.panelDetalle = new System.Windows.Forms.Panel();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.txtCita = new System.Windows.Forms.TextBox();
             this.lblSubtotalTexto = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
-            this.nudCantidad = new System.Windows.Forms.NumericUpDown();
-            this.txtServicios = new System.Windows.Forms.TextBox();
-            this.lblCantidad = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblEstado = new System.Windows.Forms.Label();
             this.txtEmpleado = new System.Windows.Forms.TextBox();
@@ -52,13 +51,11 @@
             this.lblMetodoPago = new System.Windows.Forms.Label();
             this.lblMonto = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
-            this.txtCliente = new System.Windows.Forms.TextBox();
             this.lblCita = new System.Windows.Forms.Label();
             this.cbEstado = new System.Windows.Forms.ComboBox();
             this.lblEmpleado = new System.Windows.Forms.Label();
             this.cbMetodoPago = new System.Windows.Forms.ComboBox();
-            this.cbCita = new System.Windows.Forms.ComboBox();
-            this.lblCliente = new System.Windows.Forms.Label();
+            this.cbCliente = new System.Windows.Forms.ComboBox();
             this.lblServicio = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -66,13 +63,12 @@
             this.btnActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.panelDetalle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             this.SuspendLayout();
             // 
             // lblBuscar
             // 
             this.lblBuscar.AutoSize = true;
-            this.lblBuscar.Location = new System.Drawing.Point(591, 682);
+            this.lblBuscar.Location = new System.Drawing.Point(603, 683);
             this.lblBuscar.Name = "lblBuscar";
             this.lblBuscar.Size = new System.Drawing.Size(63, 20);
             this.lblBuscar.TabIndex = 87;
@@ -81,7 +77,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(651, 26);
+            this.lblTitulo.Location = new System.Drawing.Point(828, 594);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(118, 20);
             this.lblTitulo.TabIndex = 85;
@@ -144,9 +140,9 @@
             // 
             // btnMostrar
             // 
-            this.btnMostrar.Location = new System.Drawing.Point(1179, 675);
+            this.btnMostrar.Location = new System.Drawing.Point(1215, 675);
             this.btnMostrar.Name = "btnMostrar";
-            this.btnMostrar.Size = new System.Drawing.Size(184, 35);
+            this.btnMostrar.Size = new System.Drawing.Size(184, 36);
             this.btnMostrar.TabIndex = 98;
             this.btnMostrar.Text = "Mostrar Todo";
             this.btnMostrar.UseVisualStyleBackColor = true;
@@ -154,11 +150,10 @@
             // 
             // panelDetalle
             // 
+            this.panelDetalle.Controls.Add(this.checkedListBox1);
+            this.panelDetalle.Controls.Add(this.txtCita);
             this.panelDetalle.Controls.Add(this.lblSubtotalTexto);
             this.panelDetalle.Controls.Add(this.lblSubtotal);
-            this.panelDetalle.Controls.Add(this.nudCantidad);
-            this.panelDetalle.Controls.Add(this.txtServicios);
-            this.panelDetalle.Controls.Add(this.lblCantidad);
             this.panelDetalle.Controls.Add(this.lblFecha);
             this.panelDetalle.Controls.Add(this.lblEstado);
             this.panelDetalle.Controls.Add(this.txtEmpleado);
@@ -168,18 +163,32 @@
             this.panelDetalle.Controls.Add(this.lblMetodoPago);
             this.panelDetalle.Controls.Add(this.lblMonto);
             this.panelDetalle.Controls.Add(this.txtMonto);
-            this.panelDetalle.Controls.Add(this.txtCliente);
             this.panelDetalle.Controls.Add(this.lblCita);
             this.panelDetalle.Controls.Add(this.cbEstado);
             this.panelDetalle.Controls.Add(this.lblEmpleado);
             this.panelDetalle.Controls.Add(this.cbMetodoPago);
-            this.panelDetalle.Controls.Add(this.cbCita);
-            this.panelDetalle.Controls.Add(this.lblCliente);
+            this.panelDetalle.Controls.Add(this.cbCliente);
             this.panelDetalle.Controls.Add(this.lblServicio);
-            this.panelDetalle.Location = new System.Drawing.Point(579, 89);
+            this.panelDetalle.Location = new System.Drawing.Point(583, 12);
             this.panelDetalle.Name = "panelDetalle";
-            this.panelDetalle.Size = new System.Drawing.Size(838, 548);
+            this.panelDetalle.Size = new System.Drawing.Size(834, 550);
             this.panelDetalle.TabIndex = 99;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(33, 144);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(298, 119);
+            this.checkedListBox1.TabIndex = 101;
+            // 
+            // txtCita
+            // 
+            this.txtCita.Location = new System.Drawing.Point(338, 45);
+            this.txtCita.Name = "txtCita";
+            this.txtCita.ReadOnly = true;
+            this.txtCita.Size = new System.Drawing.Size(100, 26);
+            this.txtCita.TabIndex = 31;
             // 
             // lblSubtotalTexto
             // 
@@ -199,35 +208,10 @@
             this.lblSubtotal.TabIndex = 8;
             this.lblSubtotal.Text = "cantidad";
             // 
-            // nudCantidad
-            // 
-            this.nudCantidad.Location = new System.Drawing.Point(531, 233);
-            this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(120, 26);
-            this.nudCantidad.TabIndex = 6;
-            // 
-            // txtServicios
-            // 
-            this.txtServicios.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtServicios.Location = new System.Drawing.Point(33, 232);
-            this.txtServicios.Name = "txtServicios";
-            this.txtServicios.ReadOnly = true;
-            this.txtServicios.Size = new System.Drawing.Size(284, 26);
-            this.txtServicios.TabIndex = 15;
-            // 
-            // lblCantidad
-            // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(527, 196);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(77, 20);
-            this.lblCantidad.TabIndex = 5;
-            this.lblCantidad.Text = "Cantidad:";
-            // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(334, 201);
+            this.lblFecha.Location = new System.Drawing.Point(437, 136);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(58, 20);
             this.lblFecha.TabIndex = 30;
@@ -245,7 +229,7 @@
             // txtEmpleado
             // 
             this.txtEmpleado.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtEmpleado.Location = new System.Drawing.Point(311, 46);
+            this.txtEmpleado.Location = new System.Drawing.Point(638, 48);
             this.txtEmpleado.Name = "txtEmpleado";
             this.txtEmpleado.ReadOnly = true;
             this.txtEmpleado.Size = new System.Drawing.Size(146, 26);
@@ -254,7 +238,7 @@
             // dtpFecha
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(338, 232);
+            this.dtpFecha.Location = new System.Drawing.Point(441, 167);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(152, 26);
             this.dtpFecha.TabIndex = 20;
@@ -279,7 +263,7 @@
             // lblMetodoPago
             // 
             this.lblMetodoPago.AutoSize = true;
-            this.lblMetodoPago.Location = new System.Drawing.Point(527, 110);
+            this.lblMetodoPago.Location = new System.Drawing.Point(632, 131);
             this.lblMetodoPago.Name = "lblMetodoPago";
             this.lblMetodoPago.Size = new System.Drawing.Size(108, 20);
             this.lblMetodoPago.TabIndex = 27;
@@ -303,23 +287,14 @@
             this.txtMonto.Size = new System.Drawing.Size(242, 26);
             this.txtMonto.TabIndex = 17;
             // 
-            // txtCliente
-            // 
-            this.txtCliente.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtCliente.Location = new System.Drawing.Point(33, 144);
-            this.txtCliente.Name = "txtCliente";
-            this.txtCliente.ReadOnly = true;
-            this.txtCliente.Size = new System.Drawing.Size(457, 26);
-            this.txtCliente.TabIndex = 14;
-            // 
             // lblCita
             // 
             this.lblCita.AutoSize = true;
             this.lblCita.Location = new System.Drawing.Point(29, 51);
             this.lblCita.Name = "lblCita";
-            this.lblCita.Size = new System.Drawing.Size(41, 20);
+            this.lblCita.Size = new System.Drawing.Size(62, 20);
             this.lblCita.TabIndex = 22;
-            this.lblCita.Text = "Cita:";
+            this.lblCita.Text = "Cliente:";
             // 
             // cbEstado
             // 
@@ -333,7 +308,7 @@
             // lblEmpleado
             // 
             this.lblEmpleado.AutoSize = true;
-            this.lblEmpleado.Location = new System.Drawing.Point(207, 49);
+            this.lblEmpleado.Location = new System.Drawing.Point(534, 51);
             this.lblEmpleado.Name = "lblEmpleado";
             this.lblEmpleado.Size = new System.Drawing.Size(85, 20);
             this.lblEmpleado.TabIndex = 25;
@@ -343,34 +318,25 @@
             // 
             this.cbMetodoPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMetodoPago.FormattingEnabled = true;
-            this.cbMetodoPago.Location = new System.Drawing.Point(531, 144);
+            this.cbMetodoPago.Location = new System.Drawing.Point(636, 165);
             this.cbMetodoPago.Name = "cbMetodoPago";
             this.cbMetodoPago.Size = new System.Drawing.Size(148, 28);
             this.cbMetodoPago.TabIndex = 18;
             // 
-            // cbCita
+            // cbCliente
             // 
-            this.cbCita.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cbCita.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCita.FormattingEnabled = true;
-            this.cbCita.Location = new System.Drawing.Point(76, 43);
-            this.cbCita.Name = "cbCita";
-            this.cbCita.Size = new System.Drawing.Size(102, 28);
-            this.cbCita.TabIndex = 13;
-            // 
-            // lblCliente
-            // 
-            this.lblCliente.AutoSize = true;
-            this.lblCliente.Location = new System.Drawing.Point(29, 108);
-            this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(62, 20);
-            this.lblCliente.TabIndex = 24;
-            this.lblCliente.Text = "Cliente:";
+            this.cbCliente.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCliente.FormattingEnabled = true;
+            this.cbCliente.Location = new System.Drawing.Point(97, 46);
+            this.cbCliente.Name = "cbCliente";
+            this.cbCliente.Size = new System.Drawing.Size(195, 28);
+            this.cbCliente.TabIndex = 13;
             // 
             // lblServicio
             // 
             this.lblServicio.AutoSize = true;
-            this.lblServicio.Location = new System.Drawing.Point(29, 201);
+            this.lblServicio.Location = new System.Drawing.Point(29, 112);
             this.lblServicio.Name = "lblServicio";
             this.lblServicio.Size = new System.Drawing.Size(86, 20);
             this.lblServicio.TabIndex = 1;
@@ -437,7 +403,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
             this.panelDetalle.ResumeLayout(false);
             this.panelDetalle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,9 +421,6 @@
         private System.Windows.Forms.Panel panelDetalle;
         private System.Windows.Forms.Label lblSubtotalTexto;
         private System.Windows.Forms.Label lblSubtotal;
-        private System.Windows.Forms.NumericUpDown nudCantidad;
-        private System.Windows.Forms.TextBox txtServicios;
-        private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.TextBox txtEmpleado;
@@ -470,15 +432,15 @@
         private System.Windows.Forms.Label lblMetodoPago;
         private System.Windows.Forms.Label lblMonto;
         private System.Windows.Forms.TextBox txtMonto;
-        private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label lblCita;
         private System.Windows.Forms.ComboBox cbEstado;
         private System.Windows.Forms.Label lblEmpleado;
         private System.Windows.Forms.ComboBox cbMetodoPago;
-        private System.Windows.Forms.ComboBox cbCita;
-        private System.Windows.Forms.Label lblCliente;
+        private System.Windows.Forms.ComboBox cbCliente;
         private System.Windows.Forms.Label lblServicio;
         private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.TextBox txtCita;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CapaEntidades;
 using CapaNegocio;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -32,6 +33,9 @@ namespace Capa_Presentacion
         private bool _modoNueva;
         private DataTable tablaDetalle = new DataTable();
 
+        private List<decimal> _preciosPorServicio = new List<decimal>();
+        private List<int> _idsPorServicio = new List<int>();
+
         // =====================================================================
         // CONSTRUCTOR — MODO NUEVA FACTURA
         // =====================================================================
@@ -62,7 +66,6 @@ namespace Capa_Presentacion
             SuscribirEventos();
             CargarFiltro();
 
-            // Siempre ocultar estos dos botones
             btnActualizar.Visible = false;
             btnEliminar.Visible = false;
 
@@ -72,7 +75,7 @@ namespace Capa_Presentacion
                 panelDetalle.Visible = true;
                 btnGuardar.Visible = true;
                 btnLimpiar.Visible = true;
-                CargarCitas();
+                CargarClientes();
                 CargarMetodosPago();
                 CargarEstados();
                 tablaDetalle = new DataTable();
@@ -93,8 +96,8 @@ namespace Capa_Presentacion
         // =====================================================================
         private void SuscribirEventos()
         {
-            cbCita.SelectedIndexChanged += cbCita_SelectedIndexChanged;
-            nudCantidad.ValueChanged += nudCantidad_ValueChanged;
+            cbCliente.SelectedIndexChanged += cbCliente_SelectedIndexChanged;
+            checkedListBox1.ItemCheck += checkedListBox1_ItemCheck;
             txtBuscar.TextChanged += txtBuscar_TextChanged;
             btnBuscar.Click += btnBuscar_Click;
             btnGuardar.Click += btnGuardar_Click;
@@ -106,20 +109,20 @@ namespace Capa_Presentacion
         // =====================================================================
         // CARGAR COMBOS
         // =====================================================================
-        private void CargarCitas()
+        private void CargarClientes()
         {
-            cbCita.SelectedIndexChanged -= cbCita_SelectedIndexChanged;
+            cbCliente.SelectedIndexChanged -= cbCliente_SelectedIndexChanged;
 
             DataTable dt = citasBLL.Listar();
             DataView vista = dt.DefaultView;
             vista.RowFilter = "nombre_estado = 'Completada' OR nombre_estado = 'Confirmada'";
 
-            cbCita.DataSource = vista.ToTable();
-            cbCita.DisplayMember = "id_cita";
-            cbCita.ValueMember = "id_cita";
-            cbCita.SelectedIndex = -1;
+            cbCliente.DataSource = vista.ToTable();
+            cbCliente.DisplayMember = "cliente";
+            cbCliente.ValueMember = "id_cita";
+            cbCliente.SelectedIndex = -1;
 
-            cbCita.SelectedIndexChanged += cbCita_SelectedIndexChanged;
+            cbCliente.SelectedIndexChanged += cbCliente_SelectedIndexChanged;
         }
 
         private void CargarMetodosPago()
@@ -144,34 +147,68 @@ namespace Capa_Presentacion
         }
 
         // =====================================================================
-        // EVENTO: SELECCIONAR CITA → AUTO-RELLENA CAMPOS
+        // EVENTO: SELECCIONAR CLIENTE → AUTO-RELLENA CAMPOS Y SERVICIOS
         // =====================================================================
-        private void cbCita_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbCita.SelectedValue == null) return;
+            if (cbCliente.SelectedValue == null) return;
 
-            int idCita = Convert.ToInt32(cbCita.SelectedValue);
+            int idCita = Convert.ToInt32(cbCliente.SelectedValue);
             DataTable dt = citasBLL.ObtenerPorId(idCita);
 
             if (dt.Rows.Count == 0) return;
 
             DataRow fila = dt.Rows[0];
-            txtCliente.Text = fila["cliente"].ToString();
             txtEmpleado.Text = fila["empleado"].ToString();
-            txtServicios.Text = fila["servicios"].ToString();
-            txtMonto.Text = Convert.ToDecimal(fila["precio"]).ToString("N2");
+            txtCita.Text     = "Cita #" + idCita;
 
-            decimal.TryParse(txtMonto.Text, out decimal monto);
-            lblSubtotal.Text = "RD$ " + (nudCantidad.Value * monto).ToString("N2");
+            CargarServiciosDeCita(idCita);
         }
 
         // =====================================================================
-        // SUBTOTAL EN TIEMPO REAL
+        // CARGAR SERVICIOS DE LA CITA EN EL CHECKEDLISTBOX
         // =====================================================================
-        private void nudCantidad_ValueChanged(object sender, EventArgs e)
+        private void CargarServiciosDeCita(int idCita)
         {
-            decimal.TryParse(txtMonto.Text, out decimal monto);
-            lblSubtotal.Text = "RD$ " + (nudCantidad.Value * monto).ToString("N2");
+            checkedListBox1.ItemCheck -= checkedListBox1_ItemCheck;
+            checkedListBox1.Items.Clear();
+            _preciosPorServicio.Clear();
+            _idsPorServicio.Clear();
+
+            foreach (DataRow f in detalleCitasBLL.ObtenerPorCita(idCita).Rows)
+            {
+                checkedListBox1.Items.Add(
+                    $"{f["nombre_servicio"]}  —  RD$ {Convert.ToDecimal(f["precio"]):N2}",
+                    Convert.ToBoolean(f["en_cita"]));
+                _preciosPorServicio.Add(Convert.ToDecimal(f["precio"]));
+                _idsPorServicio.Add(Convert.ToInt32(f["id_servicio"]));
+            }
+
+            checkedListBox1.ItemCheck += checkedListBox1_ItemCheck;
+            RecalcularMonto();
+        }
+        // =====================================================================
+        // EVENTO: MARCAR / DESMARCAR SERVICIO → RECALCULA MONTO
+        // =====================================================================
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            this.BeginInvoke((MethodInvoker)delegate
+            {
+                RecalcularMonto();
+            });
+        }
+
+        private void RecalcularMonto()
+        {
+            decimal total = 0;
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if (checkedListBox1.GetItemChecked(i))
+                    total += _preciosPorServicio[i];
+            }
+
+            txtMonto.Text    = total.ToString("N2");
+            lblSubtotal.Text = "RD$ " + total.ToString("N2");
         }
 
         // =====================================================================
@@ -183,41 +220,40 @@ namespace Capa_Presentacion
 
             try
             {
-                int idCita = Convert.ToInt32(cbCita.SelectedValue);
+                int idCita    = Convert.ToInt32(cbCliente.SelectedValue);
                 DataTable dtCita = citasBLL.ObtenerPorId(idCita);
                 int idCliente = Convert.ToInt32(dtCita.Rows[0]["id_cliente"]);
+
                 decimal total = decimal.TryParse(txtMonto.Text, out decimal t) ? t : 0;
 
                 Factura f = new Factura
                 {
-                    id_cliente = idCliente,
+                    id_cliente    = idCliente,
                     fecha_factura = dtpFecha.Value,
-                    total = total,
-                    metodo_pago = cbMetodoPago.SelectedItem.ToString(),
-                    estado_pago = cbEstado.SelectedItem.ToString()
+                    total         = total,
+                    metodo_pago   = cbMetodoPago.SelectedItem.ToString(),
+                    estado_pago   = cbEstado.SelectedItem.ToString()
                 };
 
                 int idNuevaFactura = facturaBLL.Guardar(f);
 
-                DataTable dtDetalleCita = detalleCitasBLL.ObtenerPorCita(idCita);
-                int cantidad = Convert.ToInt32(nudCantidad.Value);
-
-                foreach (DataRow filaDet in dtDetalleCita.Rows)
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 {
+                    if (!checkedListBox1.GetItemChecked(i)) continue;
+
                     detalleBLL.Guardar(new Detalle_Factura
                     {
-                        id_factura = idNuevaFactura,
-                        id_servicio = Convert.ToInt32(filaDet["id_servicio"]),
-                        descripcion = txtServicios.Text,
-                        cantidad = cantidad,
-                        subtotal = total * cantidad
+                        id_factura  = idNuevaFactura,
+                        id_servicio = _idsPorServicio[i],
+                        descripcion = checkedListBox1.Items[i].ToString(),
+                        cantidad    = 1,
+                        subtotal    = _preciosPorServicio[i]
                     });
                 }
 
                 MessageBox.Show("✅ Factura registrada correctamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Mostrar el detalle recién guardado en el grid
                 _idFactura = idNuevaFactura;
                 lblTitulo.Text = "Detalle de Factura #" + _idFactura;
                 MostrarDetalle();
@@ -235,11 +271,18 @@ namespace Capa_Presentacion
         // =====================================================================
         private bool ValidarCampos()
         {
-            if (cbCita.SelectedValue == null)
+            if (cbCliente.SelectedValue == null)
             {
-                MessageBox.Show("⚠️ Selecciona una cita.", "Campo requerido",
+                MessageBox.Show("⚠️ Selecciona un cliente.", "Campo requerido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cbCita.Focus();
+                cbCliente.Focus();
+                return false;
+            }
+            if (checkedListBox1.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("⚠️ Selecciona al menos un servicio.", "Campo requerido",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                checkedListBox1.Focus();
                 return false;
             }
             if (cbMetodoPago.SelectedIndex < 0)
@@ -266,15 +309,16 @@ namespace Capa_Presentacion
 
         private void LimpiarCampos()
         {
-            cbCita.SelectedIndex = -1;
-            txtCliente.Text = "";
+            cbCliente.SelectedIndex = -1;
             txtEmpleado.Text = "";
-            txtServicios.Text = "";
-            txtMonto.Text = "0.00";
+            txtCita.Text     = "";
+            checkedListBox1.Items.Clear();
+            _preciosPorServicio.Clear();
+            _idsPorServicio.Clear();
+            txtMonto.Text    = "0.00";
             cbMetodoPago.SelectedIndex = -1;
             cbEstado.SelectedIndex = 0;
-            dtpFecha.Value = DateTime.Today;
-            nudCantidad.Value = 1;
+            dtpFecha.Value   = DateTime.Today;
             lblSubtotal.Text = "RD$ 0.00";
             txtNotas.Clear();
             dgvDetalle.ClearSelection();
@@ -331,15 +375,10 @@ namespace Capa_Presentacion
             if (cbFiltro.Items.Count > 0) cbFiltro.SelectedIndex = 0;
         }
 
-        private void btnCerrar_Click(
-      object sender,
-      EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e)
         {
-            FrmPrincipal principal =
-                (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
-
-            principal.AbrirFormulario(
-                new FrmFactura());
+            FrmPrincipal principal = (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
+            principal.AbrirFormulario(new FrmFactura());
         }
 
         // =====================================================================
@@ -382,14 +421,12 @@ namespace Capa_Presentacion
             panelDetalle.BackColor = Color.White;
             AgregarSombra(panelDetalle);
 
-            // Titulo
             lblTitulo.ForeColor = COLOR_VINO;
             lblTitulo.Font = new Font("Georgia", 22F, FontStyle.Regular);
 
-            // Labels
-            foreach (Label lbl in new[] { lblCita, lblCliente, lblEmpleado, lblServicio,
+            foreach (Label lbl in new[] { lblCita, lblEmpleado, lblServicio,
                                           lblMonto, lblMetodoPago, lblFecha, lblEstado,
-                                          lblCantidad, lblNotas, lblBuscar, lblFiltro })
+                                          lblNotas, lblBuscar, lblFiltro })
             {
                 lbl.ForeColor = Color.FromArgb(70, 50, 48);
                 lbl.Font = new Font("Segoe UI", 10F);
@@ -398,8 +435,7 @@ namespace Capa_Presentacion
             lblSubtotal.ForeColor = COLOR_VINO;
             lblSubtotal.Font = new Font("Georgia", 12F, FontStyle.Bold);
 
-            // Combos formulario
-            foreach (ComboBox cb in new[] { cbCita, cbMetodoPago, cbEstado })
+            foreach (ComboBox cb in new[] { cbCliente, cbMetodoPago, cbEstado })
             {
                 cb.BackColor = Color.White;
                 cb.ForeColor = Color.FromArgb(70, 50, 48);
@@ -407,14 +443,12 @@ namespace Capa_Presentacion
                 cb.Font = new Font("Segoe UI", 10F);
             }
 
-            // Combo filtro
             cbFiltro.BackColor = Color.White;
             cbFiltro.ForeColor = Color.FromArgb(70, 50, 48);
             cbFiltro.FlatStyle = FlatStyle.Flat;
             cbFiltro.Font = new Font("Segoe UI", 10F);
 
-            // TextBoxes
-            foreach (TextBox txt in new[] { txtCliente, txtEmpleado, txtServicios,
+            foreach (TextBox txt in new[] { txtEmpleado, txtCita,
                                             txtMonto, txtBuscar, txtNotas })
             {
                 txt.BackColor = Color.White;
@@ -423,26 +457,26 @@ namespace Capa_Presentacion
                 txt.Font = new Font("Segoe UI", 10F);
             }
 
-            // Solo lectura → fondo gris
-            foreach (TextBox txt in new[] { txtCliente, txtEmpleado, txtServicios, txtMonto })
+            foreach (TextBox txt in new[] { txtEmpleado, txtCita, txtMonto })
             {
                 txt.BackColor = Color.FromArgb(245, 245, 245);
                 txt.ForeColor = Color.DimGray;
             }
 
-            // Fecha y cantidad
-            dtpFecha.Font = new Font("Segoe UI", 10F);
-            nudCantidad.Font = new Font("Segoe UI", 10F);
-            nudCantidad.BackColor = Color.White;
+            checkedListBox1.BackColor = Color.White;
+            checkedListBox1.ForeColor = Color.FromArgb(70, 50, 48);
+            checkedListBox1.Font = new Font("Segoe UI", 10F);
+            checkedListBox1.BorderStyle = BorderStyle.FixedSingle;
+            checkedListBox1.CheckOnClick = true;
 
-            // Botones
+            dtpFecha.Font = new Font("Segoe UI", 10F);
+
             EstilarBoton(btnGuardar, COLOR_VINO, Color.White, true);
             EstilarBoton(btnLimpiar, COLOR_BEIGE, COLOR_VINO, false);
             EstilarBoton(btnBuscar, COLOR_VINO, Color.White, true);
             EstilarBoton(btnMostrar, COLOR_BEIGE, COLOR_VINO, false);
             EstilarBoton(btnCerrar, COLOR_VINO, Color.White, true);
 
-            // DataGridView
             dgvDetalle.BackgroundColor = Color.White;
             dgvDetalle.BorderStyle = BorderStyle.None;
             dgvDetalle.RowHeadersVisible = false;
@@ -461,8 +495,6 @@ namespace Capa_Presentacion
             dgvDetalle.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 244, 242);
             dgvDetalle.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-
-            // Hacer que el grid ocupe todo el ancho disponible
             dgvDetalle.Anchor = AnchorStyles.Top | AnchorStyles.Left |
                                 AnchorStyles.Right | AnchorStyles.Bottom;
         }
@@ -496,7 +528,5 @@ namespace Capa_Presentacion
                 }
             };
         }
-
-
     }
 }

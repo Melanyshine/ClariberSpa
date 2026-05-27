@@ -31,10 +31,24 @@ namespace Capa_Presentacion
         FacturaBLL facturaBLL =
             new FacturaBLL();
 
+        Detalle_FacturaBLL detalleBLL =
+            new Detalle_FacturaBLL();
+
+        // =========================================
+        // TABLAS
+        // =========================================
+
+        DataTable tablaFacturas =
+            new DataTable();
+
         public FrmHistorialFacturas()
         {
             InitializeComponent();
         }
+
+        // =========================================
+        // LOAD
+        // =========================================
 
         private void FrmHistorialFacturas_Load(
             object sender,
@@ -47,9 +61,16 @@ namespace Capa_Presentacion
 
             CargarFiltroEstado();
 
+            CargarFiltroDetalle();
+
             MostrarHistorial();
 
+            MostrarTodosLosDetalles();
+
+            // =====================================
             // EVENTOS
+            // =====================================
+
             txtBuscar.TextChanged +=
                 txtBuscar_TextChanged;
 
@@ -64,10 +85,22 @@ namespace Capa_Presentacion
 
             cbFiltroEstado.SelectedIndexChanged +=
                 cbFiltroEstado_SelectedIndexChanged;
+
+            dgvHistorial.SelectionChanged +=
+                dgvHistorial_SelectionChanged;
+
+            btnMostrarTodoDetalle.Click +=
+                btnBuscarDetalle_Click;
+
+            btnMostrarTodoDetalle.Click +=
+                btnMostrarTodoDetalle_Click;
+
+            txtDetalleBuscar.TextChanged +=
+                txtBuscarDetalle_TextChanged;
         }
 
         // =========================================
-        // CARGAR FILTRO
+        // FILTRO ESTADO
         // =========================================
 
         void CargarFiltroEstado()
@@ -86,13 +119,35 @@ namespace Capa_Presentacion
         }
 
         // =========================================
+        // FILTRO DETALLE
+        // =========================================
+
+        void CargarFiltroDetalle()
+        {
+            cbFiltroDetalle.Items.Clear();
+
+            cbFiltroDetalle.Items.AddRange(
+                new object[]
+                {
+                    "Todos",
+                    "Servicio",
+                    "Descripción"
+                });
+
+            cbFiltroDetalle.SelectedIndex = 0;
+        }
+
+        // =========================================
         // MOSTRAR HISTORIAL
         // =========================================
 
         void MostrarHistorial()
         {
+            tablaFacturas =
+                facturaBLL.Listar();
+
             DataView vista =
-                facturaBLL.Listar().DefaultView;
+                tablaFacturas.DefaultView;
 
             vista.RowFilter =
                 "estado_pago = 'Pagado' " +
@@ -102,10 +157,47 @@ namespace Capa_Presentacion
                 vista;
 
             OcultarColumnas();
+
+            if (dgvHistorial.Rows.Count > 0)
+            {
+                dgvHistorial.Rows[0].Selected = true;
+            }
         }
 
         // =========================================
-        // BUSCAR
+        // MOSTRAR TODOS LOS DETALLES
+        // =========================================
+
+        void MostrarTodosLosDetalles()
+        {
+            DataTable dt =
+                detalleBLL.Listar();
+
+            dgvDetalleFactura.DataSource =
+                dt;
+
+            OcultarColumnasDetalle();
+        }
+
+        // =========================================
+        // MOSTRAR DETALLE ESPECIFICO
+        // =========================================
+
+        void MostrarDetalleFactura(
+            int idFactura)
+        {
+            DataTable dt =
+                detalleBLL.ObtenerPorFactura(
+                    idFactura);
+
+            dgvDetalleFactura.DataSource =
+                dt;
+
+            OcultarColumnasDetalle();
+        }
+
+        // =========================================
+        // BUSCAR HISTORIAL
         // =========================================
 
         void BuscarHistorial()
@@ -142,7 +234,109 @@ namespace Capa_Presentacion
         }
 
         // =========================================
-        // OCULTAR COLUMNAS
+        // BUSCAR DETALLE
+        // =========================================
+
+        void BuscarDetalle()
+        {
+            if (dgvDetalleFactura.DataSource == null)
+                return;
+
+            string texto =
+                txtDetalleBuscar.Text
+                .Trim()
+                .ToLower();
+
+            if (string.IsNullOrEmpty(texto))
+            {
+                MostrarTodosLosDetalles();
+                return;
+            }
+
+            DataTable dtActual =
+                dgvDetalleFactura.DataSource
+                as DataTable;
+
+            if (dtActual == null)
+                return;
+
+            DataTable dtFiltrado =
+                dtActual.Clone();
+
+            foreach (DataRow fila
+                in dtActual.Rows)
+            {
+                bool agregar = false;
+
+                // =============================
+                // TODOS
+                // =============================
+
+                if (cbFiltroDetalle.Text == "Todos")
+                {
+                    foreach (var celda
+                        in fila.ItemArray)
+                    {
+                        if (celda.ToString()
+                            .ToLower()
+                            .Contains(texto))
+                        {
+                            agregar = true;
+                            break;
+                        }
+                    }
+                }
+
+                // =============================
+                // SERVICIO
+                // =============================
+
+                else if (
+                    cbFiltroDetalle.Text ==
+                    "Servicio")
+                {
+                    if (
+                        fila["servicio"]
+                        .ToString()
+                        .ToLower()
+                        .Contains(texto))
+                    {
+                        agregar = true;
+                    }
+                }
+
+                // =============================
+                // DESCRIPCION
+                // =============================
+
+                else if (
+                    cbFiltroDetalle.Text ==
+                    "Descripción")
+                {
+                    if (
+                        fila["descripcion"]
+                        .ToString()
+                        .ToLower()
+                        .Contains(texto))
+                    {
+                        agregar = true;
+                    }
+                }
+
+                if (agregar)
+                {
+                    dtFiltrado.ImportRow(fila);
+                }
+            }
+
+            dgvDetalleFactura.DataSource =
+                dtFiltrado;
+
+            OcultarColumnasDetalle();
+        }
+
+        // =========================================
+        // OCULTAR COLUMNAS FACTURA
         // =========================================
 
         void OcultarColumnas()
@@ -152,8 +346,6 @@ namespace Capa_Presentacion
                 dgvHistorial.Columns["id_cliente"]
                     .Visible = false;
             }
-
-            // ENCABEZADOS
 
             if (dgvHistorial.Columns.Contains("id_factura"))
             {
@@ -196,7 +388,44 @@ namespace Capa_Presentacion
         }
 
         // =========================================
-        // EVENTOS
+        // OCULTAR COLUMNAS DETALLE
+        // =========================================
+
+        void OcultarColumnasDetalle()
+        {
+            if (dgvDetalleFactura.Columns.Contains("id_servicio"))
+                dgvDetalleFactura.Columns["id_servicio"].Visible = false;
+
+            if (dgvDetalleFactura.Columns.Contains("id_factura"))
+                dgvDetalleFactura.Columns["id_factura"].Visible = false;
+
+            if (dgvDetalleFactura.Columns.Contains("id_detalle_factura"))
+                dgvDetalleFactura.Columns["id_detalle_factura"].Visible = false;
+
+            if (dgvDetalleFactura.Columns.Contains("servicio"))
+                dgvDetalleFactura.Columns["servicio"].HeaderText =
+                    "Servicio";
+
+            if (dgvDetalleFactura.Columns.Contains("descripcion"))
+                dgvDetalleFactura.Columns["descripcion"].HeaderText =
+                    "Descripción";
+
+            if (dgvDetalleFactura.Columns.Contains("cantidad"))
+                dgvDetalleFactura.Columns["cantidad"].HeaderText =
+                    "Cantidad";
+
+            if (dgvDetalleFactura.Columns.Contains("subtotal"))
+            {
+                dgvDetalleFactura.Columns["subtotal"].HeaderText =
+                    "Subtotal";
+
+                dgvDetalleFactura.Columns["subtotal"]
+                    .DefaultCellStyle.Format = "N2";
+            }
+        }
+
+        // =========================================
+        // EVENTOS HISTORIAL
         // =========================================
 
         private void txtBuscar_TextChanged(
@@ -232,6 +461,54 @@ namespace Capa_Presentacion
         }
 
         // =========================================
+        // SELECCIONAR FACTURA
+        // =========================================
+
+        private void dgvHistorial_SelectionChanged(
+            object sender,
+            EventArgs e)
+        {
+            if (dgvHistorial.SelectedRows.Count == 0)
+                return;
+
+            int idFactura =
+                Convert.ToInt32(
+                    dgvHistorial.SelectedRows[0]
+                    .Cells["id_factura"].Value);
+
+            MostrarDetalleFactura(idFactura);
+        }
+
+        // =========================================
+        // EVENTOS DETALLE
+        // =========================================
+
+        private void btnBuscarDetalle_Click(
+            object sender,
+            EventArgs e)
+        {
+            BuscarDetalle();
+        }
+
+        private void txtBuscarDetalle_TextChanged(
+            object sender,
+            EventArgs e)
+        {
+            BuscarDetalle();
+        }
+
+        private void btnMostrarTodoDetalle_Click(
+            object sender,
+            EventArgs e)
+        {
+            txtDetalleBuscar.Clear();
+
+            cbFiltroDetalle.SelectedIndex = 0;
+
+            MostrarTodosLosDetalles();
+        }
+
+        // =========================================
         // VER DETALLE
         // =========================================
 
@@ -256,22 +533,26 @@ namespace Capa_Presentacion
                     .Cells["id_factura"].Value);
 
             FrmDetalleFactura frmDetalle =
-     new FrmDetalleFactura(idFactura);
+                new FrmDetalleFactura(idFactura);
 
             frmDetalle.ShowDialog();
         }
 
+        // =========================================
+        // VOLVER
+        // =========================================
+
         private void btnVolver_Click(
-    object sender,
-    EventArgs e)
+            object sender,
+            EventArgs e)
         {
             FrmPrincipal principal =
-                (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
+                (FrmPrincipal)
+                Application.OpenForms["FrmPrincipal"];
 
             principal.AbrirFormulario(
                 new FrmFactura());
         }
-
 
         // =========================================
         // BOTONES
@@ -316,23 +597,11 @@ namespace Capa_Presentacion
 
         void AplicarDiseno()
         {
-            // =========================================
-            // FORM
-            // =========================================
-
             this.BackColor =
                 Color.FromArgb(249, 245, 242);
 
-            // =========================================
-            // PANEL
-            // =========================================
-
             panelTabla.BackColor =
                 Color.White;
-
-            // =========================================
-            // TITULO
-            // =========================================
 
             lblTitulo.ForeColor =
                 Color.FromArgb(70, 50, 48);
@@ -343,10 +612,6 @@ namespace Capa_Presentacion
                     22F,
                     FontStyle.Regular);
 
-            // =========================================
-            // SUBTITULO
-            // =========================================
-
             lblSubtitulo.ForeColor =
                 Color.Gray;
 
@@ -355,81 +620,104 @@ namespace Capa_Presentacion
                     "Segoe UI",
                     9F);
 
-            // =========================================
-            // BUSCADOR
-            // =========================================
+            // =====================================
+            // BUSCADORES
+            // =====================================
 
-            txtBuscar.BackColor =
-                Color.White;
-
-            txtBuscar.ForeColor =
-                Color.FromArgb(70, 50, 48);
-
-            txtBuscar.BorderStyle =
-                BorderStyle.FixedSingle;
-
-            txtBuscar.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
-            // =========================================
-            // COMBO FILTRO
-            // =========================================
-
-            cbFiltroEstado.BackColor =
-                Color.White;
-
-            cbFiltroEstado.ForeColor =
-                Color.FromArgb(70, 50, 48);
-
-            cbFiltroEstado.FlatStyle =
-                FlatStyle.Flat;
-
-            cbFiltroEstado.Font =
-                new Font(
-                    "Segoe UI",
-                    9F);
-
-            // =========================================
-            // BOTONES PRINCIPALES
-            // =========================================
-
-            EstilarBoton(
-                btnBuscar,
-                Color.FromArgb(143, 94, 104),
-                Color.White,
-                true);
-
-            EstilarBoton(
-                btnVerDetalle,
-                Color.FromArgb(143, 94, 104),
-                Color.White,
-                true);
-
-            // =========================================
-            // BOTONES SECUNDARIOS
-            // =========================================
-
-            Button[] botones =
+            TextBox[] buscadores =
             {
-                btnVerTodos,
-                btnVolver
+                txtBuscar,
+                txtDetalleBuscar
             };
 
-            foreach (Button btn in botones)
+            foreach (TextBox txt in buscadores)
+            {
+                txt.BackColor =
+                    Color.White;
+
+                txt.ForeColor =
+                    colorTexto;
+
+                txt.BorderStyle =
+                    BorderStyle.FixedSingle;
+
+                txt.Font =
+                    new Font(
+                        "Segoe UI",
+                        10F);
+            }
+
+            // =====================================
+            // COMBOS
+            // =====================================
+
+            ComboBox[] combos =
+            {
+                cbFiltroEstado,
+                cbFiltroDetalle
+            };
+
+            foreach (ComboBox cb in combos)
+            {
+                cb.BackColor =
+                    Color.White;
+
+                cb.ForeColor =
+                    colorTexto;
+
+                cb.FlatStyle =
+                    FlatStyle.Flat;
+
+                cb.Font =
+                    new Font(
+                        "Segoe UI",
+                        10F);
+            }
+
+            // =====================================
+            // BOTONES VINO
+            // =====================================
+
+            Button[] botonesVino =
+            {
+                btnBuscar,
+                btnVerDetalle,
+                btnMostrarTodoDetalle
+            };
+
+            foreach (Button btn in botonesVino)
+            {
+                EstilarBoton(
+                    btn,
+                    colorVino,
+                    Color.White,
+                    true);
+            }
+
+            // =====================================
+            // BOTONES BLANCOS
+            // =====================================
+
+            Button[] botonesBlancos =
+            {
+                btnVerTodos,
+                btnVolver,
+                btnMostrarTodoDetalle
+            };
+
+            foreach (Button btn in botonesBlancos)
             {
                 btn.BackColor =
-                    Color.FromArgb(245, 240, 235);
+                    Color.White;
 
                 btn.ForeColor =
-                    Color.FromArgb(100, 80, 80);
+                    colorVino;
 
                 btn.FlatStyle =
                     FlatStyle.Flat;
 
                 btn.FlatAppearance.BorderColor =
-                    Color.FromArgb(220, 210, 205);
+                    colorVino;
 
                 btn.FlatAppearance.BorderSize =
                     1;
@@ -437,115 +725,115 @@ namespace Capa_Presentacion
                 btn.Font =
                     new Font(
                         "Segoe UI",
-                        9F);
+                        10F,
+                        FontStyle.Bold);
 
                 btn.Height =
-                    38;
+                    40;
+
+                btn.Cursor =
+                    Cursors.Hand;
             }
 
-            // =========================================
-            // GRID
-            // =========================================
+            // =====================================
+            // GRID PRINCIPAL
+            // =====================================
 
-            dgvHistorial.BackgroundColor =
+            EstilarGrid(dgvHistorial);
+
+            // =====================================
+            // GRID DETALLE
+            // =====================================
+
+            EstilarGrid(dgvDetalleFactura);
+        }
+
+        // =========================================
+        // ESTILO GRID
+        // =========================================
+
+        void EstilarGrid(
+            DataGridView dgv)
+        {
+            dgv.BackgroundColor =
                 Color.White;
 
-            dgvHistorial.BorderStyle =
+            dgv.BorderStyle =
                 BorderStyle.None;
 
-            dgvHistorial.CellBorderStyle =
+            dgv.CellBorderStyle =
                 DataGridViewCellBorderStyle.SingleHorizontal;
 
-            dgvHistorial.GridColor =
+            dgv.GridColor =
                 Color.FromArgb(245, 240, 238);
 
-            dgvHistorial.RowHeadersVisible =
+            dgv.RowHeadersVisible =
                 false;
 
-            dgvHistorial.AutoSizeColumnsMode =
+            dgv.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvHistorial.SelectionMode =
+            dgv.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
 
-            dgvHistorial.MultiSelect =
+            dgv.MultiSelect =
                 false;
 
-            dgvHistorial.ReadOnly =
+            dgv.ReadOnly =
                 true;
 
-            dgvHistorial.AllowUserToAddRows =
+            dgv.AllowUserToAddRows =
                 false;
 
-            dgvHistorial.AllowUserToDeleteRows =
+            dgv.AllowUserToDeleteRows =
                 false;
 
-            dgvHistorial.AllowUserToResizeRows =
+            dgv.AllowUserToResizeRows =
                 false;
 
-            dgvHistorial.EnableHeadersVisualStyles =
+            dgv.EnableHeadersVisualStyles =
                 false;
 
-            dgvHistorial.ColumnHeadersBorderStyle =
+            dgv.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.None;
 
-            // =========================================
-            // CABECERA
-            // =========================================
+            dgv.ColumnHeadersDefaultCellStyle.BackColor =
+                colorVino;
 
-            dgvHistorial.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(245, 238, 234);
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.White;
 
-            dgvHistorial.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.FromArgb(70, 50, 48);
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.Font =
+            dgv.ColumnHeadersDefaultCellStyle.Font =
                 new Font(
                     "Segoe UI",
                     10F,
                     FontStyle.Bold);
 
-            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(245, 238, 234);
-
-            dgvHistorial.ColumnHeadersDefaultCellStyle.SelectionForeColor =
-                Color.FromArgb(70, 50, 48);
-
-            dgvHistorial.ColumnHeadersHeight =
+            dgv.ColumnHeadersHeight =
                 45;
 
-            // =========================================
-            // FILAS
-            // =========================================
-
-            dgvHistorial.DefaultCellStyle.BackColor =
+            dgv.DefaultCellStyle.BackColor =
                 Color.White;
 
-            dgvHistorial.DefaultCellStyle.ForeColor =
-                Color.FromArgb(70, 50, 48);
+            dgv.DefaultCellStyle.ForeColor =
+                colorTexto;
 
-            dgvHistorial.DefaultCellStyle.Font =
+            dgv.DefaultCellStyle.Font =
                 new Font(
                     "Segoe UI",
-                    9.5F,
-                    FontStyle.Regular);
+                    9.5F);
 
-            dgvHistorial.DefaultCellStyle.SelectionBackColor =
-                Color.FromArgb(250, 245, 242);
+            dgv.DefaultCellStyle.SelectionBackColor =
+                colorBeige;
 
-            dgvHistorial.DefaultCellStyle.SelectionForeColor =
-                Color.FromArgb(70, 50, 48);
+            dgv.DefaultCellStyle.SelectionForeColor =
+                colorTexto;
 
-            dgvHistorial.RowTemplate.Height =
-                45;
+            dgv.RowTemplate.Height =
+                42;
 
-            dgvHistorial.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.White;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.FromArgb(248, 244, 242);
         }
-
-        // =========================================
-        // VOLVER
-        // =========================================
-       
     }
 }

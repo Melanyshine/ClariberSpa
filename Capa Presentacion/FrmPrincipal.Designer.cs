@@ -67,9 +67,9 @@
             // 
             // btnInicio
             // 
-            this.btnInicio.Location = new System.Drawing.Point(55, 648);
+            this.btnInicio.Location = new System.Drawing.Point(55, 659);
             this.btnInicio.Name = "btnInicio";
-            this.btnInicio.Size = new System.Drawing.Size(98, 73);
+            this.btnInicio.Size = new System.Drawing.Size(149, 44);
             this.btnInicio.TabIndex = 5;
             this.btnInicio.Text = "Inicio";
             this.btnInicio.UseVisualStyleBackColor = true;
@@ -77,9 +77,9 @@
             // 
             // btnFactura
             // 
-            this.btnFactura.Location = new System.Drawing.Point(55, 559);
+            this.btnFactura.Location = new System.Drawing.Point(55, 575);
             this.btnFactura.Name = "btnFactura";
-            this.btnFactura.Size = new System.Drawing.Size(143, 44);
+            this.btnFactura.Size = new System.Drawing.Size(149, 44);
             this.btnFactura.TabIndex = 0;
             this.btnFactura.Text = "Factura";
             this.btnFactura.UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@
             // 
             // btnCitas
             // 
-            this.btnCitas.Location = new System.Drawing.Point(55, 481);
+            this.btnCitas.Location = new System.Drawing.Point(55, 489);
             this.btnCitas.Name = "btnCitas";
             this.btnCitas.Size = new System.Drawing.Size(149, 44);
             this.btnCitas.TabIndex = 2;

@@ -12,20 +12,21 @@ namespace Capa_Presentacion
         // =========================================================
         // COLORES
         // =========================================================
-        private readonly Color COLOR_VINO =
-            Color.RosyBrown;
-
-        private readonly Color COLOR_FONDO =
-            Color.FromArgb(250, 248, 246);
-
-        private readonly Color COLOR_BEIGE =
-            Color.FromArgb(242, 235, 231);
+        private readonly Color COLOR_VINO = Color.RosyBrown;
+        private readonly Color COLOR_FONDO = Color.FromArgb(250, 248, 246);
+        private readonly Color COLOR_BEIGE = Color.FromArgb(242, 235, 231);
 
         // =========================================================
         // BLL
         // =========================================================
-        private readonly FacturaBLL facturaBLL =
-            new FacturaBLL();
+        private readonly FacturaBLL facturaBLL = new FacturaBLL();
+        private readonly Detalle_FacturaBLL detalleBLL =
+            new Detalle_FacturaBLL();
+
+        // =========================================================
+        // TABLAS
+        // =========================================================
+        private DataTable tablaFacturas = new DataTable();
 
         // =========================================================
         // CONSTRUCTOR
@@ -45,137 +46,255 @@ namespace Capa_Presentacion
             this.BackColor = COLOR_FONDO;
 
             ConfigurarDiseno();
+
             ConfigurarGrid();
+
+            ConfigurarGridDetalle();
+
             ConfigurarBotones();
+
             SuscribirEventos();
 
-            CargarFiltro();
             MostrarFacturas();
-            cbEstado.Items.Add("Pagado");
-            cbEstado.Items.Add("Pendiente");
-            cbEstado.Items.Add("Cancelado");
 
+            cbEstado.Items.Clear();
+
+            cbEstado.Items.Add("Pagado");
+
+            cbEstado.Items.Add("Pendiente");
+
+            cbEstado.Items.Add("Cancelado");
         }
 
         // =========================================================
         // DISEÑO
         // =========================================================
+        // =========================================================
+        // DISEÑO
+        // =========================================================
         private void ConfigurarDiseno()
         {
-            // TITULO
-            lblTabla.Text = "Pagos Pendientes";
+            lblTabla.Text = "Facturas";
 
-            lblTabla.ForeColor =
-                COLOR_VINO;
+            lblTabla.ForeColor = COLOR_VINO;
 
             lblTabla.Font =
                 new Font("Georgia", 20F);
 
-            // BUSCADOR
+            // =====================================================
+            // TXT BUSCAR FACTURA
+            // =====================================================
             txtBuscar.Font =
                 new Font("Segoe UI", 10F);
 
             txtBuscar.BorderStyle =
                 BorderStyle.FixedSingle;
 
-            // COMBO
-            cbFiltroFactura.Font =
+            txtBuscar.BackColor =
+                Color.White;
+
+            txtBuscar.ForeColor =
+                Color.Black;
+
+            txtBuscar.Height = 35;
+
+            txtBuscar.Padding =
+                new Padding(8);
+
+            // =====================================================
+            // TXT BUSCAR DETALLE
+            // =====================================================
+            txtBuscarDetalle.Font =
                 new Font("Segoe UI", 10F);
 
-            cbFiltroFactura.FlatStyle =
+            txtBuscarDetalle.BorderStyle =
+                BorderStyle.FixedSingle;
+
+            txtBuscarDetalle.BackColor =
+                Color.White;
+
+            txtBuscarDetalle.ForeColor =
+                Color.Black;
+
+            txtBuscarDetalle.Height = 35;
+
+            txtBuscarDetalle.Padding =
+                new Padding(8);
+
+       
+
+            // =====================================================
+            // COMBO ESTADO
+            // =====================================================
+            cbEstado.Font =
+                new Font("Segoe UI", 10F);
+
+            cbEstado.FlatStyle =
                 FlatStyle.Flat;
 
+            cbEstado.BackColor =
+                Color.White;
+
+            cbEstado.ForeColor =
+                Color.Black;
+
+            cbEstado.Height = 35;
+
+            // =====================================================
             // PANEL
+            // =====================================================
             panelTabla.BackColor =
                 Color.White;
+
+            // =====================================================
+            // BOTÓN BUSCAR FACTURAS
+            // =====================================================
+            btnBuscarFactura.BackColor =
+                COLOR_VINO;
+
+            btnBuscarFactura.ForeColor =
+                Color.White;
+
+            btnBuscarFactura.FlatStyle =
+                FlatStyle.Flat;
+
+            btnBuscarFactura.FlatAppearance.BorderSize = 0;
+
+            btnBuscarFactura.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Bold);
+
+            btnBuscarFactura.Cursor =
+                Cursors.Hand;
+
+            btnBuscarFactura.Height = 42;
+
+            // =====================================================
+            // BOTÓN BUSCAR DETALLE
+            // =====================================================
+            btnBuscarFactura.BackColor =
+                COLOR_VINO;
+
+            btnBuscarFactura.ForeColor =
+                Color.White;
+
+            btnBuscarFactura.FlatStyle =
+                FlatStyle.Flat;
+
+            btnBuscarFactura.FlatAppearance.BorderSize = 0;
+
+            btnBuscarFactura.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Bold);
+
+            btnBuscarFactura.Cursor =
+                Cursors.Hand;
+
+            btnBuscarFactura.Height = 42;
         }
 
-      
-
         // =========================================================
-        // GRID
+        // GRID FACTURAS
         // =========================================================
         private void ConfigurarGrid()
         {
-            dgvDetalle.BackgroundColor =
+            EstilarGrid(dgvDetalle);
+        }
+
+        // =========================================================
+        // GRID DETALLES
+        // =========================================================
+        private void ConfigurarGridDetalle()
+        {
+            EstilarGrid(dgvDetalleFactura);
+        }
+
+        // =========================================================
+        // ESTILO GRID
+        // =========================================================
+        private void EstilarGrid(
+            DataGridView dgv)
+        {
+            dgv.BackgroundColor =
                 Color.White;
 
-            dgvDetalle.BorderStyle =
+            dgv.BorderStyle =
                 BorderStyle.None;
 
-            dgvDetalle.RowHeadersVisible =
-                false;
+            dgv.RowHeadersVisible = false;
 
-            dgvDetalle.AllowUserToAddRows =
-                false;
+            dgv.AllowUserToAddRows = false;
 
-            dgvDetalle.AllowUserToDeleteRows =
-                false;
+            dgv.AllowUserToDeleteRows = false;
 
-            dgvDetalle.AllowUserToResizeRows =
-                false;
+            dgv.AllowUserToResizeRows = false;
 
-            dgvDetalle.MultiSelect =
-                false;
+            dgv.MultiSelect = false;
 
-            dgvDetalle.SelectionMode =
+            dgv.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
 
-            dgvDetalle.AutoSizeColumnsMode =
+            dgv.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvDetalle.RowTemplate.Height =
-                42;
+            dgv.RowTemplate.Height = 42;
 
-            dgvDetalle.EnableHeadersVisualStyles =
-                false;
+            dgv.EnableHeadersVisualStyles = false;
 
-            dgvDetalle.ColumnHeadersBorderStyle =
+            dgv.ColumnHeadersBorderStyle =
                 DataGridViewHeaderBorderStyle.None;
 
-            dgvDetalle.ColumnHeadersHeight =
-                45;
+            dgv.ColumnHeadersHeight = 45;
 
-            // HEADER
-            dgvDetalle.ColumnHeadersDefaultCellStyle.BackColor =
+            dgv.ColumnHeadersDefaultCellStyle.BackColor =
                 COLOR_VINO;
 
-            dgvDetalle.ColumnHeadersDefaultCellStyle.ForeColor =
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor =
                 Color.White;
 
-            dgvDetalle.ColumnHeadersDefaultCellStyle.Font =
+            dgv.ColumnHeadersDefaultCellStyle.Font =
                 new Font(
                     "Segoe UI",
                     9F,
                     FontStyle.Bold);
 
-            dgvDetalle.ColumnHeadersDefaultCellStyle.Alignment =
+            dgv.ColumnHeadersDefaultCellStyle.Alignment =
                 DataGridViewContentAlignment.MiddleCenter;
 
-            dgvDetalle.ColumnHeadersDefaultCellStyle.SelectionBackColor =
-                COLOR_VINO;
+            dgv.DefaultCellStyle.Font =
+                new Font(
+                    "Segoe UI",
+                    9.5F);
 
-            // FILAS
-            dgvDetalle.DefaultCellStyle.Font =
-                new Font("Segoe UI", 9.5F);
-
-            dgvDetalle.DefaultCellStyle.Padding =
+            dgv.DefaultCellStyle.Padding =
                 new Padding(5);
 
-            dgvDetalle.DefaultCellStyle.SelectionBackColor =
+            dgv.DefaultCellStyle.SelectionBackColor =
                 COLOR_BEIGE;
 
-            dgvDetalle.DefaultCellStyle.SelectionForeColor =
+            dgv.DefaultCellStyle.SelectionForeColor =
                 Color.Black;
 
-            dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(248, 244, 242);
+            dgv.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.FromArgb(
+                    248,
+                    244,
+                    242);
 
-            dgvDetalle.GridColor =
-                Color.FromArgb(235, 230, 228);
+            dgv.GridColor =
+                Color.FromArgb(
+                    235,
+                    230,
+                    228);
 
-            dgvDetalle.CellBorderStyle =
+            dgv.CellBorderStyle =
                 DataGridViewCellBorderStyle.SingleHorizontal;
+
+            dgv.ReadOnly = true;
         }
 
         // =========================================================
@@ -183,55 +302,70 @@ namespace Capa_Presentacion
         // =========================================================
         private void ConfigurarBotones()
         {
-      
+            // BOTONES VINO
+            EstilarBotonVino(btnNuevaFactura);
 
-            EstilarBoton(
-                btnNuevaFactura,
-                COLOR_VINO,
-                Color.White);
+            EstilarBotonVino(btnActualizarEstado);
 
-            EstilarBoton(
-                btnVerDetalle,
-                COLOR_BEIGE,
-                COLOR_VINO);
+            EstilarBotonVino(btnBuscarFactura);
 
-            EstilarBoton(
-                btnHistorial,
-                COLOR_BEIGE,
-                COLOR_VINO);
+            // BOTONES BLANCOS
+            EstilarBotonBlanco(btnHistorial);
+
+            EstilarBotonBlanco(btnMostrarTodoDetalle);
         }
 
         // =========================================================
-        // ESTILO BOTÓN
+        // BOTÓN VINO
         // =========================================================
-        private void EstilarBoton(
-            Button btn,
-            Color fondo,
-            Color texto)
+        private void EstilarBotonVino(
+            Button btn)
         {
-            btn.BackColor =
-                fondo;
+            btn.BackColor = COLOR_VINO;
 
-            btn.ForeColor =
-                texto;
+            btn.ForeColor = Color.White;
 
-            btn.FlatStyle =
-                FlatStyle.Flat;
+            btn.FlatStyle = FlatStyle.Flat;
 
-            btn.FlatAppearance.BorderSize =
-                1;
-
-            btn.FlatAppearance.BorderColor =
-                ControlPaint.Dark(fondo);
+            btn.FlatAppearance.BorderSize = 0;
 
             btn.Font =
                 new Font(
                     "Segoe UI",
-                    9.5F,
+                    10F,
                     FontStyle.Bold);
 
-            btn.Cursor =
-                Cursors.Hand;
+            btn.Cursor = Cursors.Hand;
+
+            btn.Height = 42;
+        }
+
+        // =========================================================
+        // BOTÓN BLANCO
+        // =========================================================
+        private void EstilarBotonBlanco(
+            Button btn)
+        {
+            btn.BackColor = Color.White;
+
+            btn.ForeColor = COLOR_VINO;
+
+            btn.FlatStyle = FlatStyle.Flat;
+
+            btn.FlatAppearance.BorderSize = 1;
+
+            btn.FlatAppearance.BorderColor =
+                COLOR_VINO;
+
+            btn.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Bold);
+
+            btn.Cursor = Cursors.Hand;
+
+            btn.Height = 42;
         }
 
         // =========================================================
@@ -242,59 +376,154 @@ namespace Capa_Presentacion
             txtBuscar.TextChanged +=
                 txtBuscar_TextChanged;
 
-            cbFiltroFactura.SelectedIndexChanged +=
-                cbFiltroFactura_SelectedIndexChanged;
+            txtBuscarDetalle.TextChanged +=
+                txtBuscarDetalle_TextChanged;
+
+            dgvDetalle.SelectionChanged +=
+                dgvDetalle_SelectionChanged;
 
             btnHistorial.Click +=
                 btnHistorial_Click;
 
-            btnVerDetalle.Click +=
-                btnVerDetalle_Click;
-
             btnNuevaFactura.Click +=
                 btnNuevaFactura_Click;
+
+            btnActualizarEstado.Click +=
+                btnActualizarEstado_Click;
+
+            btnMostrarTodoDetalle.Click +=
+                btnMostrarTodoDetalle_Click;
+
+            btnBuscarFactura.Click +=
+                btnBuscarDetalle_Click;
         }
 
-        // =========================================================
-        // CARGAR FILTRO
-        // =========================================================
-        private void CargarFiltro()
-        {
-            cbFiltroFactura.Items.Clear();
 
-            cbFiltroFactura.Items.Add("Todas");
-
-            DataTable dt =
-                facturaBLL.Listar();
-
-            foreach (DataRow fila in dt.Rows)
-            {
-                if (fila["estado_pago"].ToString()
-                    == "Pendiente")
-                {
-                    cbFiltroFactura.Items.Add(
-                        fila["id_factura"].ToString());
-                }
-            }
-
-            cbFiltroFactura.SelectedIndex = 0;
-        }
+    
 
         // =========================================================
         // MOSTRAR FACTURAS
         // =========================================================
         private void MostrarFacturas()
         {
-            DataView vista =
-                facturaBLL.Listar().DefaultView;
+            tablaFacturas =
+                facturaBLL.Listar();
 
-            vista.RowFilter =
-                "estado_pago = 'Pendiente'";
+            // =========================================
+            // SOLO PENDIENTES ARRIBA
+            // =========================================
+            DataTable dtPendientes =
+                tablaFacturas.Clone();
+
+            foreach (DataRow fila
+                in tablaFacturas.Rows)
+            {
+                if (fila["estado_pago"]
+                    .ToString() == "Pendiente")
+                {
+                    dtPendientes.ImportRow(fila);
+                }
+            }
 
             dgvDetalle.DataSource =
-                vista;
+                dtPendientes;
 
-            OcultarColumnas();
+            OcultarColumnasFactura();
+
+            // =========================================
+            // ABAJO TODOS LOS DETALLES
+            // DE LAS FACTURAS PENDIENTES
+            // =========================================
+            MostrarTodosLosDetallesPendientes();
+        }
+
+        // =========================================================
+        // TODOS LOS DETALLES PENDIENTES
+        // =========================================================
+        private void MostrarTodosLosDetallesPendientes()
+        {
+            DataTable dtTodos =
+                detalleBLL.Listar();
+
+            DataTable dtFiltrado =
+                dtTodos.Clone();
+
+            foreach (DataRow detalle
+                in dtTodos.Rows)
+            {
+                foreach (DataRow factura
+                    in tablaFacturas.Rows)
+                {
+                    if (
+                        factura["estado_pago"]
+                        .ToString() == "Pendiente"
+
+                        &&
+
+                        detalle["id_factura"]
+                        .ToString()
+
+                        ==
+
+                        factura["id_factura"]
+                        .ToString()
+                    )
+                    {
+                        dtFiltrado.ImportRow(detalle);
+                    }
+                }
+            }
+
+            dgvDetalleFactura.DataSource =
+                dtFiltrado;
+
+            OcultarColumnasDetalle();
+        }
+
+        // =========================================================
+        // SELECCIONAR FACTURA
+        // =========================================================
+        private void dgvDetalle_SelectionChanged(
+            object sender,
+            EventArgs e)
+        {
+            if (dgvDetalle.SelectedRows.Count == 0)
+                return;
+
+            int idFactura =
+                Convert.ToInt32(
+                    dgvDetalle.SelectedRows[0]
+                    .Cells["id_factura"].Value);
+
+            // SOLO EL DETALLE DE ESA FACTURA
+            DataTable dtDetalle =
+                detalleBLL.ObtenerPorFactura(
+                    idFactura);
+
+            dgvDetalleFactura.DataSource =
+                dtDetalle;
+
+            OcultarColumnasDetalle();
+        }
+
+        // =========================================================
+        // MOSTRAR TODO OTRA VEZ
+        // =========================================================
+        private void btnMostrarTodoDetalle_Click(
+            object sender,
+            EventArgs e)
+        {
+            MostrarTodosLosDetallesPendientes();
+        }
+
+        // =========================================================
+        // BUSCAR DETALLE
+        // =========================================================
+        private void btnBuscarDetalle_Click(
+            object sender,
+            EventArgs e)
+        {
+            BuscarDetalle();
         }
 
         // =========================================================
@@ -302,70 +531,179 @@ namespace Capa_Presentacion
         // =========================================================
         private void BuscarFacturas()
         {
-            DataView vista =
-                facturaBLL.Listar().DefaultView;
-
-            string filtro =
-                "estado_pago = 'Pendiente'";
-
-            if (cbFiltroFactura.SelectedIndex > 0)
-            {
-                filtro +=
-                    $" AND id_factura = {cbFiltroFactura.SelectedItem}";
-            }
-
             string texto =
-                txtBuscar.Text.Trim();
+                txtBuscar.Text
+                .Trim()
+                .ToLower();
 
-            if (!string.IsNullOrEmpty(texto))
+            DataTable dtPendientes =
+                tablaFacturas.Clone();
+
+            foreach (DataRow fila
+                in tablaFacturas.Rows)
             {
-                filtro +=
-                    $" AND cliente LIKE '%{texto}%'";
-            }
+                if (fila["estado_pago"]
+                    .ToString() != "Pendiente")
+                    continue;
 
-            vista.RowFilter =
-                filtro;
+                bool encontrado = false;
+
+                foreach (var celda
+                    in fila.ItemArray)
+                {
+                    if (
+                        celda.ToString()
+                        .ToLower()
+                        .Contains(texto)
+                    )
+                    {
+                        encontrado = true;
+                        break;
+                    }
+                }
+
+                if (
+                    encontrado
+                    ||
+                    string.IsNullOrEmpty(texto)
+                )
+                {
+                    dtPendientes.ImportRow(fila);
+                }
+            }
 
             dgvDetalle.DataSource =
-                vista;
+                dtPendientes;
 
-            OcultarColumnas();
+            OcultarColumnasFactura();
         }
 
         // =========================================================
-        // OCULTAR COLUMNAS
+        // BUSCAR DETALLE
         // =========================================================
-        private void OcultarColumnas()
+        private void BuscarDetalle()
+        {
+            if (dgvDetalleFactura.DataSource == null)
+                return;
+
+            string texto =
+                txtBuscarDetalle.Text
+                .Trim()
+                .ToLower();
+
+            DataTable dtActual =
+                dgvDetalleFactura.DataSource
+                as DataTable;
+
+            if (dtActual == null)
+                return;
+
+            if (string.IsNullOrEmpty(texto))
+            {
+                MostrarTodosLosDetallesPendientes();
+                return;
+            }
+
+            DataTable dtFiltrado =
+                dtActual.Clone();
+
+            foreach (DataRow fila
+                in dtActual.Rows)
+            {
+                foreach (var celda
+                    in fila.ItemArray)
+                {
+                    if (
+                        celda.ToString()
+                        .ToLower()
+                        .Contains(texto)
+                    )
+                    {
+                        dtFiltrado.ImportRow(fila);
+                        break;
+                    }
+                }
+            }
+
+            dgvDetalleFactura.DataSource =
+                dtFiltrado;
+
+            OcultarColumnasDetalle();
+        }
+
+        // =========================================================
+        // COLUMNAS FACTURA
+        // =========================================================
+        private void OcultarColumnasFactura()
         {
             if (dgvDetalle.Columns.Contains("id_cliente"))
+                dgvDetalle.Columns["id_cliente"].Visible = false;
+
+            if (dgvDetalle.Columns.Contains("id_factura"))
+                dgvDetalle.Columns["id_factura"].HeaderText = "Factura #";
+
+            if (dgvDetalle.Columns.Contains("cliente"))
+                dgvDetalle.Columns["cliente"].HeaderText = "Cliente";
+
+            if (dgvDetalle.Columns.Contains("fecha_factura"))
+                dgvDetalle.Columns["fecha_factura"].HeaderText = "Fecha";
+
+            if (dgvDetalle.Columns.Contains("total"))
             {
-                dgvDetalle.Columns["id_cliente"].Visible =
-                    false;
+                dgvDetalle.Columns["total"].HeaderText = "Total";
+
+                dgvDetalle.Columns["total"]
+                    .DefaultCellStyle.Format = "N2";
             }
 
-            if (dgvDetalle.Columns.Contains("referencia"))
-            {
-                dgvDetalle.Columns["referencia"].Visible =
-                    false;
-            }
+            if (dgvDetalle.Columns.Contains("metodo_pago"))
+                dgvDetalle.Columns["metodo_pago"].HeaderText =
+                    "Método Pago";
 
-            if (dgvDetalle.Columns.Contains("notas"))
-            {
-                dgvDetalle.Columns["notas"].Visible =
-                    false;
-            }
+            if (dgvDetalle.Columns.Contains("estado_pago"))
+                dgvDetalle.Columns["estado_pago"].HeaderText =
+                    "Estado";
         }
 
         // =========================================================
-        // EVENTOS BÚSQUEDA
+        // COLUMNAS DETALLE
         // =========================================================
-        private void btnBuscar_Click(
-            object sender,
-            EventArgs e)
+        private void OcultarColumnasDetalle()
         {
-            BuscarFacturas();
+            if (dgvDetalleFactura.Columns.Contains("id_servicio"))
+                dgvDetalleFactura.Columns["id_servicio"].Visible = false;
+
+            if (dgvDetalleFactura.Columns.Contains("id_factura"))
+                dgvDetalleFactura.Columns["id_factura"].Visible = false;
+
+            if (dgvDetalleFactura.Columns.Contains("id_detalle_factura"))
+                dgvDetalleFactura.Columns["id_detalle_factura"].Visible = false;
+
+            if (dgvDetalleFactura.Columns.Contains("servicio"))
+                dgvDetalleFactura.Columns["servicio"].HeaderText =
+                    "Servicio";
+
+            if (dgvDetalleFactura.Columns.Contains("descripcion"))
+                dgvDetalleFactura.Columns["descripcion"].HeaderText =
+                    "Descripción";
+
+            if (dgvDetalleFactura.Columns.Contains("cantidad"))
+                dgvDetalleFactura.Columns["cantidad"].HeaderText =
+                    "Cantidad";
+
+            if (dgvDetalleFactura.Columns.Contains("subtotal"))
+            {
+                dgvDetalleFactura.Columns["subtotal"].HeaderText =
+                    "Subtotal";
+
+                dgvDetalleFactura.Columns["subtotal"]
+                    .DefaultCellStyle.Format = "N2";
+            }
         }
 
+        // =========================================================
+        // EVENTOS BUSCAR
+        // =========================================================
         private void txtBuscar_TextChanged(
             object sender,
             EventArgs e)
@@ -373,41 +711,11 @@ namespace Capa_Presentacion
             BuscarFacturas();
         }
 
-        private void cbFiltroFactura_SelectedIndexChanged(
+        private void txtBuscarDetalle_TextChanged(
             object sender,
             EventArgs e)
         {
-            BuscarFacturas();
-        }
-
-        // =========================================================
-        // VER DETALLE
-        // =========================================================
-        private void btnVerDetalle_Click(
-            object sender,
-            EventArgs e)
-        {
-            if (dgvDetalle.SelectedRows.Count == 0)
-            {
-                MessageBox.Show(
-                    "Selecciona una factura.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
-                return;
-            }
-
-            int idFactura =
-                Convert.ToInt32(
-                    dgvDetalle.SelectedRows[0]
-                    .Cells["id_factura"].Value);
-
-            FrmPrincipal principal =
-                (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
-
-            principal.AbrirFormulario(
-                new FrmDetalleFactura(idFactura));
+            BuscarDetalle();
         }
 
         // =========================================================
@@ -418,7 +726,8 @@ namespace Capa_Presentacion
             EventArgs e)
         {
             FrmPrincipal principal =
-                (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
+                (FrmPrincipal)
+                Application.OpenForms["FrmPrincipal"];
 
             principal.AbrirFormulario(
                 new FrmDetalleFactura());
@@ -432,15 +741,19 @@ namespace Capa_Presentacion
             EventArgs e)
         {
             FrmPrincipal principal =
-                (FrmPrincipal)Application.OpenForms["FrmPrincipal"];
+                (FrmPrincipal)
+                Application.OpenForms["FrmPrincipal"];
 
             principal.AbrirFormulario(
                 new FrmHistorialFacturas());
         }
 
+        // =========================================================
+        // ACTUALIZAR ESTADO
+        // =========================================================
         private void btnActualizarEstado_Click(
-     object sender,
-     EventArgs e)
+            object sender,
+            EventArgs e)
         {
             if (dgvDetalle.SelectedRows.Count == 0)
             {
@@ -463,19 +776,14 @@ namespace Capa_Presentacion
                     dgvDetalle.SelectedRows[0]
                     .Cells["id_factura"].Value);
 
-            string estado =
-                cbEstado.SelectedItem
-                .ToString();
-
             facturaBLL.ActualizarEstado(
                 idFactura,
-                estado);
+                cbEstado.SelectedItem.ToString());
 
             MessageBox.Show(
                 "Estado actualizado correctamente.");
 
             MostrarFacturas();
         }
-
     }
 }
