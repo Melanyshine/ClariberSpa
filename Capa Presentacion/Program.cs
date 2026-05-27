@@ -22,7 +22,7 @@ namespace CapaPresentacion
     
 
 
-            Application.Run(new FrmPrincipal());
+            Application.Run(new FrmFacturaReporte());
 
         }
     }

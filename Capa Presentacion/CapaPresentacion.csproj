@@ -75,6 +75,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClaribetSpaDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ClaribetSpaDataSet2.cs">
+      <DependentUpon>ClaribetSpaDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ClaribetSpaDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaribetSpaDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FrmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +130,12 @@
     </Compile>
     <Compile Include="FrmFactura.Designer.cs">
       <DependentUpon>FrmFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFacturaReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFacturaReporte.Designer.cs">
+      <DependentUpon>FrmFacturaReporte.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmHistorialCitas.cs">
       <SubType>Form</SubType>
@@ -204,6 +218,9 @@
     <EmbeddedResource Include="FrmFactura.resx">
       <DependentUpon>FrmFactura.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmFacturaReporte.resx">
+      <DependentUpon>FrmFacturaReporte.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmHistorialCitas.resx">
       <DependentUpon>FrmHistorialCitas.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +256,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="Servicio.resx">
       <DependentUpon>Servicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -263,6 +281,11 @@
     </None>
     <None Include="ClaribetSpaDataSet1.xss">
       <DependentUpon>ClaribetSpaDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="ClaribetSpaDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ClaribetSpaDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
