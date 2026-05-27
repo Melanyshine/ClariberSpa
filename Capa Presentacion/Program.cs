@@ -19,10 +19,10 @@ namespace CapaPresentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+    
 
-           
 
-            Application.Run(new FrmReporteIngresos());
+            Application.Run(new FrmPrincipal());
 
         }
     }

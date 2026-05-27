@@ -48,7 +48,6 @@
             this.cbCliente = new System.Windows.Forms.ComboBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panelTabla = new System.Windows.Forms.Panel();
             this.btnHistorial = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -91,7 +90,7 @@
             this.panelCitas.Controls.Add(this.lblServicio);
             this.panelCitas.Controls.Add(this.cbCliente);
             this.panelCitas.Controls.Add(this.lblCliente);
-            this.panelCitas.Location = new System.Drawing.Point(1435, 111);
+            this.panelCitas.Location = new System.Drawing.Point(1435, 202);
             this.panelCitas.Name = "panelCitas";
             this.panelCitas.Size = new System.Drawing.Size(441, 784);
             this.panelCitas.TabIndex = 3;
@@ -253,30 +252,23 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(1431, 54);
+            this.lblTitulo.Location = new System.Drawing.Point(1431, 145);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(151, 20);
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "Agendar Nueva Cita";
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(-33, -67);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 5;
-            // 
             // panelTabla
             // 
             this.panelTabla.Controls.Add(this.dgvCitas);
-            this.panelTabla.Location = new System.Drawing.Point(432, 131);
+            this.panelTabla.Location = new System.Drawing.Point(432, 222);
             this.panelTabla.Name = "panelTabla";
             this.panelTabla.Size = new System.Drawing.Size(945, 605);
             this.panelTabla.TabIndex = 7;
             // 
             // btnHistorial
             // 
-            this.btnHistorial.Location = new System.Drawing.Point(432, 772);
+            this.btnHistorial.Location = new System.Drawing.Point(432, 863);
             this.btnHistorial.Name = "btnHistorial";
             this.btnHistorial.Size = new System.Drawing.Size(305, 49);
             this.btnHistorial.TabIndex = 9;
@@ -286,7 +278,7 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(542, 46);
+            this.txtBuscar.Location = new System.Drawing.Point(542, 137);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(277, 26);
             this.txtBuscar.TabIndex = 10;
@@ -294,14 +286,14 @@
             // cbFiltroEstado
             // 
             this.cbFiltroEstado.FormattingEnabled = true;
-            this.cbFiltroEstado.Location = new System.Drawing.Point(1063, 46);
+            this.cbFiltroEstado.Location = new System.Drawing.Point(1063, 137);
             this.cbFiltroEstado.Name = "cbFiltroEstado";
             this.cbFiltroEstado.Size = new System.Drawing.Size(121, 28);
             this.cbFiltroEstado.TabIndex = 11;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(842, 32);
+            this.btnBuscar.Location = new System.Drawing.Point(842, 123);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(56, 10);
             this.btnBuscar.TabIndex = 12;
@@ -311,7 +303,7 @@
             // 
             // btnVerTodos
             // 
-            this.btnVerTodos.Location = new System.Drawing.Point(1205, 46);
+            this.btnVerTodos.Location = new System.Drawing.Point(1205, 137);
             this.btnVerTodos.Name = "btnVerTodos";
             this.btnVerTodos.Size = new System.Drawing.Size(96, 12);
             this.btnVerTodos.TabIndex = 13;
@@ -330,7 +322,6 @@
             this.Controls.Add(this.cbFiltroEstado);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.btnHistorial);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panelCitas);
             this.Controls.Add(this.panelTabla);
@@ -364,7 +355,6 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelTabla;
         private System.Windows.Forms.Button btnHistorial;
         private System.Windows.Forms.CheckedListBox clbServicios;

@@ -146,6 +146,18 @@
     <Compile Include="FrmReporteIngresos.Designer.cs">
       <DependentUpon>FrmReporteIngresos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportes.Designer.cs">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReporteServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReporteServicios.Designer.cs">
+      <DependentUpon>FrmReporteServicios.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmServicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +214,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmReporteIngresos.resx">
       <DependentUpon>FrmReporteIngresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReportes.resx">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReporteServicios.resx">
+      <DependentUpon>FrmReporteServicios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmServicio.resx">
       <DependentUpon>FrmServicio.cs</DependentUpon>

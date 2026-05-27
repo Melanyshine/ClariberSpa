@@ -48,28 +48,24 @@
             // panelContenido
             // 
             this.panelContenido.BackColor = System.Drawing.Color.White;
-            this.panelContenido.Controls.Add(this.label6);
             this.panelContenido.Controls.Add(this.lblPagina);
-            this.panelContenido.Controls.Add(this.label5);
             this.panelContenido.Controls.Add(this.label3);
             this.panelContenido.Controls.Add(this.btnAnterior);
             this.panelContenido.Controls.Add(this.btnSiguiente);
             this.panelContenido.Controls.Add(this.btnNuevoCliente);
             this.panelContenido.Controls.Add(this.cbFiltro);
             this.panelContenido.Controls.Add(this.txtBuscar);
-            this.panelContenido.Controls.Add(this.label2);
-            this.panelContenido.Controls.Add(this.label1);
             this.panelContenido.Controls.Add(this.dgvClientes);
-            this.panelContenido.Location = new System.Drawing.Point(389, 65);
+            this.panelContenido.Location = new System.Drawing.Point(471, 173);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1452, 809);
+            this.panelContenido.Size = new System.Drawing.Size(1452, 772);
             this.panelContenido.TabIndex = 2;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(1208, 66);
+            this.label6.Location = new System.Drawing.Point(1657, 134);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(125, 20);
             this.label6.TabIndex = 4;
@@ -79,7 +75,7 @@
             // 
             this.lblPagina.AutoSize = true;
             this.lblPagina.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPagina.Location = new System.Drawing.Point(682, 738);
+            this.lblPagina.Location = new System.Drawing.Point(687, 670);
             this.lblPagina.Name = "lblPagina";
             this.lblPagina.Size = new System.Drawing.Size(20, 22);
             this.lblPagina.TabIndex = 9;
@@ -90,7 +86,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.RosyBrown;
-            this.label5.Location = new System.Drawing.Point(1165, 20);
+            this.label5.Location = new System.Drawing.Point(1614, 88);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(218, 46);
             this.label5.TabIndex = 3;
@@ -99,7 +95,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 749);
+            this.label3.Location = new System.Drawing.Point(39, 681);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(200, 20);
             this.label3.TabIndex = 8;
@@ -107,7 +103,7 @@
             // 
             // btnAnterior
             // 
-            this.btnAnterior.Location = new System.Drawing.Point(708, 730);
+            this.btnAnterior.Location = new System.Drawing.Point(713, 662);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(55, 39);
             this.btnAnterior.TabIndex = 7;
@@ -117,7 +113,7 @@
             // 
             // btnSiguiente
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(616, 729);
+            this.btnSiguiente.Location = new System.Drawing.Point(621, 661);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(60, 40);
             this.btnSiguiente.TabIndex = 6;
@@ -129,7 +125,7 @@
             // 
             this.btnNuevoCliente.BackColor = System.Drawing.Color.RosyBrown;
             this.btnNuevoCliente.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNuevoCliente.Location = new System.Drawing.Point(1148, 165);
+            this.btnNuevoCliente.Location = new System.Drawing.Point(1105, 77);
             this.btnNuevoCliente.Name = "btnNuevoCliente";
             this.btnNuevoCliente.Size = new System.Drawing.Size(206, 65);
             this.btnNuevoCliente.TabIndex = 5;
@@ -141,7 +137,7 @@
             // 
             this.cbFiltro.ForeColor = System.Drawing.Color.Gray;
             this.cbFiltro.FormattingEnabled = true;
-            this.cbFiltro.Location = new System.Drawing.Point(522, 184);
+            this.cbFiltro.Location = new System.Drawing.Point(527, 116);
             this.cbFiltro.Name = "cbFiltro";
             this.cbFiltro.Size = new System.Drawing.Size(190, 28);
             this.cbFiltro.TabIndex = 4;
@@ -150,7 +146,7 @@
             // txtBuscar
             // 
             this.txtBuscar.ForeColor = System.Drawing.Color.Gray;
-            this.txtBuscar.Location = new System.Drawing.Point(51, 184);
+            this.txtBuscar.Location = new System.Drawing.Point(56, 116);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(407, 26);
             this.txtBuscar.TabIndex = 3;
@@ -161,7 +157,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.Gray;
-            this.label2.Location = new System.Drawing.Point(47, 96);
+            this.label2.Location = new System.Drawing.Point(518, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(278, 20);
             this.label2.TabIndex = 2;
@@ -171,7 +167,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 41);
+            this.label1.Location = new System.Drawing.Point(517, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 55);
             this.label1.TabIndex = 1;
@@ -180,7 +176,7 @@
             // dgvClientes
             // 
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(51, 254);
+            this.dgvClientes.Location = new System.Drawing.Point(56, 186);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.RowHeadersWidth = 62;
             this.dgvClientes.RowTemplate.Height = 28;
@@ -193,7 +189,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.panelContenido);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
             this.Name = "FrmClientes";
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.Clientes_Load);
@@ -201,6 +201,7 @@
             this.panelContenido.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

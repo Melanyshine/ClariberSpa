@@ -40,12 +40,14 @@
             this.btnServicios = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.panelContenido = new System.Windows.Forms.Panel();
+            this.btnReportes = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
             this.panelMenu.Controls.Add(this.btnConfiguracion);
+            this.panelMenu.Controls.Add(this.btnReportes);
             this.panelMenu.Controls.Add(this.btnInicio);
             this.panelMenu.Controls.Add(this.btnFactura);
             this.panelMenu.Controls.Add(this.btnUsuario);
@@ -58,14 +60,14 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(294, 935);
+            this.panelMenu.Size = new System.Drawing.Size(353, 1030);
             this.panelMenu.TabIndex = 0;
             // 
             // btnConfiguracion
             // 
-            this.btnConfiguracion.Location = new System.Drawing.Point(55, 743);
+            this.btnConfiguracion.Location = new System.Drawing.Point(55, 810);
             this.btnConfiguracion.Name = "btnConfiguracion";
-            this.btnConfiguracion.Size = new System.Drawing.Size(160, 41);
+            this.btnConfiguracion.Size = new System.Drawing.Size(160, 45);
             this.btnConfiguracion.TabIndex = 0;
             this.btnConfiguracion.Text = "Configuración";
             this.btnConfiguracion.UseVisualStyleBackColor = true;
@@ -73,7 +75,7 @@
             // 
             // btnInicio
             // 
-            this.btnInicio.Location = new System.Drawing.Point(55, 151);
+            this.btnInicio.Location = new System.Drawing.Point(55, 115);
             this.btnInicio.Name = "btnInicio";
             this.btnInicio.Size = new System.Drawing.Size(160, 44);
             this.btnInicio.TabIndex = 5;
@@ -83,7 +85,7 @@
             // 
             // btnFactura
             // 
-            this.btnFactura.Location = new System.Drawing.Point(55, 575);
+            this.btnFactura.Location = new System.Drawing.Point(55, 543);
             this.btnFactura.Name = "btnFactura";
             this.btnFactura.Size = new System.Drawing.Size(160, 44);
             this.btnFactura.TabIndex = 0;
@@ -93,7 +95,7 @@
             // 
             // btnUsuario
             // 
-            this.btnUsuario.Location = new System.Drawing.Point(55, 402);
+            this.btnUsuario.Location = new System.Drawing.Point(55, 370);
             this.btnUsuario.Name = "btnUsuario";
             this.btnUsuario.Size = new System.Drawing.Size(160, 44);
             this.btnUsuario.TabIndex = 0;
@@ -112,7 +114,7 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(55, 832);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(55, 926);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(160, 44);
             this.btnCerrarSesion.TabIndex = 1;
@@ -122,7 +124,7 @@
             // 
             // btnDisponibilidad
             // 
-            this.btnDisponibilidad.Location = new System.Drawing.Point(55, 657);
+            this.btnDisponibilidad.Location = new System.Drawing.Point(55, 635);
             this.btnDisponibilidad.Name = "btnDisponibilidad";
             this.btnDisponibilidad.Size = new System.Drawing.Size(160, 44);
             this.btnDisponibilidad.TabIndex = 3;
@@ -132,7 +134,7 @@
             // 
             // btnCitas
             // 
-            this.btnCitas.Location = new System.Drawing.Point(55, 487);
+            this.btnCitas.Location = new System.Drawing.Point(55, 452);
             this.btnCitas.Name = "btnCitas";
             this.btnCitas.Size = new System.Drawing.Size(160, 44);
             this.btnCitas.TabIndex = 2;
@@ -142,7 +144,7 @@
             // 
             // btnServicios
             // 
-            this.btnServicios.Location = new System.Drawing.Point(55, 317);
+            this.btnServicios.Location = new System.Drawing.Point(55, 283);
             this.btnServicios.Name = "btnServicios";
             this.btnServicios.Size = new System.Drawing.Size(160, 44);
             this.btnServicios.TabIndex = 1;
@@ -152,7 +154,7 @@
             // 
             // btnClientes
             // 
-            this.btnClientes.Location = new System.Drawing.Point(55, 228);
+            this.btnClientes.Location = new System.Drawing.Point(55, 203);
             this.btnClientes.Name = "btnClientes";
             this.btnClientes.Size = new System.Drawing.Size(160, 44);
             this.btnClientes.TabIndex = 1;
@@ -162,17 +164,26 @@
             // 
             // panelContenido
             // 
-            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.Location = new System.Drawing.Point(0, 0);
+            this.panelContenido.Location = new System.Drawing.Point(300, 0);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(1524, 935);
+            this.panelContenido.Size = new System.Drawing.Size(1224, 935);
             this.panelContenido.TabIndex = 1;
+            // 
+            // btnReportes
+            // 
+            this.btnReportes.Location = new System.Drawing.Point(55, 725);
+            this.btnReportes.Name = "btnReportes";
+            this.btnReportes.Size = new System.Drawing.Size(160, 45);
+            this.btnReportes.TabIndex = 0;
+            this.btnReportes.Text = "Reportes";
+            this.btnReportes.UseVisualStyleBackColor = true;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1524, 935);
+            this.ClientSize = new System.Drawing.Size(1270, 858);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelContenido);
             this.Name = "FrmPrincipal";
@@ -209,5 +220,6 @@
         private System.Windows.Forms.Button btnInicio;
 
         public System.Windows.Forms.Button btnConfiguracion;
+        private System.Windows.Forms.Button btnReportes;
     }
 }

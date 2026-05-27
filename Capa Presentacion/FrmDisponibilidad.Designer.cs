@@ -56,7 +56,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(423, 41);
+            this.lblTitulo.Location = new System.Drawing.Point(471, 40);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(107, 20);
             this.lblTitulo.TabIndex = 0;
@@ -65,7 +65,7 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(423, 115);
+            this.lblDescripcion.Location = new System.Drawing.Point(471, 114);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(242, 40);
             this.lblDescripcion.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(1651, 314);
+            this.btnLimpiar.Location = new System.Drawing.Point(1699, 313);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(177, 53);
             this.btnLimpiar.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(1631, 255);
+            this.btnGuardar.Location = new System.Drawing.Point(1679, 254);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(213, 53);
             this.btnGuardar.TabIndex = 5;
@@ -94,7 +94,7 @@
             // gbListado
             // 
             this.gbListado.Controls.Add(this.dgvDisponibilidad);
-            this.gbListado.Location = new System.Drawing.Point(427, 584);
+            this.gbListado.Location = new System.Drawing.Point(475, 583);
             this.gbListado.Name = "gbListado";
             this.gbListado.Size = new System.Drawing.Size(1220, 340);
             this.gbListado.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(1685, 680);
+            this.btnEliminar.Location = new System.Drawing.Point(1733, 679);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(180, 53);
             this.btnEliminar.TabIndex = 7;
@@ -123,7 +123,7 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(1685, 739);
+            this.btnEditar.Location = new System.Drawing.Point(1733, 738);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(180, 49);
             this.btnEditar.TabIndex = 8;
@@ -230,7 +230,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.gbDisponibilidad);
-            this.panel1.Location = new System.Drawing.Point(400, 158);
+            this.panel1.Location = new System.Drawing.Point(448, 157);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1234, 395);
             this.panel1.TabIndex = 10;

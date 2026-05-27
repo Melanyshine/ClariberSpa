@@ -51,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1286, 75);
+            this.label1.Location = new System.Drawing.Point(1138, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 20);
             this.label1.TabIndex = 2;
@@ -85,7 +85,7 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.lblTitulo);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(417, 12);
+            this.panel3.Location = new System.Drawing.Point(509, 18);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1507, 129);
             this.panel3.TabIndex = 5;
@@ -95,7 +95,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.RosyBrown;
-            this.label4.Location = new System.Drawing.Point(1226, 18);
+            this.label4.Location = new System.Drawing.Point(1078, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(239, 46);
             this.label4.TabIndex = 6;
@@ -104,7 +104,7 @@
             // cmbServicio
             // 
             this.cmbServicio.FormattingEnabled = true;
-            this.cmbServicio.Location = new System.Drawing.Point(1015, 36);
+            this.cmbServicio.Location = new System.Drawing.Point(809, 45);
             this.cmbServicio.Name = "cmbServicio";
             this.cmbServicio.Size = new System.Drawing.Size(121, 28);
             this.cmbServicio.TabIndex = 5;
@@ -119,9 +119,9 @@
             this.panelServiciosRegistrados.Controls.Add(this.label5);
             this.panelServiciosRegistrados.Controls.Add(this.txtBuscar);
             this.panelServiciosRegistrados.Controls.Add(this.btnNuevoServicio);
-            this.panelServiciosRegistrados.Location = new System.Drawing.Point(417, 168);
+            this.panelServiciosRegistrados.Location = new System.Drawing.Point(509, 174);
             this.panelServiciosRegistrados.Name = "panelServiciosRegistrados";
-            this.panelServiciosRegistrados.Size = new System.Drawing.Size(1443, 817);
+            this.panelServiciosRegistrados.Size = new System.Drawing.Size(1338, 817);
             this.panelServiciosRegistrados.TabIndex = 6;
             // 
             // lblResultados

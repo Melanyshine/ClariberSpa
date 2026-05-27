@@ -279,19 +279,11 @@ namespace Capa_Presentacion {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class sp_reporte_ingresos_mensualesDataTable : global::System.Data.TypedTableBase<sp_reporte_ingresos_mensualesRow> {
             
-            private global::System.Data.DataColumn columnid_factura;
-            
-            private global::System.Data.DataColumn columnfecha_factura;
-            
             private global::System.Data.DataColumn columnMes;
             
-            private global::System.Data.DataColumn columnCliente;
+            private global::System.Data.DataColumn columnCantidadFacturas;
             
-            private global::System.Data.DataColumn columntotal;
-            
-            private global::System.Data.DataColumn columnestado_pago;
-            
-            private global::System.Data.DataColumn columnmetodo_pago;
+            private global::System.Data.DataColumn columnTotal;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -328,22 +320,6 @@ namespace Capa_Presentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn id_facturaColumn {
-                get {
-                    return this.columnid_factura;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn fecha_facturaColumn {
-                get {
-                    return this.columnfecha_factura;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn MesColumn {
                 get {
                     return this.columnMes;
@@ -352,33 +328,17 @@ namespace Capa_Presentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn ClienteColumn {
+            public global::System.Data.DataColumn CantidadFacturasColumn {
                 get {
-                    return this.columnCliente;
+                    return this.columnCantidadFacturas;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn totalColumn {
+            public global::System.Data.DataColumn TotalColumn {
                 get {
-                    return this.columntotal;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn estado_pagoColumn {
-                get {
-                    return this.columnestado_pago;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn metodo_pagoColumn {
-                get {
-                    return this.columnmetodo_pago;
+                    return this.columnTotal;
                 }
             }
             
@@ -419,26 +379,15 @@ namespace Capa_Presentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public sp_reporte_ingresos_mensualesRow Addsp_reporte_ingresos_mensualesRow(System.DateTime fecha_factura, string Mes, string Cliente, decimal total, string estado_pago, string metodo_pago) {
+            public sp_reporte_ingresos_mensualesRow Addsp_reporte_ingresos_mensualesRow(string Mes, int CantidadFacturas, decimal Total) {
                 sp_reporte_ingresos_mensualesRow rowsp_reporte_ingresos_mensualesRow = ((sp_reporte_ingresos_mensualesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
-                        fecha_factura,
                         Mes,
-                        Cliente,
-                        total,
-                        estado_pago,
-                        metodo_pago};
+                        CantidadFacturas,
+                        Total};
                 rowsp_reporte_ingresos_mensualesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsp_reporte_ingresos_mensualesRow);
                 return rowsp_reporte_ingresos_mensualesRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public sp_reporte_ingresos_mensualesRow FindByid_factura(int id_factura) {
-                return ((sp_reporte_ingresos_mensualesRow)(this.Rows.Find(new object[] {
-                            id_factura})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -458,48 +407,24 @@ namespace Capa_Presentacion {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnid_factura = base.Columns["id_factura"];
-                this.columnfecha_factura = base.Columns["fecha_factura"];
                 this.columnMes = base.Columns["Mes"];
-                this.columnCliente = base.Columns["Cliente"];
-                this.columntotal = base.Columns["total"];
-                this.columnestado_pago = base.Columns["estado_pago"];
-                this.columnmetodo_pago = base.Columns["metodo_pago"];
+                this.columnCantidadFacturas = base.Columns["CantidadFacturas"];
+                this.columnTotal = base.Columns["Total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnid_factura = new global::System.Data.DataColumn("id_factura", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnid_factura);
-                this.columnfecha_factura = new global::System.Data.DataColumn("fecha_factura", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfecha_factura);
                 this.columnMes = new global::System.Data.DataColumn("Mes", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMes);
-                this.columnCliente = new global::System.Data.DataColumn("Cliente", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCliente);
-                this.columntotal = new global::System.Data.DataColumn("total", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntotal);
-                this.columnestado_pago = new global::System.Data.DataColumn("estado_pago", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnestado_pago);
-                this.columnmetodo_pago = new global::System.Data.DataColumn("metodo_pago", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmetodo_pago);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnid_factura}, true));
-                this.columnid_factura.AutoIncrement = true;
-                this.columnid_factura.AllowDBNull = false;
-                this.columnid_factura.ReadOnly = true;
-                this.columnid_factura.Unique = true;
-                this.columnfecha_factura.AllowDBNull = false;
+                this.columnCantidadFacturas = new global::System.Data.DataColumn("CantidadFacturas", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantidadFacturas);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
                 this.columnMes.ReadOnly = true;
-                this.columnMes.MaxLength = 30;
-                this.columnCliente.ReadOnly = true;
-                this.columnCliente.MaxLength = 201;
-                this.columntotal.AllowDBNull = false;
-                this.columnestado_pago.AllowDBNull = false;
-                this.columnestado_pago.MaxLength = 50;
-                this.columnmetodo_pago.AllowDBNull = false;
-                this.columnmetodo_pago.MaxLength = 50;
+                this.columnMes.MaxLength = 10;
+                this.columnCantidadFacturas.ReadOnly = true;
+                this.columnTotal.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -642,28 +567,6 @@ namespace Capa_Presentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int id_factura {
-                get {
-                    return ((int)(this[this.tablesp_reporte_ingresos_mensuales.id_facturaColumn]));
-                }
-                set {
-                    this[this.tablesp_reporte_ingresos_mensuales.id_facturaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public System.DateTime fecha_factura {
-                get {
-                    return ((global::System.DateTime)(this[this.tablesp_reporte_ingresos_mensuales.fecha_facturaColumn]));
-                }
-                set {
-                    this[this.tablesp_reporte_ingresos_mensuales.fecha_facturaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Mes {
                 get {
                     try {
@@ -681,51 +584,35 @@ namespace Capa_Presentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Cliente {
+            public int CantidadFacturas {
                 get {
                     try {
-                        return ((string)(this[this.tablesp_reporte_ingresos_mensuales.ClienteColumn]));
+                        return ((int)(this[this.tablesp_reporte_ingresos_mensuales.CantidadFacturasColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Cliente\' de la tabla \'sp_reporte_ingresos_mensuales\' es D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CantidadFacturas\' de la tabla \'sp_reporte_ingresos_mensua" +
+                                "les\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablesp_reporte_ingresos_mensuales.ClienteColumn] = value;
+                    this[this.tablesp_reporte_ingresos_mensuales.CantidadFacturasColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal total {
+            public decimal Total {
                 get {
-                    return ((decimal)(this[this.tablesp_reporte_ingresos_mensuales.totalColumn]));
+                    try {
+                        return ((decimal)(this[this.tablesp_reporte_ingresos_mensuales.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Total\' de la tabla \'sp_reporte_ingresos_mensuales\' es DBN" +
+                                "ull.", e);
+                    }
                 }
                 set {
-                    this[this.tablesp_reporte_ingresos_mensuales.totalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string estado_pago {
-                get {
-                    return ((string)(this[this.tablesp_reporte_ingresos_mensuales.estado_pagoColumn]));
-                }
-                set {
-                    this[this.tablesp_reporte_ingresos_mensuales.estado_pagoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string metodo_pago {
-                get {
-                    return ((string)(this[this.tablesp_reporte_ingresos_mensuales.metodo_pagoColumn]));
-                }
-                set {
-                    this[this.tablesp_reporte_ingresos_mensuales.metodo_pagoColumn] = value;
+                    this[this.tablesp_reporte_ingresos_mensuales.TotalColumn] = value;
                 }
             }
             
@@ -743,14 +630,26 @@ namespace Capa_Presentacion {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsClienteNull() {
-                return this.IsNull(this.tablesp_reporte_ingresos_mensuales.ClienteColumn);
+            public bool IsCantidadFacturasNull() {
+                return this.IsNull(this.tablesp_reporte_ingresos_mensuales.CantidadFacturasColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetClienteNull() {
-                this[this.tablesp_reporte_ingresos_mensuales.ClienteColumn] = global::System.Convert.DBNull;
+            public void SetCantidadFacturasNull() {
+                this[this.tablesp_reporte_ingresos_mensuales.CantidadFacturasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tablesp_reporte_ingresos_mensuales.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tablesp_reporte_ingresos_mensuales.TotalColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -913,13 +812,9 @@ namespace Capa_Presentacion.ClaribetSpaDataSet1TableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "sp_reporte_ingresos_mensuales";
-            tableMapping.ColumnMappings.Add("id_factura", "id_factura");
-            tableMapping.ColumnMappings.Add("fecha_factura", "fecha_factura");
             tableMapping.ColumnMappings.Add("Mes", "Mes");
-            tableMapping.ColumnMappings.Add("Cliente", "Cliente");
-            tableMapping.ColumnMappings.Add("total", "total");
-            tableMapping.ColumnMappings.Add("estado_pago", "estado_pago");
-            tableMapping.ColumnMappings.Add("metodo_pago", "metodo_pago");
+            tableMapping.ColumnMappings.Add("CantidadFacturas", "CantidadFacturas");
+            tableMapping.ColumnMappings.Add("Total", "Total");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

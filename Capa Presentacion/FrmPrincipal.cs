@@ -47,6 +47,7 @@ namespace Capa_Presentacion
             DiseñoBoton(btnFactura);
             DiseñoBoton(btnConfiguracion);
             DiseñoBoton(btnCerrarSesion);
+            DiseñoBoton(btnReportes);
 
             // =========================================
             // TEXTOS BOTONES
@@ -60,6 +61,8 @@ namespace Capa_Presentacion
             btnFactura.Text = "🧾 Factura";
             btnConfiguracion.Text = "⚙️ Configuración";
             btnCerrarSesion.Text = "↩ Cerrar Sesión";
+            btnReportes.Text = "📊 Reportes";
+
         }
 
         // =========================================
@@ -162,6 +165,11 @@ namespace Capa_Presentacion
             Inicio login = new Inicio();
             login.Show();
             this.Hide();
+        }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new FrmReportes());
         }
     }
 }

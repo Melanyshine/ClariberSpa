@@ -94,7 +94,7 @@
             this.gbDatosUsuario.Controls.Add(this.lblCorreo);
             this.gbDatosUsuario.Controls.Add(this.lblApellido);
             this.gbDatosUsuario.Controls.Add(this.lblNombre);
-            this.gbDatosUsuario.Location = new System.Drawing.Point(490, 147);
+            this.gbDatosUsuario.Location = new System.Drawing.Point(615, 181);
             this.gbDatosUsuario.Name = "gbDatosUsuario";
             this.gbDatosUsuario.Size = new System.Drawing.Size(827, 328);
             this.gbDatosUsuario.TabIndex = 3;
@@ -239,7 +239,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(1358, 192);
+            this.btnGuardar.Location = new System.Drawing.Point(1483, 226);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(117, 43);
             this.btnGuardar.TabIndex = 4;
@@ -249,7 +249,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(1358, 242);
+            this.btnNuevo.Location = new System.Drawing.Point(1483, 276);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(117, 42);
             this.btnNuevo.TabIndex = 5;
@@ -259,7 +259,7 @@
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(1358, 290);
+            this.btnEditar.Location = new System.Drawing.Point(1483, 324);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(117, 46);
             this.btnEditar.TabIndex = 6;
@@ -269,7 +269,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(1358, 349);
+            this.btnEliminar.Location = new System.Drawing.Point(1483, 383);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(117, 43);
             this.btnEliminar.TabIndex = 7;
@@ -279,7 +279,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(1358, 403);
+            this.btnCancelar.Location = new System.Drawing.Point(1483, 437);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(117, 43);
             this.btnCancelar.TabIndex = 8;
@@ -293,7 +293,7 @@
             this.gbListadoUsuarios.Controls.Add(this.lblBuscar);
             this.gbListadoUsuarios.Controls.Add(this.txtBuscar);
             this.gbListadoUsuarios.Controls.Add(this.dgvUsuarios);
-            this.gbListadoUsuarios.Location = new System.Drawing.Point(490, 514);
+            this.gbListadoUsuarios.Location = new System.Drawing.Point(615, 548);
             this.gbListadoUsuarios.Name = "gbListadoUsuarios";
             this.gbListadoUsuarios.Size = new System.Drawing.Size(1075, 437);
             this.gbListadoUsuarios.TabIndex = 9;
@@ -329,7 +329,7 @@
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(498, 8);
+            this.lblTitulo.Location = new System.Drawing.Point(623, 42);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(72, 20);
             this.lblTitulo.TabIndex = 10;
@@ -338,7 +338,7 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(498, 73);
+            this.lblDescripcion.Location = new System.Drawing.Point(623, 107);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(262, 40);
             this.lblDescripcion.TabIndex = 11;

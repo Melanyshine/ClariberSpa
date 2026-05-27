@@ -15,6 +15,7 @@ namespace Capa_Presentacion
         public FrmReporteIngresos()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void FrmReporteIngresos_Load(object sender, EventArgs e)
